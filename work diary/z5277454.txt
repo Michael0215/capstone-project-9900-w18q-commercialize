@@ -1,0 +1,95 @@
+Week 1 (2022.9.16)
+
+1) What was planned for the period since the last work diary entry
+
+Form a group and sign up for Jira and GitHub.
+
+2) What was finished 
+
+Created accounts of Jira and GitHub, and formed a project team with team members in Jira.
+Discuss with the team and decide the topic. 
+And we also decide on the software and related API that will be used for the project.
+
+3) What were the main technical and non-technical obstacles and how they were 
+overcome (or what was tried and did not work)
+
+Jira is a brand-new platform for me, and I try to familiarize myself with the functions of the platform.
+
+4) What was not finished, why this happened, how this affects the overall project 
+progress and what adjustments (if any) are needed so the success of the project is not 
+endangered.
+
+Nothing, it is the first week of this course.
+
+5) what is planned for the next period
+
+Brainstorm on the topic, think of the user stories, and start writing proposals.
+Join the GitHub Classroom.
+Design the user interface framework.
+--------------------------------------------------------------------------------
+
+Week 2 (2022.9.22)
+
+
+1) What was planned for the period since the last work diary entry
+
+Come up with some user stories and Brainstorm on the selected topic.
+Design the user interface framework.
+
+2) What was finished 
+
+Design the user interface framework.
+Join the GitHub Classroom.
+Come up with some user stories and complete the User stories and Sprints parts of proposal.
+
+3) What were the main technical and non-technical obstacles and how they were 
+overcome (or what was tried and did not work)
+
+The team have no idea about the implementation of some functions, 
+and we will search for more information.
+
+
+4) What was not finished, why this happened, how this affects the overall project 
+progress and what adjustments (if any) are needed so the success of the project is not 
+endangered.
+
+None.
+
+5) what is planned for the next period
+
+Complete the proposal.
+Finish the backlogs and assign tasks for sprint 1.
+Set up a frontend template.
+--------------------------------------------------------------------------------
+
+Week 3 (2022.9.30)
+
+
+1) What was planned for the period since the last work diary entry
+Complete the proposal.
+Finish the backlogs and assign tasks for sprint 1.
+Set up a frontend template.
+
+2) What was finished
+ 
+Complete the proposal.
+Finish the backlogs and assign tasks for sprint 1.
+
+3) What were the main technical and non-technical obstacles and how they were 
+overcome (or what was tried and did not work)
+
+Figure out two novel functions. It is hard to define the criteria of novelty.
+The existing application functions are relatively complete, and it is not easy to find innovation points
+We will continue brainstorming.
+And we will communicate with the instructor in time if we have new ideas. 
+
+4) What was not finished, why this happened, how this affects the overall project 
+progress and what adjustments (if any) are needed so the success of the project is not 
+endangered.
+
+None.
+
+5) what is planned for the next period
+
+Log in, Register front-end coding.
+User verification functionality coding.
