@@ -1,1 +1,12 @@
+Week 1 (2022.9.16)
 
+We form a group and sign up for Jira and GitHub and all of our members join our group in the GitHubClassroom. We have decided the front and back end softwares and choose the meal recommendations system as our project topic.
+
+
+Week 2 (2022.9.22)
+We hold the meeting to decide the features of our platform. And we start to focus on the work of proposal. We distribute the tasks before Sprints of the proposal and I charge for the recipe part(feature 3) of user stories. And we concatenate our own part on Tencent doc which is I create.
+
+Week 3 (2022.9.30)
+We have another meeting to negotiate UI designs for each feature and we distribute the rest parts of the proposal. I just fix, improve the recipe feature, keep finishing the Sprints & Backlogs part, and fix the grammar problem for the proposal. And we begin to work on our coding part based on the sprint I.
+
+Week4 ()
