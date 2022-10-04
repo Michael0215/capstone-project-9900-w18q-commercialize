@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1022755438472",
+    "project_id": "comp9900-commercialize",
+    "storage_bucket": "comp9900-commercialize.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1022755438472:android:eda9e8997058187985843d",
+        "android_client_info": {
+          "package_name": "com.example.comp9900_commercialize"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1022755438472-3jejgeru7pccfcnqr0m17bm8pva2uv0a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.comp9900_Commercialize",
+            "certificate_hash": "dd3fb05a6c76261d1f47e68c04f9cde2b381bb3d"
+          }
+        },
+        {
+          "client_id": "1022755438472-s535vdgnj9d8d98jvk9bhnfok76ggkf9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDmDwrSuSBebL2oyvyhYuR4XdDiOX2Q6U4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1022755438472-s535vdgnj9d8d98jvk9bhnfok76ggkf9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
