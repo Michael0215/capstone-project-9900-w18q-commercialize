@@ -12,4 +12,4 @@ We have another meeting to negotiate UI designs for each feature and we distribu
 
 Week4 (2022.10.4)
 
-I create project on Android Studio and connect to the GitHub in master branch, and try to help other members connect their Android Studio with the GitHub as the preparation work.
+I create project on Android Studio and connect to the GitHub in master branch, and try to help other members connect their Android Studio with the GitHub as the preparation work. I'v created Firebase project and connect to android project, which all json and build.grade files have been configurated correctly. The project on Android Studio can be synchronized, built successfully and we can start our work.
