@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:padding="24dp"
     android:clipToPadding="false">
-    <!--This page displays content related to Login-->
+
     <ImageView
         android:id="@+id/iv_title"
         android:layout_width="354dp"
@@ -44,7 +44,7 @@
             android:textColor="@color/secondary_text"
             android:textSize="12sp"
             android:textStyle="bold" />
-        <!--Enable users to enter their e-mail account-->
+
         <EditText
             android:id="@+id/et_email"
             android:layout_width="match_parent"
@@ -59,7 +59,7 @@
             android:paddingEnd="16dp"
             android:textColor="@color/primary_text"
             android:textSize="13sp" />
-        <!--Enable users to enter their password-->
+
         <EditText
             android:id="@+id/et_password"
             android:layout_width="match_parent"
@@ -74,7 +74,7 @@
             android:paddingEnd="16dp"
             android:textColor="@color/primary_text"
             android:textSize="13sp" />
-        <!--Enable users to sign in-->
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/bt_login"
             android:layout_width="match_parent"
@@ -96,7 +96,7 @@
             android:gravity="center"
             android:textSize="13sp"
             android:textStyle="bold" />
-        <!--Enable users to register a new account-->
+
         <TextView
             android:id="@+id/tv_sign_up"
             android:layout_width="wrap_content"

@@ -7,7 +7,7 @@
     android:padding="24dp"
     android:clipToPadding="false">
 
-    <!--This page displays content related to Login-->
+
     <TextView
         android:id="@+id/tv_edit_profile"
         android:layout_width="match_parent"
