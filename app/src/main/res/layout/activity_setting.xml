@@ -19,21 +19,23 @@
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
-    <ImageView
+    <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/iv_user_photo"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginTop="30dp"
+        android:layout_marginStart="10dp"
         android:background="@color/white"
         android:src="@drawable/template"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_setting"/>
+        app:layout_constraintTop_toBottomOf="@+id/tv_setting"
+        app:riv_oval="true"/>
     <TextView
         android:id="@+id/tv_user_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:layout_marginStart="40dp"
+        android:layout_marginStart="30dp"
         android:text="User Name"
         android:textColor="@color/black"
         android:textSize="18sp"
@@ -45,7 +47,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:layout_marginStart="40dp"
+        android:layout_marginStart="30dp"
         android:text="Contact detail"
         android:textColor="@color/black"
         android:textSize="18sp"
