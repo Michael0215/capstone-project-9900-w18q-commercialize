@@ -8,12 +8,12 @@
     android:clipToPadding="false">
 
     <TextView
-        android:id="@+id/tv_meal_recommend"
+        android:id="@+id/tv_collection_page"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#1C2E46"
         android:gravity="center_horizontal"
-        android:text="Meal Recommend"
+        android:text="Collection"
         android:textColor="@color/white"
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -30,13 +30,14 @@
         app:layout_constraintTop_toTopOf="parent"/>
 
     <ListView
-        android:id="@+id/lv_all_post"
+        android:id="@+id/lv_collection"
         android:layout_width="match_parent"
         android:layout_height="550dp"
         android:layout_marginTop="15dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_meal_recommend"
+        app:layout_constraintTop_toBottomOf="@+id/tv_collection_page"
         />
+
     <View
         android:id="@+id/view1"
         android:layout_width="match_parent"
@@ -45,7 +46,6 @@
         android:background="@color/drak_blue"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
-
     <ImageButton
         android:id="@+id/ib_explore"
         android:layout_width="42dp"
@@ -55,6 +55,7 @@
         android:background="@color/white"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_explore"
+        app:tint="@color/secondary_text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
     <TextView
@@ -64,7 +65,7 @@
         android:layout_marginTop="2dp"
         android:layout_marginStart="4dp"
         android:text="Explore"
-        android:textColor="@color/black"
+        android:textColor="@color/secondary_text"
         android:textSize="10sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/ib_explore"
@@ -76,7 +77,6 @@
         android:background="@color/drak_blue"
         app:layout_constraintStart_toEndOf="@+id/ib_explore"
         app:layout_constraintBottom_toBottomOf="parent"/>
-
     <ImageButton
         android:id="@+id/ib_search"
         android:layout_width="42dp"
@@ -181,7 +181,7 @@
         android:background="@color/white"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_profile"
-        app:tint="@color/secondary_text"
+
         app:layout_constraintStart_toStartOf="@+id/view5"
         app:layout_constraintBottom_toBottomOf="parent"/>
     <TextView
@@ -191,7 +191,7 @@
         android:layout_marginTop="2dp"
         android:layout_marginStart="4dp"
         android:text="Profile"
-        android:textColor="@color/secondary_text"
+        android:textColor="@color/black"
         android:textSize="10sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/ib_profile"
@@ -216,6 +216,16 @@
         android:layout_marginStart="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
-
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/bt_cancel"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="5dp"
+        android:padding="6dp"
+        android:src="@drawable/ic_back"
+        app:tint="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
 
