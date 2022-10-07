@@ -8,12 +8,11 @@
     android:clipToPadding="false">
 
     <TextView
-        android:id="@+id/tv_meal_recommend"
+        android:id="@+id/tv_other_profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#1C2E46"
         android:gravity="center_horizontal"
-        android:text="Meal Recommend"
         android:textColor="@color/white"
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -28,14 +27,144 @@
         app:tint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
+    <ImageView
+        android:id="@+id/iv_user_photo"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="30dp"
+        android:background="@color/white"
+        android:src="@drawable/template"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_other_profile"/>
+    <TextView
+        android:id="@+id/tv_user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="40dp"
+        android:text="User Name"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/iv_user_photo"
+        app:layout_constraintTop_toBottomOf="@+id/tv_other_profile"/>
+    <TextView
+        android:id="@+id/tv_contact_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="40dp"
+        android:text="Contact detail"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/iv_user_photo"
+        app:layout_constraintTop_toBottomOf="@+id/tv_user_name"/>
+    <View
+        android:id="@+id/view0"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/drak_blue"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_user_photo"/>
+    <ImageView
+        android:id="@+id/iv_notice"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginStart="50dp"
+        android:background="@color/white"
+        android:src="@drawable/ic_chat"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_user_photo"/>
+    <TextView
+        android:id="@+id/tv_notice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:layout_marginStart="5dp"
+        android:text="Chat"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/iv_notice"
+        app:layout_constraintTop_toBottomOf="@+id/iv_notice"/>
 
+    <ImageView
+        android:id="@+id/iv_collection"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="30dp"
+        android:background="@color/white"
+        android:src="@drawable/ic_subscribe_contributor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_user_photo" />
+
+    <TextView
+        android:id="@+id/tv_collection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Subscribe"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_collection" />
+
+    <View
+        android:id="@+id/view01"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/drak_blue"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_notice"/>
+    <View android:id="@+id/view02"
+        android:layout_width="2dp"
+        android:layout_height="430dp"
+        android:background="@color/drak_blue"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/view0"
+        app:layout_constraintBottom_toBottomOf="@+id/view04"/>
+    <View android:id="@+id/view03"
+        android:layout_width="2dp"
+        android:layout_height="430dp"
+        android:background="@color/drak_blue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/view0"
+        app:layout_constraintBottom_toBottomOf="@+id/view04"/>
+    <View
+        android:id="@+id/view04"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/drak_blue"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/view03"/>
+    <TextView
+        android:id="@+id/tv_recipe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:text="Recipes"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view01" />
     <ListView
         android:id="@+id/lv_all_post"
         android:layout_width="match_parent"
-        android:layout_height="550dp"
-        android:layout_marginTop="15dp"
+        android:layout_height="260dp"
+        android:layout_marginTop="4dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_meal_recommend"
+        app:layout_constraintTop_toBottomOf="@+id/tv_recipe"
         />
     <View
         android:id="@+id/view1"
@@ -55,6 +184,7 @@
         android:background="@color/white"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_explore"
+        app:tint="@color/secondary_text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
     <TextView
@@ -64,7 +194,7 @@
         android:layout_marginTop="2dp"
         android:layout_marginStart="4dp"
         android:text="Explore"
-        android:textColor="@color/black"
+        android:textColor="@color/secondary_text"
         android:textSize="10sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/ib_explore"
@@ -216,6 +346,16 @@
         android:layout_marginStart="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
-
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/bt_cancel"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="5dp"
+        android:padding="6dp"
+        android:src="@drawable/ic_back"
+        app:tint="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
 
