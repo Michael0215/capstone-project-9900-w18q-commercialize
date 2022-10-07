@@ -8,7 +8,7 @@
     android:clipToPadding="false">
     <!--This page displays content related to Login-->
     <ImageView
-        android:id="@+id/title"
+        android:id="@+id/iv_title"
         android:layout_width="354dp"
         android:layout_height="212dp"
         android:layout_marginEnd="3dp"
@@ -20,12 +20,12 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/title"
+        android:layout_below="@+id/iv_title"
         android:layout_marginStart="4dp"
         android:gravity="center_horizontal"
         android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/title">
+        app:layout_constraintTop_toBottomOf="@id/iv_title">
 
         <TextView
             android:layout_width="wrap_content"
@@ -46,7 +46,7 @@
             android:textStyle="bold" />
         <!--Enable users to enter their e-mail account-->
         <EditText
-            android:id="@+id/editTextEmail"
+            android:id="@+id/et_email"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_marginTop="40dp"
@@ -61,7 +61,7 @@
             android:textSize="13sp" />
         <!--Enable users to enter their password-->
         <EditText
-            android:id="@+id/editTextPassword"
+            android:id="@+id/et_password"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_marginTop="16dp"
@@ -76,7 +76,7 @@
             android:textSize="13sp" />
         <!--Enable users to sign in-->
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/buttonLogin"
+            android:id="@+id/bt_login"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="20dp"
@@ -87,7 +87,7 @@
             android:textStyle="bold"
             app:cornerRadius="8dp" />
         <TextView
-            android:id="@+id/textViewForgotPassword"
+            android:id="@+id/tv_forgot_password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -98,7 +98,7 @@
             android:textStyle="bold" />
         <!--Enable users to register a new account-->
         <TextView
-            android:id="@+id/textViewSignUp"
+            android:id="@+id/tv_sign_up"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
@@ -109,7 +109,7 @@
             android:textStyle="bold" />
     </LinearLayout>
     <TextView
-        android:id="@+id/textViewBroseAsGuest"
+        android:id="@+id/tv_brose_as_guest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"

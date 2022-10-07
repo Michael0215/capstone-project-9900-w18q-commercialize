@@ -44,13 +44,13 @@
             android:orientation="horizontal"
             android:layout_marginTop="10dp">
             <RadioButton
-                android:id="@+id/btnContributor"
+                android:id="@+id/bt_contributor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Contributor"
                 android:checked="true"/>
             <RadioButton
-                android:id="@+id/btnExplorer"
+                android:id="@+id/bt_explorer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Explorer"/>
@@ -121,7 +121,7 @@
             />
         <!--Enable students or staff to sign up-->
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/buttonRegister"
+            android:id="@+id/bt_register"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="20dp"
@@ -135,7 +135,7 @@
     </LinearLayout>
     <!--If the students or staff already have account, back to login page-->
     <TextView
-        android:id="@+id/tv_BackToLogin"
+        android:id="@+id/tv_back_to_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="600dp"
