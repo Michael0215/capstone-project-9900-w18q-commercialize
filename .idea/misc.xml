@@ -3,19 +3,30 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/StudioProjects/capstone-project-9900-w18q-commercialize/app/src/main/res/layout/activity_email_reset_password.xml" value="0.25364583333333335" />
-        <entry key="..\:/StudioProjects/capstone-project-9900-w18q-commercialize/app/src/main/res/layout/activity_forgot_password.xml" value="0.25364583333333335" />
-        <entry key="..\:/StudioProjects/capstone-project-9900-w18q-commercialize/app/src/main/res/layout/activity_login.xml" value="0.25364583333333335" />
-        <entry key="..\:/StudioProjects/capstone-project-9900-w18q-commercialize/app/src/main/res/layout/activity_main.xml" value="0.264" />
-        <entry key="..\:/StudioProjects/capstone-project-9900-w18q-commercialize/app/src/main/res/layout/activity_profile.xml" value="0.25364583333333335" />
-        <entry key="..\:/StudioProjects/capstone-project-9900-w18q-commercialize/app/src/main/res/layout/activity_profile_change_password.xml" value="0.25364583333333335" />
-        <entry key="..\:/StudioProjects/capstone-project-9900-w18q-commercialize/app/src/main/res/layout/activity_register.xml" value="0.25364583333333335" />
-        <entry key="..\:/StudioProjects/capstone-project-9900-w18q-commercialize/app/src/main/res/layout/activity_subscribe.xml" value="0.25364583333333335" />
+        <entry key="..\:/capstone-project-9900-w18q-commercialize/app/src/main/res/drawable-v24/background_image.xml" value="0.3365" />
+        <entry key="..\:/capstone-project-9900-w18q-commercialize/app/src/main/res/drawable-v24/background_input.xml" value="0.185" />
+        <entry key="..\:/capstone-project-9900-w18q-commercialize/app/src/main/res/drawable-v24/ic_notice.xml" value="0.185" />
+        <entry key="..\:/capstone-project-9900-w18q-commercialize/app/src/main/res/layout/activity_collection.xml" value="0.35052083333333334" />
+        <entry key="..\:/capstone-project-9900-w18q-commercialize/app/src/main/res/layout/activity_edit_profile.xml" value="0.36614583333333334" />
+        <entry key="..\:/capstone-project-9900-w18q-commercialize/app/src/main/res/layout/activity_email_reset_password.xml" value="0.3515625" />
+        <entry key="..\:/capstone-project-9900-w18q-commercialize/app/src/main/res/layout/activity_following.xml" value="0.35052083333333334" />
+        <entry key="..\:/capstone-project-9900-w18q-commercialize/app/src/main/res/layout/activity_forgot_password.xml" value="0.36614583333333334" />
+        <entry key="..\:/capstone-project-9900-w18q-commercialize/app/src/main/res/layout/activity_login.xml" value="0.36614583333333334" />
+        <entry key="..\:/capstone-project-9900-w18q-commercialize/app/src/main/res/layout/activity_main.xml" value="0.36614583333333334" />
+        <entry key="..\:/capstone-project-9900-w18q-commercialize/app/src/main/res/layout/activity_notice.xml" value="0.35052083333333334" />
+        <entry key="..\:/capstone-project-9900-w18q-commercialize/app/src/main/res/layout/activity_other_profile.xml" value="0.35052083333333334" />
+        <entry key="..\:/capstone-project-9900-w18q-commercialize/app/src/main/res/layout/activity_profile.xml" value="0.33" />
+        <entry key="..\:/capstone-project-9900-w18q-commercialize/app/src/main/res/layout/activity_profile_change_password.xml" value="0.36614583333333334" />
+        <entry key="..\:/capstone-project-9900-w18q-commercialize/app/src/main/res/layout/activity_register.xml" value="0.36614583333333334" />
+        <entry key="..\:/capstone-project-9900-w18q-commercialize/app/src/main/res/layout/activity_search.xml" value="0.35052083333333334" />
+        <entry key="..\:/capstone-project-9900-w18q-commercialize/app/src/main/res/layout/activity_search_result.xml" value="0.35052083333333334" />
+        <entry key="..\:/capstone-project-9900-w18q-commercialize/app/src/main/res/layout/activity_setting.xml" value="0.36614583333333334" />
+        <entry key="..\:/capstone-project-9900-w18q-commercialize/app/src/main/res/layout/activity_subscribe.xml" value="0.35052083333333334" />
+        <entry key="..\:/capstone-project-9900-w18q-commercialize/app/src/main/res/layout/item_container_recent_chat.xml" value="0.33" />
       </map>
     </option>
   </component>
-  <component name="ExternalStorageConfigurationManager" enabled="true" />
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
 </project>
