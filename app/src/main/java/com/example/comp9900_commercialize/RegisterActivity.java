@@ -35,7 +35,6 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-
         firebaseAuth = FirebaseAuth.getInstance();
         progressDialog = new ProgressDialog(this);
         binding = ActivityRegisterBinding.inflate(getLayoutInflater());
