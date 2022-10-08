@@ -61,15 +61,19 @@ public class RegisterActivity extends AppCompatActivity {
         radioButton = (RadioButton) findViewById(usertypeid);
         String type = radioButton.getText().toString().trim();
         String name = binding.etUsername.getText().toString().trim();
+        String contact = binding.etContact.getText().toString().trim();
         String email = binding.etEmail.getText().toString().trim();
         String password= binding.etPassword.getText().toString().trim();
+
 
         // store the account information into the user hashMap
         Map<String, Object> user = new HashMap<>();
         user.put("Name", name);
         user.put("Type", type);
+        user.put("Contact Detail", contact);
         user.put("E-mail", email);
         user.put("Password", password);
+        user.put("Avatar", password);
         progressDialog.setMessage("Registering User...");
         progressDialog.show();
 
@@ -80,18 +84,19 @@ public class RegisterActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()) {
                             // table 'users' in firebase to store the information in the hashMap 'user'
-                            firestoreDatabase.collection("users")
-                                    .add(user)
-                                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                            firestoreDatabase.collection("users").document(email)
+                                    .set(user)
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
-                                        public void onSuccess(DocumentReference documentReference) {
+                                        public void onSuccess(Void aVoid) {
                                             Toast.makeText(RegisterActivity.this, "Registered Successfully!\nNow you can login.", Toast.LENGTH_SHORT).show();
                                             progressDialog.cancel();
                                             // jump from RegisterActivity.java to LoginActivity.java
                                             Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                                             startActivity(intent);
                                         }
-                                    }) // error handling if the registration is failed
+                                    })
+                                     // error handling if the registration is failed
                                     .addOnFailureListener(new OnFailureListener() {
                                         @Override
                                         public void onFailure(@NonNull Exception e) {
