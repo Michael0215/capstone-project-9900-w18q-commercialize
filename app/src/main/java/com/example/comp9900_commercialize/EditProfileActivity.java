@@ -4,11 +4,24 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import com.example.comp9900_commercialize.databinding.ActivityEditProfileBinding;
+
+
 public class EditProfileActivity extends AppCompatActivity {
+
+    private ActivityEditProfileBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_profile);
+        binding = ActivityEditProfileBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        setListeners();
     }
+
+    private void setListeners(){
+        binding.btCancel.setOnClickListener(v ->
+                finish());
+    }
+
 }
