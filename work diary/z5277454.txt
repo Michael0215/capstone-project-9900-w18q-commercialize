@@ -107,6 +107,7 @@ User verification functionality coding.
  
 Log in, Register, Profile, Password Change, Collection, Subscribe Page front-end coding.
 User verification functionality coding.
+Avatar uploading coding.
 
 3) What were the main technical and non-technical obstacles and how they were 
 overcome (or what was tried and did not work)
