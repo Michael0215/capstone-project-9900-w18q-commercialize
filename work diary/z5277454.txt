@@ -93,3 +93,33 @@ None.
 
 Log in, Register front-end coding.
 User verification functionality coding.
+--------------------------------------------------------------------------------
+
+Week 4 (2022.10.8)
+
+
+1) What was planned for the period since the last work diary entry
+
+Log in, Register front-end coding.
+User verification functionality coding.
+
+2) What was finished
+ 
+Log in, Register, Profile, Password Change, Collection, Subscribe Page front-end coding.
+User verification functionality coding.
+
+3) What were the main technical and non-technical obstacles and how they were 
+overcome (or what was tried and did not work)
+
+None
+
+4) What was not finished, why this happened, how this affects the overall project 
+progress and what adjustments (if any) are needed so the success of the project is not 
+endangered.
+
+None.
+
+5) what is planned for the next period
+
+Recipe Detail Page front-end coding.
+Plan what needs to be done in sprint2, and start to work on it.
