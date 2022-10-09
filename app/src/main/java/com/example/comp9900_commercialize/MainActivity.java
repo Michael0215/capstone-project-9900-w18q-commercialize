@@ -24,16 +24,16 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void setListeners(){
-        binding.ibExplore.setOnClickListener(v ->
-                startActivity(new Intent(getApplicationContext(), MainActivity.class)));
         binding.ibSearch.setOnClickListener(v ->
                 startActivity(new Intent(getApplicationContext(), SearchActivity.class)));
         binding.ibCreate.setOnClickListener(v ->
                 startActivity(new Intent(getApplicationContext(), CollectionActivity.class)));
         binding.ibSubscribe.setOnClickListener(v ->
                 startActivity(new Intent(getApplicationContext(), SubscribeActivity.class)));
-        binding.ibProfile.setOnClickListener(v ->
-                startActivity(new Intent(getApplicationContext(), ProfileActivity.class)));
+        binding.ibProfile.setOnClickListener(v -> {
+                startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+                finish();
+                });
         binding.btNotice.setOnClickListener(v ->
                 startActivity(new Intent(getApplicationContext(), NoticeActivity.class)));
     }

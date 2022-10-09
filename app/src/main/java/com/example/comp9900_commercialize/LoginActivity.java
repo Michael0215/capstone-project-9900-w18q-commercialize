@@ -18,6 +18,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class LoginActivity extends AppCompatActivity {
@@ -25,6 +26,7 @@ public class LoginActivity extends AppCompatActivity {
     private ActivityLoginBinding binding;
     private FirebaseAuth auth;;
     private Preferences preferences;
+    private FirebaseFirestore firebaseFirestore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +49,13 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void init(){
-        auth= FirebaseAuth.getInstance();
+        preferences = new Preferences(getApplicationContext());
+        if(preferences.getBoolean(MacroDef.KEY_IS_SIGNED_IN)){
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            finish();
+        }
+        auth = FirebaseAuth.getInstance();
+        firebaseFirestore = FirebaseFirestore.getInstance();
     }
 
     private void login() {
@@ -63,7 +71,20 @@ public class LoginActivity extends AppCompatActivity {
                             preferences = new Preferences(getApplicationContext());
                             preferences.putBoolean(MacroDef.KEY_IS_SIGNED_IN, true);
                             preferences.putString(MacroDef.KEY_EMAIL, email);
-                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                            firebaseFirestore.collection(MacroDef.KEY_COLLECTION_USERS)
+                                    .whereEqualTo(MacroDef.KEY_EMAIL, email)
+                                    .get()
+                                    .addOnCompleteListener(task1 -> {
+                                        if(task1.isSuccessful() && task1.getResult() != null
+                                                && task1.getResult().getDocuments().size() > 0) {
+                                            DocumentSnapshot documentSnapshot = task1.getResult().getDocuments().get(0);
+                                            preferences.putString(MacroDef.KEY_USERNAME, documentSnapshot.getString("Name"));
+                                            preferences.putString(MacroDef.KEY_CONTACT, documentSnapshot.getString("Contact Detail"));
+                                            preferences.putString(MacroDef.KEY_AVATAR, documentSnapshot.getString("Avatar"));
+                                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                                            finish();
+                                        }
+                                    });
                         } else {
                             // If sign in fails, display a message to the user.
                             showToast(task.getException().getMessage());
