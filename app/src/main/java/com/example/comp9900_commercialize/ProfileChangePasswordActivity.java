@@ -89,7 +89,7 @@ public class ProfileChangePasswordActivity extends AppCompatActivity {
             }
         });
         binding.btCancel.setOnClickListener(v ->
-                startActivity(new Intent(getApplicationContext(), ProfileActivity.class)));
+                startActivity(new Intent(getApplicationContext(), SettingActivity.class)));
     }
 
     public boolean checkValid(EditText newPassword) {
