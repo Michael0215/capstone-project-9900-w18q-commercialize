@@ -42,12 +42,14 @@ public class ProfileActivity extends AppCompatActivity {
     private FirebaseFirestore firebaseFirestore;
     private Preferences preferences;
 
+    public static ProfileActivity instance = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityProfileBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        instance = this;
         init();
         loadData();
         setListeners();
@@ -55,21 +57,6 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void init(){
         preferences = new Preferences(getApplicationContext());
-        firebaseFirestore = FirebaseFirestore.getInstance();
-        String email = preferences.getString(MacroDef.KEY_EMAIL);
-        showToast(email);
-        firebaseFirestore.collection(MacroDef.KEY_COLLECTION_USERS)
-                .whereEqualTo(MacroDef.KEY_EMAIL, email)
-                .get()
-                .addOnCompleteListener(task -> {
-                    if(task.isSuccessful() && task.getResult() != null
-                        && task.getResult().getDocuments().size() > 0) {
-                        DocumentSnapshot documentSnapshot = task.getResult().getDocuments().get(0);
-                        preferences.putString(MacroDef.KEY_USERNAME, documentSnapshot.getString("Name"));
-                        preferences.putString(MacroDef.KEY_CONTACT, documentSnapshot.getString("Contact Detail"));
-                        preferences.putString(MacroDef.KEY_AVATAR, documentSnapshot.getString("Avatar"));
-                    }
-                });
     }
 
     private void loadData(){
@@ -91,16 +78,16 @@ public class ProfileActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), CollectionActivity.class)));
         binding.ivFollowing.setOnClickListener(v ->
                 startActivity(new Intent(getApplicationContext(), FollowingActivity.class)));
-        binding.ibExplore.setOnClickListener(v ->
-                startActivity(new Intent(getApplicationContext(), MainActivity.class)));
+        binding.ibExplore.setOnClickListener(v -> {
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    finish();
+                });
         binding.ibSearch.setOnClickListener(v ->
                 startActivity(new Intent(getApplicationContext(), SearchActivity.class)));
         binding.ibCreate.setOnClickListener(v ->
                 startActivity(new Intent(getApplicationContext(), CollectionActivity.class)));
         binding.ibSubscribe.setOnClickListener(v ->
                 startActivity(new Intent(getApplicationContext(), SubscribeActivity.class)));
-        binding.ibProfile.setOnClickListener(v ->
-                startActivity(new Intent(getApplicationContext(), ProfileActivity.class)));
     }
 
     private void showToast(String message) {
