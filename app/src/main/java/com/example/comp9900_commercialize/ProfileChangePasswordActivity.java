@@ -104,7 +104,7 @@ public class ProfileChangePasswordActivity extends AppCompatActivity {
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
-                                        //Toast.makeText(getApplicationContext(), "Reset1 succeed", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getApplicationContext(), "Reset succeed", Toast.LENGTH_SHORT).show();
                                     }
                                 });
                         user.updatePassword(newPassword.getText().toString())
@@ -112,8 +112,7 @@ public class ProfileChangePasswordActivity extends AppCompatActivity {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if (task.isSuccessful()) {
-                                            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                                            startActivity(intent);
+                                            signOut();
                                         }
                                     }
                                 });
