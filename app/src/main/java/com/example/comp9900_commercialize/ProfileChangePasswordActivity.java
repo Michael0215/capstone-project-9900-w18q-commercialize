@@ -65,7 +65,7 @@ public class ProfileChangePasswordActivity extends AppCompatActivity {
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
-                                    Toast.makeText(getApplicationContext(), "Reset1 succeed", Toast.LENGTH_SHORT).show();
+                                    //Toast.makeText(getApplicationContext(), "Reset1 succeed", Toast.LENGTH_SHORT).show();
                                 }
                             });
                     user.updatePassword(newPassword.getText().toString())
@@ -89,7 +89,7 @@ public class ProfileChangePasswordActivity extends AppCompatActivity {
             }
         });
         binding.btCancel.setOnClickListener(v ->
-                startActivity(new Intent(getApplicationContext(), MainActivity.class)));
+                startActivity(new Intent(getApplicationContext(), ProfileActivity.class)));
     }
 
     public boolean checkValid(EditText newPassword) {
