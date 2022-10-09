@@ -5,14 +5,18 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.Preference;
 import android.text.TextUtils;
 import android.widget.Toast;
 
 import com.example.comp9900_commercialize.databinding.ActivityLoginBinding;
+import com.example.comp9900_commercialize.utilities.MacroDef;
+import com.example.comp9900_commercialize.utilities.Preferences;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -20,6 +24,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private ActivityLoginBinding binding;
     private FirebaseAuth auth;;
+    private Preferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +38,6 @@ public class LoginActivity extends AppCompatActivity {
     private void setListeners(){
         binding.btLogin.setOnClickListener(v -> {
             if (isValidInput()) {
-
                 login();
             }});
         binding.tvForgotPassword.setOnClickListener(v ->
@@ -56,10 +60,13 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             FirebaseUser user = auth.getCurrentUser();
+                            preferences = new Preferences(getApplicationContext());
+                            preferences.putBoolean(MacroDef.KEY_IS_SIGNED_IN, true);
+                            preferences.putString(MacroDef.KEY_EMAIL, email);
                             startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         } else {
                             // If sign in fails, display a message to the user.
-                            showToast("Authentication failed.");
+                            showToast(task.getException().getMessage());
                         }
                     }
                 });
