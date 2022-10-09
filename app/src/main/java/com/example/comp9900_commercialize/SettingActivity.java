@@ -17,11 +17,14 @@ public class SettingActivity extends AppCompatActivity {
     private Preferences preferences;
     private FirebaseAuth auth;;
 
+    public static SettingActivity instance = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivitySettingBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        instance = this;
         setListeners();
     }
 
