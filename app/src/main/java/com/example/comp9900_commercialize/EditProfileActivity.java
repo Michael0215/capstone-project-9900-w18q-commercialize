@@ -45,6 +45,8 @@ public class EditProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityEditProfileBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        init();
+        loadData();
         setListeners();
     }
 
@@ -53,11 +55,14 @@ public class EditProfileActivity extends AppCompatActivity {
     }
 
     private void loadData(){
+        binding.etUserName.setText(preferences.getString(MacroDef.KEY_USERNAME));
+        binding.etContact.setText(preferences.getString(MacroDef.KEY_CONTACT));
         if (preferences.getString(MacroDef.KEY_AVATAR) != null){
             byte[] bytes = Base64.decode(preferences.getString(MacroDef.KEY_AVATAR), Base64.DEFAULT);
             Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
             binding.ivUserPhoto.setImageBitmap(bitmap);
         }
+
     }
 
     private String encodeImage(Bitmap bitmap) {
@@ -94,6 +99,9 @@ public class EditProfileActivity extends AppCompatActivity {
     private void save(){
         String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
         FirebaseFirestore database = FirebaseFirestore.getInstance();
+        if (encodedImage == null){
+            encodedImage = preferences.getString(MacroDef.KEY_AVATAR);
+        }
         database.collection("users").document(email)
                 .update("Avatar", encodedImage,
                         "Name", binding.etUserName.getText().toString().trim(),
