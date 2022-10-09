@@ -75,9 +75,11 @@ public class ProfileActivity extends AppCompatActivity {
     private void loadData(){
         binding.tvUserName.setText(preferences.getString(MacroDef.KEY_USERNAME));
         binding.tvContactDetail.setText(preferences.getString(MacroDef.KEY_CONTACT));
-        byte[] bytes = Base64.decode(preferences.getString(MacroDef.KEY_AVATAR), Base64.DEFAULT);
-        Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-        binding.rivUserPhoto.setImageBitmap(bitmap);
+        if (preferences.getString(MacroDef.KEY_AVATAR) != null){
+            byte[] bytes = Base64.decode(preferences.getString(MacroDef.KEY_AVATAR), Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+            binding.rivUserPhoto.setImageBitmap(bitmap);
+        }
     }
 
     private void setListeners(){
