@@ -48,6 +48,18 @@ public class EditProfileActivity extends AppCompatActivity {
         setListeners();
     }
 
+    private void init(){
+        preferences = new Preferences(getApplicationContext());
+    }
+
+    private void loadData(){
+        if (preferences.getString(MacroDef.KEY_AVATAR) != null){
+            byte[] bytes = Base64.decode(preferences.getString(MacroDef.KEY_AVATAR), Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+            binding.ivUserPhoto.setImageBitmap(bitmap);
+        }
+    }
+
     private String encodeImage(Bitmap bitmap) {
         int previewWidth = 150;
         int previewHeight = bitmap.getHeight() * previewWidth / bitmap.getWidth();
