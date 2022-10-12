@@ -5,18 +5,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.example.comp9900_commercialize.MainActivity;
-import com.example.comp9900_commercialize.NoticeActivity;
-import com.example.comp9900_commercialize.databinding.ActivityAddRecipeBinding;
 
 
+import com.example.comp9900_commercialize.databinding.ActivityAddRecipeSub1Binding;
 
-public class AddRecipeActivity extends AppCompatActivity {
-    private ActivityAddRecipeBinding binding;
+public class AddRecipeSub1Activity extends AppCompatActivity {
+    private ActivityAddRecipeSub1Binding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityAddRecipeBinding.inflate(getLayoutInflater());
+        binding = ActivityAddRecipeSub1Binding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setListeners();
     }
@@ -26,8 +24,10 @@ public class AddRecipeActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), MainActivity.class)));
         binding.btNotice.setOnClickListener(v ->
                 startActivity(new Intent(getApplicationContext(), NoticeActivity.class)));
+        binding.btPre.setOnClickListener(v ->
+                startActivity(new Intent(getApplicationContext(), AddRecipeActivity.class)));
         binding.btNext.setOnClickListener(v ->
-                startActivity(new Intent(getApplicationContext(), AddRecipeSub1Activity.class)));
+                startActivity(new Intent(getApplicationContext(), AddRecipeSub2Activity.class)));
     }
 
 }

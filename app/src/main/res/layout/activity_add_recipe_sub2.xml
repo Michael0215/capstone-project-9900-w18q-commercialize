@@ -20,94 +20,91 @@
         app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
-        android:id="@+id/tv_step_one"
+        android:id="@+id/tv_step_three"
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:background="@drawable/background_input"
         android:layout_marginTop="15dp"
         android:gravity="center"
-        android:text="Create Recipe Step 1"
+        android:text="Create Recipe Step 3"
         android:textColor="@color/black"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_add_recipe_page"/>
 
-
-    <ImageView
-        android:id="@+id/iv_add_cover_image"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginTop="28dp"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/template"
-        android:background="@color/white"
-        android:backgroundTint="#ECECEC"
-        app:layout_constraintEnd_toEndOf="parent"
+    <TextView
+        android:id="@+id/tv_add_procedure"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Add procedure"
+        android:textColor="@color/black"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_step_one" />
-
-    <EditText
-        android:id="@+id/et_recipe_name"
+        app:layout_constraintTop_toBottomOf="@+id/tv_step_three"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/ProcedureRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_marginTop="10dp"
-        android:hint="Enter the name recipe name"
-        android:paddingStart="30dp"
-        android:paddingEnd="30dp"
-        android:gravity="center"
-        android:textColor="@color/primary_text"
-        android:textSize="13sp"
+        android:layout_height="300dp"
+        android:layout_marginTop="15dp"
+        android:orientation="vertical"
+        android:overScrollMode="never"
+        android:padding="15sp"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_add_cover_image" />
-
-    <EditText
-        android:id="@+id/et_recipe_description"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_marginTop="10dp"
-        android:hint="Add subtitle or introduction if needed"
-        android:gravity="clip_horizontal"
-        android:paddingTop="15dp"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:textColor="@color/primary_text"
-        android:background="@null"
-        android:textSize="13sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_recipe_name" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_add_procedure"
+        />
     <View
         android:id="@+id/view01"
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:background="@color/drak_blue"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/et_recipe_description"/>
+        app:layout_constraintTop_toTopOf="@+id/ProcedureRecyclerView"/>
     <View android:id="@+id/view02"
         android:layout_width="2dp"
-        android:layout_height="150dp"
+        android:layout_height="300dp"
         android:background="@color/drak_blue"
-        app:layout_constraintStart_toStartOf="@+id/et_recipe_description"
-        app:layout_constraintTop_toTopOf="@+id/et_recipe_description"
-        app:layout_constraintBottom_toBottomOf="@+id/et_recipe_description"/>
+        app:layout_constraintStart_toStartOf="@+id/ProcedureRecyclerView"
+        app:layout_constraintTop_toTopOf="@+id/ProcedureRecyclerView"
+        app:layout_constraintBottom_toBottomOf="@+id/ProcedureRecyclerView"/>
     <View android:id="@+id/view03"
         android:layout_width="2dp"
-        android:layout_height="150dp"
+        android:layout_height="300dp"
         android:background="@color/drak_blue"
-        app:layout_constraintEnd_toEndOf="@+id/et_recipe_description"
-        app:layout_constraintTop_toTopOf="@+id/et_recipe_description"
-        app:layout_constraintBottom_toBottomOf="@+id/et_recipe_description"/>
+        app:layout_constraintEnd_toEndOf="@+id/ProcedureRecyclerView"
+        app:layout_constraintTop_toTopOf="@+id/ProcedureRecyclerView"
+        app:layout_constraintBottom_toBottomOf="@+id/ProcedureRecyclerView"/>
     <View
         android:id="@+id/view04"
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:background="@color/drak_blue"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_recipe_description"/>
+        app:layout_constraintTop_toBottomOf="@+id/ProcedureRecyclerView"/>
+    <TextView
+        android:id="@+id/tv_classification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="Classification"
+        android:layout_marginTop="40dp"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ProcedureRecyclerView"/>
+
+    <Spinner
+        android:id="@+id/spn_classification"
+        android:layout_width="150dp"
+        android:layout_height="30dp"
+        android:entries="@array/product_type"
+        android:textColor="@color/teal_700"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_classification" />
+
+
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/bt_notice"
         android:layout_width="wrap_content"
@@ -119,27 +116,41 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/bt_next"
+        android:id="@+id/bt_pre"
         android:layout_width="120dp"
         android:layout_height="70dp"
+        android:layout_marginStart="40dp"
         android:layout_marginBottom="40dp"
         android:backgroundTint="@color/dark_blue"
-        android:text="NEXT"
+        android:text="PREV"
         android:textColor="@color/white"
         android:textSize="13sp"
         android:textStyle="bold"
         app:cornerRadius="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-<!--    <GridView-->
-<!--    android:id="@+id/gv_recipe"-->
-<!--    android:layout_width="match_parent"-->
-<!--    android:layout_height="600dp"-->
-<!--    android:layout_marginTop="15dp"-->
-<!--    app:layout_constraintStart_toStartOf="parent"-->
-<!--    app:layout_constraintTop_toBottomOf="@+id/tv_add_recipe_page"/>-->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/bt_publish"
+        android:layout_width="120dp"
+        android:layout_height="70dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="40dp"
+        android:backgroundTint="@color/dark_blue"
+        android:text="PUBLISH"
+        android:textColor="@color/white"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        app:cornerRadius="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"  />
+    <!--    <GridView-->
+    <!--    android:id="@+id/gv_recipe"-->
+    <!--    android:layout_width="match_parent"-->
+    <!--    android:layout_height="600dp"-->
+    <!--    android:layout_marginTop="15dp"-->
+    <!--    app:layout_constraintStart_toStartOf="parent"-->
+    <!--    app:layout_constraintTop_toBottomOf="@+id/tv_add_recipe_page"/>-->
 
 
     <androidx.appcompat.widget.AppCompatImageView
