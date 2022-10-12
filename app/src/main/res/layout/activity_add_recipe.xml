@@ -28,7 +28,13 @@
         app:tint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
-
+<!--    <GridView-->
+<!--    android:id="@+id/gv_recipe"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="600dp"-->
+<!--    android:layout_marginTop="15dp"-->
+<!--    app:layout_constraintStart_toStartOf="parent"-->
+<!--    app:layout_constraintTop_toBottomOf="@+id/tv_add_recipe_page"/>-->
     <ListView
         android:id="@+id/lv_recipe"
         android:layout_width="match_parent"

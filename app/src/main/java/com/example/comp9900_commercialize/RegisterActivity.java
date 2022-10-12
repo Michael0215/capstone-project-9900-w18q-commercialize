@@ -72,7 +72,6 @@ public class RegisterActivity extends AppCompatActivity {
         user.put("Type", type);
         user.put("Contact Detail", contact);
         user.put("E-mail", email);
-        user.put("Password", password);
         user.put("Avatar", null);
         progressDialog.setMessage("Registering User...");
         progressDialog.show();

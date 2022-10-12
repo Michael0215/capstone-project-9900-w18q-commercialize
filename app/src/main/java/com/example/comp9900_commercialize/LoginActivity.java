@@ -7,17 +7,20 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.text.TextUtils;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.comp9900_commercialize.databinding.ActivityLoginBinding;
 import com.example.comp9900_commercialize.utilities.MacroDef;
 import com.example.comp9900_commercialize.utilities.Preferences;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -71,12 +74,24 @@ public class LoginActivity extends AppCompatActivity {
                             preferences = new Preferences(getApplicationContext());
                             preferences.putBoolean(MacroDef.KEY_IS_SIGNED_IN, true);
                             preferences.putString(MacroDef.KEY_EMAIL, email);
+//                            EditText Password = binding.etPassword;
+//
+//                            DocumentReference Ref = firebaseFirestore.collection("users").document(user.getEmail());
+//                            Ref
+//                                    .update("Password", Password.getText().toString())
+//                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                                        @Override
+//                                        public void onSuccess(Void aVoid) {
+//                                        }
+//                                    });
+
                             firebaseFirestore.collection(MacroDef.KEY_COLLECTION_USERS)
                                     .whereEqualTo(MacroDef.KEY_EMAIL, email)
                                     .get()
                                     .addOnCompleteListener(task1 -> {
                                         if(task1.isSuccessful() && task1.getResult() != null
                                                 && task1.getResult().getDocuments().size() > 0) {
+                                            preferences.putString(MacroDef.KEY_PASSWORD,pwd);
                                             DocumentSnapshot documentSnapshot = task1.getResult().getDocuments().get(0);
                                             preferences.putString(MacroDef.KEY_USERNAME, documentSnapshot.getString("Name"));
                                             preferences.putString(MacroDef.KEY_CONTACT, documentSnapshot.getString("Contact Detail"));

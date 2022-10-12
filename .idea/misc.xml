@@ -17,6 +17,7 @@
         <entry key="..\:/capstone-project-9900-w18q-commercialize/app/src/main/res/layout/activity_forgot_password.xml" value="0.36614583333333334" />
         <entry key="..\:/capstone-project-9900-w18q-commercialize/app/src/main/res/layout/activity_login.xml" value="0.36614583333333334" />
         <entry key="..\:/capstone-project-9900-w18q-commercialize/app/src/main/res/layout/activity_main.xml" value="0.36614583333333334" />
+        <entry key="..\:/capstone-project-9900-w18q-commercialize/app/src/main/res/layout/activity_main2.xml" value="0.36614583333333334" />
         <entry key="..\:/capstone-project-9900-w18q-commercialize/app/src/main/res/layout/activity_notice.xml" value="0.35052083333333334" />
         <entry key="..\:/capstone-project-9900-w18q-commercialize/app/src/main/res/layout/activity_other_profile.xml" value="0.35052083333333334" />
         <entry key="..\:/capstone-project-9900-w18q-commercialize/app/src/main/res/layout/activity_profile.xml" value="0.33" />
@@ -34,6 +35,7 @@
         <entry key="..\:/capstone-project-9900-w18q-commercialize/app/src/main/res/layout/item_container_recent_chat.xml" value="0.33" />
         <entry key="..\:/capstone-project-9900-w18q-commercialize/app/src/main/res/layout/item_container_sent_message.xml" value="0.25416666666666665" />
         <entry key="..\:/capstone-project-9900-w18q-commercialize/app/src/main/res/layout/item_container_subscribe.xml" value="0.33" />
+        <entry key="..\:/capstone-project-9900-w18q-commercialize/app/src/main/res/layout/recyclerview_row.xml" value="0.36614583333333334" />
       </map>
     </option>
   </component>
