@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="product_type">
+    <string-array name="difficulty">
         <item></item>
-        <item>Hard</item>
-        <item>Normal</item>
         <item>Easy</item>
-        <item>1 hour</item>
-        <item>30 min</item>
-        <item>15 min</item>
+        <item>Normal</item>
+        <item>Hard</item>
+    </string-array>
+    <string-array name="time">
+        <item></item>
+        <item>15min</item>
+        <item>30min</item>
+        <item>1hour</item>
+    </string-array>
+    <string-array name="classification">
+        <item></item>
+        <item>Breakfast</item>
+        <item>Brunch</item>
+        <item>Lunch</item>
+        <item>Supper</item>
     </string-array>
 </resources>
