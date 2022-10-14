@@ -124,3 +124,35 @@ None.
 
 Recipe Detail Page front-end coding.
 Plan what needs to be done in sprint2, and start to work on it.
+--------------------------------------------------------------------------------
+
+Week 5 (2022.10.14)
+
+
+1) What was planned for the period since the last work diary entry
+
+Recipe Detail Page front-end coding.
+Plan what needs to be done in sprint2, and start to work on it.
+
+2) What was finished
+ 
+fix some bugs.
+Reset Password via Email function implemented
+
+
+3) What were the main technical and non-technical obstacles and how they were 
+overcome (or what was tried and did not work)
+
+The use of RecyclerView, GirdLayoutManager are not proficient.
+
+4) What was not finished, why this happened, how this affects the overall project 
+progress and what adjustments (if any) are needed so the success of the project is not 
+endangered.
+
+None.
+
+5) what is planned for the next period
+
+Recipe Detail Page and Add Recipe Detail Page back-end coding.
+Test and fix bugs.
+Work on sprint2.
