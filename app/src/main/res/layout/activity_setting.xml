@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:background="#1C2E46"
         android:gravity="center_horizontal"
-        android:text="Setting"
+        android:text="Settings"
         android:textColor="@color/white"
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"

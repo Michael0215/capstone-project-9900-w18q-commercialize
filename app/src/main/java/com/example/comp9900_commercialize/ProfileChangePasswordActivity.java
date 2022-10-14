@@ -75,7 +75,6 @@ public class ProfileChangePasswordActivity extends AppCompatActivity {
                 if (checkSame(newPassword, confirmPassword)) {
                     if (checkValid(newPassword)) {
                         preferences.putString(MacroDef.KEY_PASSWORD,confirmPassword.getText().toString());
-                        Toast.makeText(getApplicationContext(), "Reset succeed", Toast.LENGTH_SHORT).show();
 //                        DocumentReference Ref = db.collection("users").document(user.getEmail());
 //                        Ref
 //                                .update("Password", newPassword.getText().toString())
@@ -91,6 +90,7 @@ public class ProfileChangePasswordActivity extends AppCompatActivity {
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if (task.isSuccessful()) {
                                             signOut();
+                                            Toast.makeText(getApplicationContext(), "Reset succeed", Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                 });
@@ -105,7 +105,7 @@ public class ProfileChangePasswordActivity extends AppCompatActivity {
             }
         });
         binding.btCancel.setOnClickListener(v ->
-                startActivity(new Intent(getApplicationContext(), SettingActivity.class)));
+                onBackPressed());
     }
 
     /*public String getRealPassword(){
@@ -153,8 +153,9 @@ public class ProfileChangePasswordActivity extends AppCompatActivity {
         preferences.putBoolean(MacroDef.KEY_IS_SIGNED_IN, false);
         auth = FirebaseAuth.getInstance();
         auth.signOut();
-        new ProfileActivity().instance.finish();
         startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+        new ProfileActivity().instance.finish();
+        new SettingActivity().instance.finish();
         finish();
     }
 }
