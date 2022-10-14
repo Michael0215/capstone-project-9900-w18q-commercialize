@@ -23,14 +23,21 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void setListeners(){
-        binding.ibSearch.setOnClickListener(v ->
-                startActivity(new Intent(getApplicationContext(), SearchActivity.class)));
-        binding.ibCreate.setOnClickListener(v ->
-                startActivity(new Intent(getApplicationContext(), AddRecipeActivity.class)));
-        binding.ibSubscribe.setOnClickListener(v ->
-                startActivity(new Intent(getApplicationContext(), SubscribeActivity.class)));
-        binding.ibProfile.setOnClickListener(v ->
-                startActivity(new Intent(getApplicationContext(), ProfileActivity.class)));
+        binding.ibSearch.setOnClickListener(v -> {
+                    startActivity(new Intent(getApplicationContext(), SearchActivity.class));
+                    finish();
+                });
+        binding.ibCreate.setOnClickListener(v -> {
+                    startActivity(new Intent(getApplicationContext(), AddRecipeActivity.class));
+                });
+        binding.ibSubscribe.setOnClickListener(v -> {
+                    startActivity(new Intent(getApplicationContext(), SubscribeActivity.class));
+                    finish();
+                });
+        binding.ibProfile.setOnClickListener(v -> {
+                    startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+                    finish();
+                });
         binding.btNotice.setOnClickListener(v ->
                 startActivity(new Intent(getApplicationContext(), NoticeActivity.class)));
     }

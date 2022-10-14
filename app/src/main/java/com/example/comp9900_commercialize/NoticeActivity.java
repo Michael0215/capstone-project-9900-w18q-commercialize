@@ -22,6 +22,6 @@ public class NoticeActivity extends AppCompatActivity {
 
     private void setListeners(){
         binding.btCancel.setOnClickListener(v ->
-                finish());
+                onBackPressed());
     }
 }

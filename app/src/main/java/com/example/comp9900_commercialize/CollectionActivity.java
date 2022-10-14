@@ -22,7 +22,7 @@ public class CollectionActivity extends AppCompatActivity {
 
     private void setListeners(){
         binding.btCancel.setOnClickListener(v ->
-                startActivity(new Intent(getApplicationContext(), ProfileActivity.class)));
+                onBackPressed());
         binding.btNotice.setOnClickListener(v ->
                 startActivity(new Intent(getApplicationContext(), NoticeActivity.class)));
     }

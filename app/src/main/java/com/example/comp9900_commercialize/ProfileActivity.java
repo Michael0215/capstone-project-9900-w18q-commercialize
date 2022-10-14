@@ -70,8 +70,9 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void setListeners(){
-        binding.btSetting.setOnClickListener(v ->
-                startActivity(new Intent(getApplicationContext(), SettingActivity.class)));
+        binding.btSetting.setOnClickListener(v -> {
+                    startActivity(new Intent(getApplicationContext(), SettingActivity.class));
+                });
         binding.ivNotice.setOnClickListener(v ->
                 startActivity(new Intent(getApplicationContext(), NoticeActivity.class)));
         binding.ivCollection.setOnClickListener(v ->
@@ -82,12 +83,17 @@ public class ProfileActivity extends AppCompatActivity {
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     finish();
                 });
-        binding.ibSearch.setOnClickListener(v ->
-                startActivity(new Intent(getApplicationContext(), SearchActivity.class)));
-        binding.ibCreate.setOnClickListener(v ->
-                startActivity(new Intent(getApplicationContext(), AddRecipeActivity.class)));
-        binding.ibSubscribe.setOnClickListener(v ->
-                startActivity(new Intent(getApplicationContext(), SubscribeActivity.class)));
+        binding.ibSearch.setOnClickListener(v -> {
+                    startActivity(new Intent(getApplicationContext(), SearchActivity.class));
+                    finish();
+                });
+        binding.ibCreate.setOnClickListener(v -> {
+                    startActivity(new Intent(getApplicationContext(), AddRecipeActivity.class));
+                });
+        binding.ibSubscribe.setOnClickListener(v -> {
+                    startActivity(new Intent(getApplicationContext(), SubscribeActivity.class));
+                    finish();
+                });
     }
 
     private void showToast(String message) {

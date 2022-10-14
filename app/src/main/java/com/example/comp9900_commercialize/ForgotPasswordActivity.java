@@ -39,9 +39,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
     private void setListeners(){
         binding.btCancel.setOnClickListener(v ->
-                finish());
-        binding.tvSignIn.setOnClickListener(v ->
-                startActivity(new Intent(getApplicationContext(), LoginActivity.class)));
+                onBackPressed());
 
         binding.btSend.setOnClickListener(v -> {
             FirebaseAuth auth = FirebaseAuth.getInstance();

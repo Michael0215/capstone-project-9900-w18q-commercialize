@@ -45,7 +45,7 @@ public class RegisterActivity extends AppCompatActivity {
     //create actions for palette
     private void setListeners() {
         binding.tvBackToLogin.setOnClickListener(v ->
-                finish());
+                onBackPressed());
         binding.btRegister.setOnClickListener(v -> {
             if (checkInput()) {
                 registerUser();

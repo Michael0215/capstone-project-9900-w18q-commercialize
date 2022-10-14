@@ -22,8 +22,7 @@ public class AddRecipeActivity extends AppCompatActivity {
     }
 
     private void setListeners(){
-        binding.btCancel.setOnClickListener(v ->
-                startActivity(new Intent(getApplicationContext(), MainActivity.class)));
+        binding.btCancel.setOnClickListener(v -> onBackPressed());
         binding.btNotice.setOnClickListener(v ->
                 startActivity(new Intent(getApplicationContext(), NoticeActivity.class)));
         binding.btNext.setOnClickListener(v ->
