@@ -90,3 +90,67 @@ Nothing at this moment.
 
 Implement the functions as we planned in sprint 1.
 Implement some functions in sprint 2 in advance if possible.
+--------------------------------------------------------------------------------
+
+Week 4 (2022.10.9)
+
+
+1) What was planned for the period since the last work diary entry
+
+Implement the functions as we planned in sprint 1.
+Implement some functions in sprint 2 in advance if possible.
+
+2) What was finished 
+
+Implement the functions as we planned in sprint 1.
+Implement some functions in sprint 2 in advance if possible.
+
+3) What were the main technical and non-technical obstacles and how they were 
+overcome (or what was tried and did not work)
+
+Some pages were not closed after hopping to another page, so if you press the back button(the triangle one integrated in the Android system)
+you will go back to these pages. This was not what we want.
+
+4) What was not finished, why this happened, how this affects the overall project 
+progress and what adjustments (if any) are needed so the success of the project is not 
+endangered.
+
+Nothing at this moment.
+
+5) what is planned for the next period
+
+Prepare for the demo A.
+Implement the rest functions in sprint 2.
+Keep debugging and optimizing the UI design.
+--------------------------------------------------------------------------------
+
+Week 5 (2022.10.15)
+
+
+1) What was planned for the period since the last work diary entry
+
+Prepare for the demo A.
+Implement the rest functions in sprint 2.
+Keep debugging and optimizing the UI design.
+
+2) What was finished 
+
+Prepare for the demo A.
+Keep debugging and optimizing the UI design.
+
+3) What were the main technical and non-technical obstacles and how they were 
+overcome (or what was tried and did not work)
+
+Trying to figure out the usage of RecycleView and GridView widgets, which are very important to the implementation of 
+creating a recipe and view a list of recipes.
+
+4) What was not finished, why this happened, how this affects the overall project 
+progress and what adjustments (if any) are needed so the success of the project is not 
+endangered.
+
+User stories in sprint 2 except for restting password by e-mail.
+
+5) what is planned for the next period
+
+Implement the rest functions in sprint 2.
+Keep debugging and optimizing the UI design.
