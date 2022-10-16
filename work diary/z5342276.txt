@@ -16,4 +16,4 @@ I create project on Android Studio and connect to the GitHub in master branch, a
 
 Week5 (2022.10.13)
 
-We finish the progressive demo A and retrospective A to evaluate and conclude the sprint one. And we start to work on tasks in sprint two.
+We finish the progressive demo A and retrospective A to evaluate and conclude the sprint one. And we start to work on tasks in sprint two. I'm working on the design of the 'StaggeredGridLayout' of the explore(main) page.
