@@ -38,23 +38,31 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Add procedure"
+        android:text="Procedures"
         android:textColor="@color/black"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_step_three"/>
-    <androidx.recyclerview.widget.RecyclerView
+    <ScrollView
         android:id="@+id/ProcedureRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:layout_marginTop="15dp"
         android:orientation="vertical"
         android:overScrollMode="never"
-        android:padding="15sp"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_add_procedure"
-        />
+        >
+        <LinearLayout
+            android:id="@+id/ll_procedures"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:overScrollMode="never"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="parent">
+        </LinearLayout>
+    </ScrollView>
     <View
         android:id="@+id/view01"
         android:layout_width="match_parent"
@@ -128,7 +136,8 @@
         android:textStyle="bold"
         app:cornerRadius="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/spn_classification" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/bt_publish"
@@ -143,7 +152,8 @@
         android:textStyle="bold"
         app:cornerRadius="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"  />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/spn_classification" />
     <!--    <GridView-->
     <!--    android:id="@+id/gv_recipe"-->
     <!--    android:layout_width="match_parent"-->
@@ -164,5 +174,16 @@
         app:tint="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
+
+    <Button
+        android:id="@+id/bt_add_procedure"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add"
+        app:layout_constraintTop_toTopOf="@id/tv_add_procedure"
+        app:layout_constraintEnd_toEndOf="@id/ProcedureRecyclerView"
+        app:layout_constraintBottom_toBottomOf="@id/tv_add_procedure"
+        android:drawableRight="@drawable/ic_add"
+        android:backgroundTint="@color/primary"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
 
