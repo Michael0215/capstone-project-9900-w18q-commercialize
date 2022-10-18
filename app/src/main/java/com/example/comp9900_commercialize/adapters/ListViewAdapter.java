@@ -2,20 +2,15 @@ package com.example.comp9900_commercialize.adapters;
 
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
-
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.comp9900_commercialize.R;
-import com.example.comp9900_commercialize.bean.ItemBean;
+import com.example.comp9900_commercialize.bean.ItemExplore;
 
 import java.util.List;
 
 public class ListViewAdapter extends RecyclerViewBaseAdapter {
 
-    public ListViewAdapter(List<ItemBean> data) {
+    public ListViewAdapter(List<ItemExplore> data) {
         super(data);
     }
 

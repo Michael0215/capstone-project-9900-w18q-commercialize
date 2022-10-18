@@ -2,25 +2,24 @@ package com.example.comp9900_commercialize.adapters;
 
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.AdapterView.OnItemClickListener;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.comp9900_commercialize.R;
-import com.example.comp9900_commercialize.bean.ItemBean;
+import com.example.comp9900_commercialize.bean.ItemExplore;
+import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.List;
 
 public abstract class RecyclerViewBaseAdapter extends RecyclerView.Adapter<RecyclerViewBaseAdapter.InnerHolder> {
 
-    private final List<ItemBean> mData;
+    private final List<ItemExplore> mData;
     private OnItemClickListener mOnItemClickListener;
 
-    public RecyclerViewBaseAdapter(List<ItemBean> data){
+    public RecyclerViewBaseAdapter(List<ItemExplore> data){
         this.mData = data;
     }
 
@@ -70,13 +69,28 @@ public abstract class RecyclerViewBaseAdapter extends RecyclerView.Adapter<Recyc
     public class InnerHolder extends RecyclerView.ViewHolder {
         private ImageView mIcon;
         private TextView mTitle;
+        private TextView mLikeNum;
+        private TextView mCommentNum;
+        private TextView mContributor;
+        private ImageView mLike;
+        private ImageView mComment;
+        private RoundedImageView mAvatar;
+
+
         private int mPosition;
 
         public InnerHolder(@NonNull View itemView) {
             super(itemView);
             //找到图片控件
-            mIcon = (ImageView) itemView.findViewById(R.id.icon);
-            mTitle = (TextView) itemView.findViewById(R.id.title);
+            mIcon =  itemView.findViewById(R.id.iv_recipe);
+            mTitle =  itemView.findViewById(R.id.tv_recipe);
+            mLikeNum = itemView.findViewById(R.id.tv_like_num);
+            mCommentNum = itemView.findViewById(R.id.tv_comment_num);
+            mContributor = itemView.findViewById(R.id.tv_contributor_name);
+            mLike = itemView.findViewById(R.id.iv_like);
+            mComment = itemView.findViewById(R.id.iv_comment);
+            mAvatar = itemView.findViewById(R.id.riv_user_photo);
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -88,11 +102,18 @@ public abstract class RecyclerViewBaseAdapter extends RecyclerView.Adapter<Recyc
         }
 
         //这个方法用于设置数据
-        public void setData(ItemBean itemBean, int position) {
+        public void setData(ItemExplore itemExplore, int position) {
             this.mPosition = position;
             //开始设置数据
-            mIcon.setImageResource(itemBean.icon);
-            mTitle.setText(itemBean.title);
+            mIcon.setImageResource(itemExplore.icon);
+            mTitle.setText(itemExplore.title);
+            mLikeNum.setText(itemExplore.tv_like_num);
+            mCommentNum.setText(itemExplore.tv_comment_num);
+            mContributor.setText(itemExplore.tv_contributor_name);
+            mLike.setImageResource(itemExplore.like);
+            mComment.setImageResource(itemExplore.comment_);
+            mAvatar.setImageResource(itemExplore.avatar);
+
         }
     }
 }

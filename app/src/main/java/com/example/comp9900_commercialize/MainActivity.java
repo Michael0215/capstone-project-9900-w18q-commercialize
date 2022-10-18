@@ -1,22 +1,17 @@
 package com.example.comp9900_commercialize;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.example.comp9900_commercialize.adapters.ListViewAdapter;
 import com.example.comp9900_commercialize.adapters.RecyclerViewBaseAdapter;
 import com.example.comp9900_commercialize.adapters.StaggerAdapter;
 import com.example.comp9900_commercialize.bean.Datas;
-import com.example.comp9900_commercialize.bean.ItemBean;
+import com.example.comp9900_commercialize.bean.ItemExplore;
 import com.example.comp9900_commercialize.databinding.ActivityMainBinding;
 
 import java.util.ArrayList;
@@ -27,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
     private RecyclerView mList;
-    private List<ItemBean> mData;
+    private List<ItemExplore> mData;
     private RecyclerViewBaseAdapter mAdapter;
 
 
@@ -38,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         setListeners();
         //找到控件
-        mList = (RecyclerView) this.findViewById(R.id.recycler_view);
+        mList = this.findViewById(R.id.recycler_view);
         //准备数据
         initData();
     }
@@ -51,9 +46,15 @@ public class MainActivity extends AppCompatActivity {
         //创建模拟数据
         for (int i = 0; i < Datas.icons.length; i++){
             //创建数据对象
-            ItemBean data = new ItemBean();
+            ItemExplore data = new ItemExplore();
             data.icon = Datas.icons[i];
             data.title = "我是第" + (i+1) + "个菜谱";
+            data.avatar = R.drawable.default_avatar;
+            data.comment_ = R.drawable.ic_comment;
+            data.like = R.drawable.ic_like;
+            data.tv_comment_num = "12";
+            data.tv_like_num = "25";
+            data.tv_contributor_name = "Test Contributor";
             //添加到集合里头
             mData.add(data);
         }
@@ -63,16 +64,16 @@ public class MainActivity extends AppCompatActivity {
         //瀑布流布局管理器
         showStagger(true, false);
     }
-    private void showLinear() {
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        mList.setLayoutManager(layoutManager);
-        //创建适配器
-        mAdapter = new ListViewAdapter(mData);
-        //设置到RecyclerView里头
-        mList.setAdapter(mAdapter);
-        //初始化事件LinearView
-        initListener();
-    }
+//    private void showLinear() {
+//        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+//        mList.setLayoutManager(layoutManager);
+//        //创建适配器
+//        mAdapter = new ListViewAdapter(mData);
+//        //设置到RecyclerView里头
+//        mList.setAdapter(mAdapter);
+//        //初始化事件LinearView
+//        initListener();
+//    }
 
     private void showStagger(boolean isVertical, boolean isReverse) {
         //准备布局管理器
