@@ -8,5 +8,5 @@ public class MacroDef {
     public static final  String KEY_USERNAME = "username";
     public static final  String KEY_CONTACT = "contact";
     public static final  String KEY_AVATAR = "avatar";
-
+    public static final  String KEY_PASSWORD = "password";
 }

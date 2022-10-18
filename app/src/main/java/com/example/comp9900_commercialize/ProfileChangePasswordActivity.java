@@ -58,61 +58,39 @@ public class ProfileChangePasswordActivity extends AppCompatActivity {
     private void init(){
         user = FirebaseAuth.getInstance().getCurrentUser();
         db = FirebaseFirestore.getInstance();
-        DocumentReference Ref = db.collection("users").document(user.getEmail());
-        Ref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
-                        Map doc = document.getData();
-                        realPassword = (String) doc.get("Password");
-                        //Toast.makeText(getApplicationContext(), realPassword, Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }
-        });
+        preferences = new Preferences(getApplicationContext());
+
     }
 
     private void setListeners(){
         binding.btSet.setOnClickListener(v -> {
+            realPassword = preferences.getString(MacroDef.KEY_PASSWORD);
+
             EditText oldPassword = binding.etPassword;
             EditText newPassword = binding.etNewPassword;
             EditText confirmPassword = binding.etConfirmPassword;
-            /*DocumentReference Ref = db.collection("users").document(user.getEmail());
-            Ref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                    if (task.isSuccessful()) {
-                        DocumentSnapshot document = task.getResult();
-                        if (document.exists()) {
-                            Map doc = document.getData();
-                            realPassword = (String) doc.get("Password");
-                            Toast.makeText(getApplicationContext(), realPassword, Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                }
-            });*/
-
             if (realPassword.equals(oldPassword.getText().toString())) {
+//            if (realPassword.equals(oldPassword.getText().toString())) {
             //if (getRealPassword().equals(oldPassword.getText().toString())) {
                 if (checkSame(newPassword, confirmPassword)) {
                     if (checkValid(newPassword)) {
-                        DocumentReference Ref = db.collection("users").document(user.getEmail());
-                        Ref
-                                .update("Password", newPassword.getText().toString())
-                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void aVoid) {
-                                        Toast.makeText(getApplicationContext(), "Reset succeed", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
+                        preferences.putString(MacroDef.KEY_PASSWORD,confirmPassword.getText().toString());
+//                        DocumentReference Ref = db.collection("users").document(user.getEmail());
+//                        Ref
+//                                .update("Password", newPassword.getText().toString())
+//                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                                    @Override
+//                                    public void onSuccess(Void aVoid) {
+//                                        Toast.makeText(getApplicationContext(), "Reset succeed", Toast.LENGTH_SHORT).show();
+//                                    }
+//                                });
                         user.updatePassword(newPassword.getText().toString())
                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if (task.isSuccessful()) {
                                             signOut();
+                                            Toast.makeText(getApplicationContext(), "Reset succeed", Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                 });
@@ -127,7 +105,7 @@ public class ProfileChangePasswordActivity extends AppCompatActivity {
             }
         });
         binding.btCancel.setOnClickListener(v ->
-                startActivity(new Intent(getApplicationContext(), SettingActivity.class)));
+                onBackPressed());
     }
 
     /*public String getRealPassword(){
@@ -175,8 +153,9 @@ public class ProfileChangePasswordActivity extends AppCompatActivity {
         preferences.putBoolean(MacroDef.KEY_IS_SIGNED_IN, false);
         auth = FirebaseAuth.getInstance();
         auth.signOut();
-        new ProfileActivity().instance.finish();
         startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+        new ProfileActivity().instance.finish();
+        new SettingActivity().instance.finish();
         finish();
     }
 }

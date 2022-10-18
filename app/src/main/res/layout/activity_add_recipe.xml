@@ -18,6 +18,96 @@
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_step_one"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:background="@drawable/background_input"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:text="Create Recipe Step 1"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_add_recipe_page"/>
+
+
+    <ImageView
+        android:id="@+id/iv_add_cover_image"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="28dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/template"
+        android:background="@color/white"
+        android:backgroundTint="#ECECEC"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_step_one" />
+
+    <EditText
+        android:id="@+id/et_recipe_name"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginTop="10dp"
+        android:hint="Enter the name recipe name"
+        android:paddingStart="30dp"
+        android:paddingEnd="30dp"
+        android:gravity="center"
+        android:textColor="@color/primary_text"
+        android:textSize="13sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_add_cover_image" />
+
+    <EditText
+        android:id="@+id/et_recipe_description"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginTop="10dp"
+        android:hint="Add subtitle or introduction if needed"
+        android:gravity="clip_horizontal"
+        android:paddingTop="15dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:textColor="@color/primary_text"
+        android:background="@null"
+        android:textSize="13sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_recipe_name" />
+    <View
+        android:id="@+id/view01"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/drak_blue"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/et_recipe_description"/>
+    <View android:id="@+id/view02"
+        android:layout_width="2dp"
+        android:layout_height="150dp"
+        android:background="@color/drak_blue"
+        app:layout_constraintStart_toStartOf="@+id/et_recipe_description"
+        app:layout_constraintTop_toTopOf="@+id/et_recipe_description"
+        app:layout_constraintBottom_toBottomOf="@+id/et_recipe_description"/>
+    <View android:id="@+id/view03"
+        android:layout_width="2dp"
+        android:layout_height="150dp"
+        android:background="@color/drak_blue"
+        app:layout_constraintEnd_toEndOf="@+id/et_recipe_description"
+        app:layout_constraintTop_toTopOf="@+id/et_recipe_description"
+        app:layout_constraintBottom_toBottomOf="@+id/et_recipe_description"/>
+    <View
+        android:id="@+id/view04"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/drak_blue"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_recipe_description"/>
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/bt_notice"
         android:layout_width="wrap_content"
@@ -28,15 +118,29 @@
         app:tint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/bt_next"
+        android:layout_width="120dp"
+        android:layout_height="70dp"
+        android:layout_marginBottom="40dp"
+        android:backgroundTint="@color/dark_blue"
+        android:text="NEXT"
+        android:textColor="@color/white"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        app:cornerRadius="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <ListView
-        android:id="@+id/lv_recipe"
-        android:layout_width="match_parent"
-        android:layout_height="600dp"
-        android:layout_marginTop="15dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_add_recipe_page"
-        />
+<!--    <GridView-->
+<!--    android:id="@+id/gv_recipe"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="600dp"-->
+<!--    android:layout_marginTop="15dp"-->
+<!--    app:layout_constraintStart_toStartOf="parent"-->
+<!--    app:layout_constraintTop_toBottomOf="@+id/tv_add_recipe_page"/>-->
+
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/bt_cancel"

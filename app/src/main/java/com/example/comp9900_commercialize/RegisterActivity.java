@@ -45,7 +45,7 @@ public class RegisterActivity extends AppCompatActivity {
     //create actions for palette
     private void setListeners() {
         binding.tvBackToLogin.setOnClickListener(v ->
-                finish());
+                onBackPressed());
         binding.btRegister.setOnClickListener(v -> {
             if (checkInput()) {
                 registerUser();
@@ -72,7 +72,6 @@ public class RegisterActivity extends AppCompatActivity {
         user.put("Type", type);
         user.put("Contact Detail", contact);
         user.put("E-mail", email);
-        user.put("Password", password);
         user.put("Avatar", null);
         progressDialog.setMessage("Registering User...");
         progressDialog.show();
