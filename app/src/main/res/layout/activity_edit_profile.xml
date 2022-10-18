@@ -26,7 +26,7 @@
         android:layout_height="80dp"
         android:layout_marginTop="28dp"
         android:background="@color/white"
-        android:src="@drawable/template"
+        android:src="@drawable/default_avatar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_edit_profile" />

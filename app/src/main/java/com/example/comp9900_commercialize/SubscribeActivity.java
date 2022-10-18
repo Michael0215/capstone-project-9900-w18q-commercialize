@@ -25,7 +25,7 @@ public class SubscribeActivity extends AppCompatActivity {
         binding.ibSearch.setOnClickListener(v ->
                 startActivity(new Intent(getApplicationContext(), SearchActivity.class)));
         binding.ibCreate.setOnClickListener(v ->
-                startActivity(new Intent(getApplicationContext(), CollectionActivity.class)));
+                startActivity(new Intent(getApplicationContext(), AddRecipeActivity.class)));
         binding.ibSubscribe.setOnClickListener(v ->
                 startActivity(new Intent(getApplicationContext(), SubscribeActivity.class)));
         binding.ibProfile.setOnClickListener(v ->

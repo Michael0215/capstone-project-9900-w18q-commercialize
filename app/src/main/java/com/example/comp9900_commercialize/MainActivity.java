@@ -19,7 +19,6 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setListeners();
-
     }
 
 
@@ -27,13 +26,11 @@ public class MainActivity extends AppCompatActivity {
         binding.ibSearch.setOnClickListener(v ->
                 startActivity(new Intent(getApplicationContext(), SearchActivity.class)));
         binding.ibCreate.setOnClickListener(v ->
-                startActivity(new Intent(getApplicationContext(), CollectionActivity.class)));
+                startActivity(new Intent(getApplicationContext(), AddRecipeActivity.class)));
         binding.ibSubscribe.setOnClickListener(v ->
                 startActivity(new Intent(getApplicationContext(), SubscribeActivity.class)));
-        binding.ibProfile.setOnClickListener(v -> {
-                startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
-                finish();
-                });
+        binding.ibProfile.setOnClickListener(v ->
+                startActivity(new Intent(getApplicationContext(), ProfileActivity.class)));
         binding.btNotice.setOnClickListener(v ->
                 startActivity(new Intent(getApplicationContext(), NoticeActivity.class)));
     }

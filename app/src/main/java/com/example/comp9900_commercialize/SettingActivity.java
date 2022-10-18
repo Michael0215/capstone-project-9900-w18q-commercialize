@@ -30,10 +30,10 @@ public class SettingActivity extends AppCompatActivity {
 
     private void setListeners(){
         binding.btCancel.setOnClickListener(v ->
-                onBackPressed());
-        binding.btEditProfile.setOnClickListener(v ->
+                startActivity(new Intent(getApplicationContext(), ProfileActivity.class)));
+        binding.tvEditProfile.setOnClickListener(v ->
                 startActivity(new Intent(getApplicationContext(), EditProfileActivity.class)));
-        binding.btChangePassword.setOnClickListener(v ->
+        binding.tvChangePassword.setOnClickListener(v ->
                 startActivity(new Intent(getApplicationContext(), ProfileChangePasswordActivity.class)));
         binding.btLogOut.setOnClickListener(v -> signOut());
     }
