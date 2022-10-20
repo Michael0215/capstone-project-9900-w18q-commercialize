@@ -156,3 +156,41 @@ None.
 Recipe Detail Page and Add Recipe Detail Page back-end coding.
 Test and fix bugs.
 Work on sprint2.
+--------------------------------------------------------------------------------
+
+Week 6 (2022.10.20)
+
+
+1) What was planned for the period since the last work diary entry
+
+Recipe Detail Page and Add Recipe Detail Page back-end coding.
+Test and fix bugs.
+Work on sprint2.
+
+2) What was finished
+ 
+Fix some bugs.
+Successfully obtained the data in the Firebase Database and added the data to the adapter.
+Content can be displayed on the Explorer page (homepage).
+
+3) What were the main technical and non-technical obstacles and how they were 
+overcome (or what was tried and did not work)
+
+The storage structure of some data is complex, and it is not easy to obtain data.
+Discuss with team members to modify the data storage type and structure.
+
+4) What was not finished, why this happened, how this affects the overall project 
+progress and what adjustments (if any) are needed so the success of the project is not 
+endangered.
+
+Add Recipe Detail Page back-end coding.
+The other pages need to get the recipe data from the Firebase Database.
+If the data content of the Added Recipe Page cannot be uploaded to the database in time,
+other pages will not have the content to display.
+We adopt the method of manually adding data to the database to provide temporary virtual data for other pages
+
+5) what is planned for the next period
+
+Recipe Detail Page and Add Recipe Detail Page back-end coding.
+Test and fix bugs.
+Work on sprint2.
