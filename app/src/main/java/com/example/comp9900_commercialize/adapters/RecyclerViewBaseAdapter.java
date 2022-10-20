@@ -1,5 +1,7 @@
 package com.example.comp9900_commercialize.adapters;
 
+import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -12,16 +14,20 @@ import com.example.comp9900_commercialize.R;
 import com.example.comp9900_commercialize.bean.ItemExplore;
 import com.makeramen.roundedimageview.RoundedImageView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class RecyclerViewBaseAdapter extends RecyclerView.Adapter<RecyclerViewBaseAdapter.InnerHolder> {
 
-    private final List<ItemExplore> mData;
+    private List<ItemExplore> mData = new ArrayList<>();
     private OnItemClickListener mOnItemClickListener;
+
+
 
     public RecyclerViewBaseAdapter(List<ItemExplore> data){
         this.mData = data;
     }
+
 
     @NonNull
     @Override
@@ -67,13 +73,8 @@ public abstract class RecyclerViewBaseAdapter extends RecyclerView.Adapter<Recyc
 
 
     public class InnerHolder extends RecyclerView.ViewHolder {
-        private ImageView mIcon;
-        private TextView mTitle;
-        private TextView mLikeNum;
-        private TextView mCommentNum;
-        private TextView mContributor;
-        private ImageView mLike;
-        private ImageView mComment;
+        private ImageView mIcon,mLike,mComment;
+        private TextView mTitle,mLikeNum,mCommentNum,mContributor;
         private RoundedImageView mAvatar;
 
 
@@ -105,15 +106,14 @@ public abstract class RecyclerViewBaseAdapter extends RecyclerView.Adapter<Recyc
         public void setData(ItemExplore itemExplore, int position) {
             this.mPosition = position;
             //开始设置数据
-            mIcon.setImageResource(itemExplore.icon);
+            mIcon.setImageBitmap(itemExplore.icon);
             mTitle.setText(itemExplore.title);
             mLikeNum.setText(itemExplore.tv_like_num);
             mCommentNum.setText(itemExplore.tv_comment_num);
             mContributor.setText(itemExplore.tv_contributor_name);
-            mLike.setImageResource(itemExplore.like);
-            mComment.setImageResource(itemExplore.comment_);
-            mAvatar.setImageResource(itemExplore.avatar);
-
+            mLike.setImageResource(itemExplore.icon_like);
+            mComment.setImageResource(itemExplore.icon_comment);
+            mAvatar.setImageBitmap(itemExplore.avatar);
         }
     }
 }

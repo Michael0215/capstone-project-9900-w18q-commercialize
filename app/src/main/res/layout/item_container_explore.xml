@@ -14,10 +14,11 @@
             android:layout_height="match_parent"
             android:padding="5dp"
             >
+            <!--这里的imageView的width和height改为warp_content就能实现瀑布流的效果-->
             <ImageView
                 android:id="@+id/iv_recipe"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="200dp"
+                android:layout_height="130dp"
                 android:layout_centerHorizontal="true"
                 android:adjustViewBounds="true"
                 android:scaleType="fitXY"
