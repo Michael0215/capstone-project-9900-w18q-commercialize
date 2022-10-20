@@ -8,25 +8,18 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.res.Resources;
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Base64;
 import android.widget.Toast;
 
-import com.example.comp9900_commercialize.adapters.RecyclerViewBaseAdapter;
 import com.example.comp9900_commercialize.adapters.StaggerAdapter;
 import com.example.comp9900_commercialize.bean.Datas;
 import com.example.comp9900_commercialize.bean.ItemExplore;
 import com.example.comp9900_commercialize.databinding.ActivityMainBinding;
-import com.example.comp9900_commercialize.utilities.MacroDef;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -44,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     private RecyclerView mList;
     private List<ItemExplore> mData;
-    private RecyclerViewBaseAdapter mAdapter;
+    private StaggerAdapter mAdapter;
     private SwipeRefreshLayout refreshLayout;
     private FirebaseFirestore firebaseFirestore;
 
@@ -206,21 +199,9 @@ public class MainActivity extends AppCompatActivity {
             mData.add(data);
         }
         //RecyclerView需要设置样式，其实就是设置布局管理器,在这里设置瀑布流，线性流，还是网格流
-        //线性流布局管理器
-//        showLinear();
         //瀑布流布局管理器
         showStagger(true, false);
     }
-//    private void showLinear() {
-//        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-//        mList.setLayoutManager(layoutManager);
-//        //创建适配器
-//        mAdapter = new ListViewAdapter(mData);
-//        //设置到RecyclerView里头
-//        mList.setAdapter(mAdapter);
-//        //初始化事件LinearView
-//        initListener();
-//    }
 
     private void showStagger(boolean isVertical, boolean isReverse) {
         //准备布局管理器
@@ -233,7 +214,6 @@ public class MainActivity extends AppCompatActivity {
         mAdapter = new StaggerAdapter(mData);
         //设置适配器
         mList.setAdapter(mAdapter);
-
         //初始化事件RecyclerView
         initListener();
     }
@@ -241,7 +221,7 @@ public class MainActivity extends AppCompatActivity {
 
     //RecyclerView doesn't have clickOnListener
     private void initListener() {
-        mAdapter.setOnItemClickListener(new RecyclerViewBaseAdapter.OnItemClickListener() {
+        mAdapter.setOnItemClickListener(new StaggerAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
                 //这里处理图片的点击事件，该干嘛就干嘛，跳转的就跳转。。。
@@ -272,7 +252,4 @@ public class MainActivity extends AppCompatActivity {
 //            refresh();
 //        });
     }
-
-
-
 }
