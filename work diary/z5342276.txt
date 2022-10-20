@@ -17,3 +17,7 @@ I create project on Android Studio and connect to the GitHub in master branch, a
 Week5 (2022.10.13)
 
 We finish the progressive demo A and retrospective A to evaluate and conclude the sprint one. And we start to work on tasks in sprint two. I'm working on the design of the 'StaggeredGridLayout' of the explore(main) page.
+
+Week6 (2022.10.20)
+
+I'm working on pull the images from the Firestore to replace to local images for the data belong to StaggeredGridLayout. And the back-end part of the explore page in StaggeredGrid-style is almost done.
