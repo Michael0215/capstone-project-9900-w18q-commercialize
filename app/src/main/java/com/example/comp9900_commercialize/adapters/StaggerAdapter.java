@@ -17,7 +17,7 @@ import java.util.List;
 
 public class StaggerAdapter extends RecyclerView.Adapter<StaggerAdapter.InnerHolder>{
 
-    private List<ItemExplore> mData = new ArrayList<>();
+    private List<ItemExplore> mData;
     private OnItemClickListener mOnItemClickListener;
 
     public StaggerAdapter(List<ItemExplore> data){
