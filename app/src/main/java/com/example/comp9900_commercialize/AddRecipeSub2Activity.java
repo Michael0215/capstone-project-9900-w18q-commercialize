@@ -111,6 +111,7 @@ public class AddRecipeSub2Activity extends AppCompatActivity implements View.OnC
                 recipe.setRecipePublishTime(simpleDateFormat.format(date));
                 recipe.setRecipeContributorEmail(preferences.getString(MacroDef.KEY_EMAIL));
                 recipe.setRecipeContributorName(preferences.getString(MacroDef.KEY_USERNAME));
+                recipe.setRecipeContributorAvatar(preferences.getString(MacroDef.KEY_AVATAR));
                 firebaseFirestore.collection("recipes").document(UUID.randomUUID().toString().replace("-", "")).set(recipe)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override

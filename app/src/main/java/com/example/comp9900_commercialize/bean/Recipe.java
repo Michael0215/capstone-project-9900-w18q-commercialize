@@ -16,14 +16,15 @@ public class Recipe implements Serializable {
     public int recipeCommentsNum;
     public String recipePublishTime;
     public String recipeContributorName;
+    public String recipeContributorAvatar;
 
     public Recipe(){
 
     }
 
-    public Recipe(String recipeCover, String recipeContributor, String recipeName, String recipeDescription, List<Ingredient> recipeIngredientList, String recipeDifficulty, String recipeScheduledTime, List<Step> recipeStepList, int recipeLikesNum, int recipeCommentsNum, String recipePublishTime, String recipeContributorName) {
+    public Recipe(String recipeCover, String recipeContributorEmail, String recipeName, String recipeDescription, List<Ingredient> recipeIngredientList, String recipeDifficulty, String recipeScheduledTime, List<Step> recipeStepList, int recipeLikesNum, int recipeCommentsNum, String recipePublishTime, String recipeContributorName, String recipeContributorAvatar) {
         this.recipeCover = recipeCover;
-        this.recipeContributorEmail = recipeContributor;
+        this.recipeContributorEmail = recipeContributorEmail;
         this.recipeName = recipeName;
         this.recipeDescription = recipeDescription;
         this.recipeIngredientList = recipeIngredientList;
@@ -34,6 +35,15 @@ public class Recipe implements Serializable {
         this.recipeCommentsNum = recipeCommentsNum;
         this.recipePublishTime = recipePublishTime;
         this.recipeContributorName = recipeContributorName;
+        this.recipeContributorAvatar = recipeContributorAvatar;
+    }
+
+    public String getRecipeContributorAvatar() {
+        return recipeContributorAvatar;
+    }
+
+    public void setRecipeContributorAvatar(String recipeContributorAvatar) {
+        this.recipeContributorAvatar = recipeContributorAvatar;
     }
 
     public String getRecipeContributorName() {
