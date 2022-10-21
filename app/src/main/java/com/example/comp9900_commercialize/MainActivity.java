@@ -21,6 +21,7 @@ import com.example.comp9900_commercialize.databinding.ActivityMainBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -69,9 +70,9 @@ public class MainActivity extends AppCompatActivity {
                         //clear all posts in the listview
                         mData.clear();
                         // retrieve all the post in the firestore's table 'posts'
-                        CollectionReference posts = firebaseFirestore.collection("recpies");
+                        CollectionReference posts = firebaseFirestore.collection("recipes");
                         // order the post in creating time order
-                        Query query = posts.orderBy("Like Num", Query.Direction.DESCENDING);
+                        Query query = posts.orderBy("recipeLikesNum", Query.Direction.DESCENDING);
                         query.get()
                                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                     @Override
@@ -82,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
                                                 ItemExplore explore = new ItemExplore();
 //                                                Toast.makeText(MainActivity.this, "Refresh Success!", Toast.LENGTH_SHORT).show();
                                                 for (Map.Entry<String, Object> mapElement : document.getData().entrySet()){
-                                                    if (mapElement.getKey().equals("Avatar")){
+                                                    if (mapElement.getKey().equals("recipeContributorAvatar")){
                                                         if (mapElement.getValue() != null){
                                                             byte[] bytes = Base64.decode(mapElement.getValue().toString(), Base64.DEFAULT);
                                                             explore.avatar = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
@@ -91,20 +92,21 @@ public class MainActivity extends AppCompatActivity {
                                                             explore.avatar = BitmapFactory.decodeStream(img_avatar);
                                                         }
                                                     }
-                                                    if (mapElement.getKey().equals("Recipe Picture")){
+
+                                                    if (mapElement.getKey().equals("recipeCover")){
                                                         byte[] bytes = Base64.decode(mapElement.getValue().toString(), Base64.DEFAULT);
                                                         explore.icon =  BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
                                                     }
-                                                    if (mapElement.getKey().equals("Contributor Name")){
+                                                    if (mapElement.getKey().equals("recipeContributorName")){
                                                         explore.tv_contributor_name = mapElement.getValue().toString();
                                                     }
-                                                    if (mapElement.getKey().equals("Like Num")){
+                                                    if (mapElement.getKey().equals("recipeLikesNum")){
                                                         explore.tv_like_num = mapElement.getValue().toString();
                                                     }
-                                                    if (mapElement.getKey().equals("Comment Num")){
+                                                    if (mapElement.getKey().equals("recipeCommentsNum")){
                                                         explore.tv_comment_num = mapElement.getValue().toString();
                                                     }
-                                                    if (mapElement.getKey().equals("Title")){
+                                                    if (mapElement.getKey().equals("recipeName")){
                                                         explore.title = mapElement.getValue().toString();
                                                     }
                                                 }
