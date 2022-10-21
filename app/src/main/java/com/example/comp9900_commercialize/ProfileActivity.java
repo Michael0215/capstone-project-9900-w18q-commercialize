@@ -196,7 +196,7 @@ public class ProfileActivity extends AppCompatActivity {
             //创建数据对象
             ItemProfileRecipe data = new ItemProfileRecipe();
             data.id = String.valueOf(i);
-            @SuppressLint("ResourceType") InputStream img_icon = getResources().openRawResource(R.mipmap.pic_01);
+            @SuppressLint("ResourceType") InputStream img_icon = getResources().openRawResource(Datas.icons[i]);
             data.icon = BitmapFactory.decodeStream(img_icon);
             data.title = "我是第" + (i+1) + "个菜谱";
             //添加到集合里头

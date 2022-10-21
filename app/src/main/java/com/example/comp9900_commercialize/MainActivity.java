@@ -139,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
             //创建数据对象
             ItemExplore data = new ItemExplore();
             data.id = String.valueOf(i);
-            @SuppressLint("ResourceType") InputStream img_icon = getResources().openRawResource(R.mipmap.pic_01);
+            @SuppressLint("ResourceType") InputStream img_icon = getResources().openRawResource(Datas.icons[i]);
             data.icon = BitmapFactory.decodeStream(img_icon);
             data.title = "我是第" + (i+1) + "个菜谱";
             @SuppressLint("ResourceType") InputStream img_avatar = getResources().openRawResource(R.drawable.default_avatar);
