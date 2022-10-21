@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Recipe implements Serializable {
     public String recipeCover;
-    public String recipeContributor;
+    public String recipeContributorEmail;
     public String recipeName;
     public String recipeDescription;
     public List<Ingredient> recipeIngredientList;
@@ -15,14 +15,15 @@ public class Recipe implements Serializable {
     public int recipeLikesNum;
     public int recipeCommentsNum;
     public String recipePublishTime;
+    public String recipeContributorName;
 
     public Recipe(){
 
     }
 
-    public Recipe(String recipeCover, String recipeContributor, String recipeName, String recipeDescription, List<Ingredient> recipeIngredientList, String recipeDifficulty, String recipeScheduledTime, List<Step> recipeStepList, int recipeLikesNum, int recipeCommentsNum, String recipePublishTime) {
+    public Recipe(String recipeCover, String recipeContributor, String recipeName, String recipeDescription, List<Ingredient> recipeIngredientList, String recipeDifficulty, String recipeScheduledTime, List<Step> recipeStepList, int recipeLikesNum, int recipeCommentsNum, String recipePublishTime, String recipeContributorName) {
         this.recipeCover = recipeCover;
-        this.recipeContributor = recipeContributor;
+        this.recipeContributorEmail = recipeContributor;
         this.recipeName = recipeName;
         this.recipeDescription = recipeDescription;
         this.recipeIngredientList = recipeIngredientList;
@@ -32,6 +33,15 @@ public class Recipe implements Serializable {
         this.recipeLikesNum = recipeLikesNum;
         this.recipeCommentsNum = recipeCommentsNum;
         this.recipePublishTime = recipePublishTime;
+        this.recipeContributorName = recipeContributorName;
+    }
+
+    public String getRecipeContributorName() {
+        return recipeContributorName;
+    }
+
+    public void setRecipeContributorName(String recipeContributorName) {
+        this.recipeContributorName = recipeContributorName;
     }
 
     public String getRecipeCover() {
@@ -42,12 +52,12 @@ public class Recipe implements Serializable {
         this.recipeCover = recipeCover;
     }
 
-    public String getRecipeContributor() {
-        return recipeContributor;
+    public String getRecipeContributorEmail() {
+        return recipeContributorEmail;
     }
 
-    public void setRecipeContributor(String recipeContributor) {
-        this.recipeContributor = recipeContributor;
+    public void setRecipeContributorEmail(String recipeContributor) {
+        this.recipeContributorEmail = recipeContributor;
     }
 
     public int getRecipeLikesNum() {

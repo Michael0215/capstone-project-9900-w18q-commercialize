@@ -89,8 +89,8 @@ public class AddRecipeActivity extends AppCompatActivity {
 //                     preferences.putString(MacroDef.KEY_RECIPE_NAME, binding.etRecipeName.getText().toString().trim());
 //                     preferences.putString(MacroDef.KEY_RECIPE_DESCRIPTION, binding.etRecipeDescription.getText().toString().trim());
                      Recipe recipe = new Recipe();
-                     recipe.setRecipeName(binding.etRecipeDescription.getText().toString().trim());
-                     recipe.setRecipeDescription(binding.etRecipeName.getText().toString().trim());
+                     recipe.setRecipeName(binding.etRecipeName.getText().toString().trim());
+                     recipe.setRecipeDescription(binding.etRecipeDescription.getText().toString().trim());
                      recipe.setRecipeCover(encodedImage);
                      Intent intent = new Intent(AddRecipeActivity.this, AddRecipeSub1Activity.class);
                      Bundle bundle = new Bundle();
