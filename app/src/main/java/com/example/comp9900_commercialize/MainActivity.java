@@ -41,9 +41,6 @@ public class MainActivity extends AppCompatActivity {
     private SwipeRefreshLayout refreshLayout;
     private FirebaseFirestore firebaseFirestore;
 
-    CollectionReference recipes = FirebaseFirestore.getInstance().collection("recipes");
-//    DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-//    DatabaseReference ref = mDatabase.child("0").child("Rooms");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,49 +57,6 @@ public class MainActivity extends AppCompatActivity {
         handlerDownPullUpdate();
     }
 
-//    private void refresh(){
-//        mData.clear();
-//        // retrieve all the post in the firestore's table 'posts'
-//        CollectionReference posts = firebaseFirestore.collection("users");
-//        // order the post in creating time order
-//        Query query = posts;
-//        query.get()
-//                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                        if (task.isSuccessful()) {
-//                            // retrieve all posts in the 'posts' table
-//                            for (QueryDocumentSnapshot document : task.getResult()) {
-//                                ItemExplore explore = new ItemExplore();
-//                                Toast.makeText(MainActivity.this, "Refresh Success!", Toast.LENGTH_SHORT).show();
-//                                for (Map.Entry<String, Object> mapElement : document.getData().entrySet()){
-//                                    if (mapElement.getKey().equals("Name")){
-//                                        explore.tv_contributor_name = mapElement.getValue().toString();
-//                                    }
-//                                    if (mapElement.getKey().equals("Password")){
-//                                        explore.tv_like_num = mapElement.getValue().toString();
-//                                    }
-//                                    if (mapElement.getKey().equals("Contact Detail")){
-//                                        explore.tv_comment_num = mapElement.getValue().toString();
-//                                    }
-//                                    if (mapElement.getKey().equals("E-mail")){
-//                                        explore.title = mapElement.getValue().toString();
-//                                    }
-//                                }
-//                                explore.icon = R.drawable.template;
-//                                explore.id = document.getId();
-//                                explore.icon_comment = R.drawable.ic_comment;
-//                                explore.icon_like = R.drawable.ic_like;
-//                                explore.avatar = R.drawable.default_avatar;
-//                                mData.add(explore);
-//                            }
-//                            showStagger(true, false);
-//                        } else { // error handling
-//                            Toast.makeText(MainActivity.this, "Error getting documents.", Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//                });
-//    }
 
     private void handlerDownPullUpdate() {
         refreshLayout.setEnabled(true);
