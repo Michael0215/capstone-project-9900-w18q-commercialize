@@ -146,16 +146,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tv_scheduled_time" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/bt_notice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:padding="10dp"
-        android:src="@drawable/ic_notice"
-        app:tint="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
     <com.google.android.material.button.MaterialButton
         android:id="@+id/bt_pre"
         android:layout_width="120dp"
