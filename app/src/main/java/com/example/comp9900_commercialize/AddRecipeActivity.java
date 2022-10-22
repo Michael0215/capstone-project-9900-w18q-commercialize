@@ -116,7 +116,7 @@ public class AddRecipeActivity extends AppCompatActivity {
     }
 
     private boolean isValidInput() {
-        if(binding.tvAddRecipePage == null){
+        if(encodedImage == null){
             showToast("Upload a cover");
             return false;
         }else if (binding.etRecipeName.getText().toString().trim().isEmpty()) {
