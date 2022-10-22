@@ -72,10 +72,11 @@ public class ProfileActivity extends AppCompatActivity {
         binding = ActivityProfileBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         mList = this.findViewById(R.id.rcv_all_post);
+        firebaseFirestore = FirebaseFirestore.getInstance();
         instance = this;
         init();
         loadData();
-        initData();
+//        initData();
         setListeners();
     }
 
@@ -92,39 +93,42 @@ public class ProfileActivity extends AppCompatActivity {
             binding.rivUserPhoto.setImageBitmap(bitmap);
         }
         //创建数据集合
-//        mData = new ArrayList<>();
-//        //创建模拟数据
-//        // retrieve all the post in the firestore's table 'posts'
-//        CollectionReference posts = firebaseFirestore.collection("recpies");
-//        // order the post in creating time order
-//        Query query = posts.orderBy("Time", Query.Direction.DESCENDING).whereEqualTo("Contributor",mUser.toString());
-//        query.get()
-//                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                        if (task.isSuccessful()) {
-//                            // retrieve all posts in the 'posts' table
-//                            for (QueryDocumentSnapshot document : task.getResult()) {
-//                                ItemProfileRecipe recipe = new ItemProfileRecipe();
-////                                                Toast.makeText(MainActivity.this, "Refresh Success!", Toast.LENGTH_SHORT).show();
-//                                for (Map.Entry<String, Object> mapElement : document.getData().entrySet()){
-//                                    if (mapElement.getKey().equals("Recipe Picture")){
-//                                        byte[] bytes = Base64.decode(mapElement.getValue().toString(), Base64.DEFAULT);
-//                                        recipe.icon =  BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-//                                    }
-//                                    if (mapElement.getKey().equals("Title")){
-//                                        recipe.title = mapElement.getValue().toString();
-//                                    }
-//                                }
-//                                recipe.id = document.getId();
-//                                mData.add(recipe);
-//                            }
-//                            showGrid();
-//                        } else { // error handling
+        mData = new ArrayList<>();
+        //创建模拟数据
+        // retrieve all the post in the firestore's table 'posts'
+        CollectionReference posts = firebaseFirestore.collection("recipes");
+        // order the post in creating time order
+        Query query = posts.whereEqualTo("recipeContributorEmail",preferences.getString(MacroDef.KEY_EMAIL));
+//        Query query = posts.orderBy("recipePublishTime", Query.Direction.DESCENDING); //.whereEqualTo("recipeContributorEmail","767831805@qq.com");
+        query.get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            // retrieve all posts in the 'posts' table
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                ItemProfileRecipe recipe = new ItemProfileRecipe();
+//                                                Toast.makeText(MainActivity.this, "Refresh Success!", Toast.LENGTH_SHORT).show();
+                                for (Map.Entry<String, Object> mapElement : document.getData().entrySet()){
+                                    if (mapElement.getKey().equals("recipeCover")){
+                                        byte[] bytes = Base64.decode(mapElement.getValue().toString(), Base64.DEFAULT);
+                                        recipe.icon =  BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                                    }
+                                    if (mapElement.getKey().equals("recipeName")){
+                                        recipe.title = mapElement.getValue().toString();
+                                    }
+                                }
+                                recipe.id = document.getId();
+                                mData.add(recipe);
+                            }
+                            showGrid();
+                        } else { // error handling
+
+                            Toast.makeText(ProfileActivity.this, mUser.toString(), Toast.LENGTH_SHORT).show();
 //                            Toast.makeText(ProfileActivity.this, "Error getting documents.", Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//                });
+                        }
+                    }
+                });
     }
 
     private void setListeners(){
@@ -187,21 +191,21 @@ public class ProfileActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), message,Toast.LENGTH_SHORT).show();
     }
     // 等数据库内有数据了就可以把下面这个函数注释掉了
-    private void initData() {
-        //list<Data>-->Adapter-->SetAdapter-->显示数据
-        //创建数据集合
-        mData = new ArrayList<>();
-        //创建模拟数据
-        for (int i = 0; i < Datas.icons.length; i++){
-            //创建数据对象
-            ItemProfileRecipe data = new ItemProfileRecipe();
-            data.id = String.valueOf(i);
-            @SuppressLint("ResourceType") InputStream img_icon = getResources().openRawResource(Datas.icons[i]);
-            data.icon = BitmapFactory.decodeStream(img_icon);
-            data.title = "我是第" + (i+1) + "个菜谱";
-            //添加到集合里头
-            mData.add(data);
-        }
-        showGrid();
-    }
+//    private void initData() {
+//        //list<Data>-->Adapter-->SetAdapter-->显示数据
+//        //创建数据集合
+//        mData = new ArrayList<>();
+//        //创建模拟数据
+//        for (int i = 0; i < Datas.icons.length; i++){
+//            //创建数据对象
+//            ItemProfileRecipe data = new ItemProfileRecipe();
+//            data.id = String.valueOf(i);
+//            @SuppressLint("ResourceType") InputStream img_icon = getResources().openRawResource(Datas.icons[i]);
+//            data.icon = BitmapFactory.decodeStream(img_icon);
+//            data.title = "我是第" + (i+1) + "个菜谱";
+//            //添加到集合里头
+//            mData.add(data);
+//        }
+//        showGrid();
+//    }
 }
