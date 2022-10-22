@@ -84,6 +84,9 @@ public class AddRecipeSub2Activity extends AppCompatActivity implements View.OnC
         recipe = (Recipe) this.getIntent().getSerializableExtra("recipe");
         linearLayout = binding.llProcedures;
         init();
+        if(!preferences.getBoolean(MacroDef.KEY_MODE_CREATE)){
+            loadData();
+        }
         setListeners();
     }
 
@@ -94,6 +97,7 @@ public class AddRecipeSub2Activity extends AppCompatActivity implements View.OnC
 
     private void setListeners(){
         binding.btCancel.setOnClickListener(v -> {
+            preferences.putBoolean(MacroDef.KEY_MODE_CREATE, true);
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
             new AddRecipeSub1Activity().instance.finish();
             new AddRecipeActivity().instance.finish();
@@ -112,11 +116,18 @@ public class AddRecipeSub2Activity extends AppCompatActivity implements View.OnC
                 recipe.setRecipeContributorEmail(preferences.getString(MacroDef.KEY_EMAIL));
                 recipe.setRecipeContributorName(preferences.getString(MacroDef.KEY_USERNAME));
                 recipe.setRecipeContributorAvatar(preferences.getString(MacroDef.KEY_AVATAR));
-                firebaseFirestore.collection("recipes").document(UUID.randomUUID().toString().replace("-", "")).set(recipe)
+                String recipeID = "";
+                if(preferences.getBoolean(MacroDef.KEY_MODE_CREATE)){
+                    recipeID = UUID.randomUUID().toString().replace("-", "");
+                }else{
+                    recipeID = preferences.getString(MacroDef.KEY_RECIPE_ID);
+                }
+                firebaseFirestore.collection("recipes").document(recipeID).set(recipe)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
                                 showToast("Success");
+                                preferences.putBoolean(MacroDef.KEY_MODE_CREATE, true);
                                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
                                 new AddRecipeSub1Activity().instance.finish();
                                 new AddRecipeActivity().instance.finish();
@@ -129,8 +140,6 @@ public class AddRecipeSub2Activity extends AppCompatActivity implements View.OnC
                                 showToast("Error writing document" + e);
                             }
                         });
-
-
             }
         });
         binding.btAddProcedure.setOnClickListener(this);
@@ -147,6 +156,33 @@ public class AddRecipeSub2Activity extends AppCompatActivity implements View.OnC
         ImageView image = (ImageView) procedureView.findViewById(R.id.iv_procedure_photo);
         ImageView remove = (ImageView)procedureView.findViewById(R.id.iv_remove_procedure);
 
+        image.setOnClickListener(v -> {
+            imageView = image;
+            Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            pickImage.launch(intent);
+        });
+        remove.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                removeView(procedureView);
+            }
+        });
+        linearLayout.addView(procedureView);
+    }
+
+    private void loadView(int position) {
+
+        View procedureView = getLayoutInflater().inflate(R.layout.row_add_procedure, null, false);
+        EditText procedureDescription = (EditText)procedureView.findViewById(R.id.et_procedure_description);
+        ImageView image = (ImageView) procedureView.findViewById(R.id.iv_procedure_photo);
+        ImageView remove = (ImageView)procedureView.findViewById(R.id.iv_remove_procedure);
+
+        procedureDescription.setText(recipe.recipeStepList.get(position).stepDescription);
+        byte[] bytes = Base64.decode(recipe.recipeStepList.get(position).encodedImage, Base64.DEFAULT);
+        Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+        image.setImageBitmap(bitmap);
 
         image.setOnClickListener(v -> {
             imageView = image;
@@ -162,6 +198,7 @@ public class AddRecipeSub2Activity extends AppCompatActivity implements View.OnC
             }
         });
         linearLayout.addView(procedureView);
+
     }
 
     private void removeView(View view) {
@@ -219,6 +256,16 @@ public class AddRecipeSub2Activity extends AppCompatActivity implements View.OnC
         previewBitmap.compress(Bitmap.CompressFormat.JPEG, 50, byteArrayOutputStream);
         byte[] bytes = byteArrayOutputStream.toByteArray();
         return Base64.encodeToString(bytes, Base64.DEFAULT);
+    }
+
+    private void loadData(){
+        if(recipe != null){
+            for(int i = 0; i < recipe.recipeStepList.size(); i++){
+                loadView(i);
+//            binding.spnTypeDifficulty.setSelection(recipe.recipeDifficulty);
+//            binding.etRecipeDescription.setText(recipe.recipeDescription);
+            }
+        }
     }
 
 }

@@ -20,6 +20,10 @@ import com.example.comp9900_commercialize.bean.Recipe;
 import com.example.comp9900_commercialize.databinding.ActivityAddRecipeBinding;
 import com.example.comp9900_commercialize.utilities.MacroDef;
 import com.example.comp9900_commercialize.utilities.Preferences;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
@@ -31,6 +35,8 @@ public class AddRecipeActivity extends AppCompatActivity {
     private Preferences preferences;
     public static AddRecipeActivity instance = null;
     private String encodedImage;
+    private FirebaseFirestore firebaseFirestore;
+    private Recipe recipe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +45,9 @@ public class AddRecipeActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         instance = this;
         init();
+        if(!preferences.getBoolean(MacroDef.KEY_MODE_CREATE)){
+            loadData();
+        }
         setListeners();
     }
 
@@ -74,6 +83,7 @@ public class AddRecipeActivity extends AppCompatActivity {
 
     private void setListeners(){
         binding.btCancel.setOnClickListener(v ->  {
+            preferences.putBoolean(MacroDef.KEY_MODE_CREATE, true);
             if(new AddRecipeSub2Activity().instance != null){
                 new AddRecipeSub2Activity().instance.finish();
             }
@@ -88,10 +98,13 @@ public class AddRecipeActivity extends AppCompatActivity {
                  if(isValidInput()){
 //                     preferences.putString(MacroDef.KEY_RECIPE_NAME, binding.etRecipeName.getText().toString().trim());
 //                     preferences.putString(MacroDef.KEY_RECIPE_DESCRIPTION, binding.etRecipeDescription.getText().toString().trim());
-                     Recipe recipe = new Recipe();
+                     if(recipe == null){
+                         recipe = new Recipe();
+                     }
                      recipe.setRecipeName(binding.etRecipeName.getText().toString().trim());
                      recipe.setRecipeDescription(binding.etRecipeDescription.getText().toString().trim());
-                     recipe.setRecipeCover(encodedImage);
+                     if(preferences.getBoolean(MacroDef.KEY_MODE_CREATE))
+                         recipe.setRecipeCover(encodedImage);
                      Intent intent = new Intent(AddRecipeActivity.this, AddRecipeSub1Activity.class);
                      Bundle bundle = new Bundle();
                      bundle.putSerializable("recipe", recipe);
@@ -111,12 +124,31 @@ public class AddRecipeActivity extends AppCompatActivity {
         preferences = new Preferences(getApplicationContext());
     }
 
+    private void loadData(){
+        firebaseFirestore = FirebaseFirestore.getInstance();
+        DocumentReference docRef = firebaseFirestore.collection("recipes").document(preferences.getString(MacroDef.KEY_RECIPE_ID));
+        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                recipe = documentSnapshot.toObject(Recipe.class);
+                if(recipe != null){
+                    byte[] bytes = Base64.decode(recipe.recipeCover, Base64.DEFAULT);
+                    Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                    binding.ivAddCoverImage.setImageBitmap(bitmap);
+                    binding.etRecipeName.setText(recipe.recipeName);
+                    binding.etRecipeDescription.setText(recipe.recipeDescription);
+                }
+            }
+        });
+    }
+
     private void showToast(String message) {
         Toast.makeText(getApplicationContext(), message,Toast.LENGTH_SHORT).show();
     }
 
     private boolean isValidInput() {
-        if(encodedImage == null){
+        if(encodedImage == null
+                && preferences.getBoolean(MacroDef.KEY_MODE_CREATE)){
             showToast("Upload a cover");
             return false;
         }else if (binding.etRecipeName.getText().toString().trim().isEmpty()) {
@@ -131,6 +163,7 @@ public class AddRecipeActivity extends AppCompatActivity {
     }
 
     public void onBackPressed() {
+        preferences.putBoolean(MacroDef.KEY_MODE_CREATE, true);
         if(new AddRecipeSub2Activity().instance != null){
             new AddRecipeSub2Activity().instance.finish();
         }

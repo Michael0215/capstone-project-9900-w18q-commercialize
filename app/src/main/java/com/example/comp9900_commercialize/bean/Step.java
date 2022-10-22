@@ -1,6 +1,8 @@
 package com.example.comp9900_commercialize.bean;
 
-public class Step {
+import java.io.Serializable;
+
+public class Step implements Serializable {
     public String encodedImage;
     public String stepDescription;
 
