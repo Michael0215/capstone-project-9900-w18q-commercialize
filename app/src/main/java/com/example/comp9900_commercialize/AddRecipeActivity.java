@@ -116,7 +116,10 @@ public class AddRecipeActivity extends AppCompatActivity {
     }
 
     private boolean isValidInput() {
-        if (binding.etRecipeName.getText().toString().trim().isEmpty()) {
+        if(binding.tvAddRecipePage == null){
+            showToast("Upload a cover");
+            return false;
+        }else if (binding.etRecipeName.getText().toString().trim().isEmpty()) {
             showToast("Enter a recipe name");
             return false;
         } else if (binding.etRecipeDescription.getText().toString().trim().isEmpty()) {
