@@ -137,26 +137,57 @@ public class MainActivity extends AppCompatActivity {
         //创建数据集合
         mData = new ArrayList<>();
         //创建模拟数据
-        for (int i = 0; i < Datas.icons.length; i++){
-            //创建数据对象
-            ItemExplore data = new ItemExplore();
-            data.id = String.valueOf(i);
-            @SuppressLint("ResourceType") InputStream img_icon = getResources().openRawResource(Datas.icons[i]);
-            data.icon = BitmapFactory.decodeStream(img_icon);
-            data.title = "我是第" + (i+1) + "个菜谱";
-            @SuppressLint("ResourceType") InputStream img_avatar = getResources().openRawResource(R.drawable.default_avatar);
-            data.avatar = BitmapFactory.decodeStream(img_avatar);
-            data.icon_comment = R.drawable.ic_comment;
-            data.icon_like = R.drawable.ic_like;
-            data.tv_comment_num = "12";
-            data.tv_like_num = "25";
-            data.tv_contributor_name = "Test Contributor";
-            //添加到集合里头
-            mData.add(data);
-        }
-        //RecyclerView需要设置样式，其实就是设置布局管理器,在这里设置瀑布流，线性流，还是网格流
-        //瀑布流布局管理器
-        showStagger(true, false);
+        CollectionReference posts = firebaseFirestore.collection("recipes");
+        // order the post in creating time order
+        Query query = posts.orderBy("recipeLikesNum", Query.Direction.DESCENDING);
+        query.get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            // retrieve all posts in the 'posts' table
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                ItemExplore explore = new ItemExplore();
+//                                                Toast.makeText(MainActivity.this, "Refresh Success!", Toast.LENGTH_SHORT).show();
+                                for (Map.Entry<String, Object> mapElement : document.getData().entrySet()){
+                                    if (mapElement.getKey().equals("recipeContributorAvatar")){
+                                        if (mapElement.getValue() != null){
+                                            byte[] bytes = Base64.decode(mapElement.getValue().toString(), Base64.DEFAULT);
+                                            explore.avatar = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                                        } else {
+                                            @SuppressLint("ResourceType") InputStream img_avatar = getResources().openRawResource(R.drawable.default_avatar);
+                                            explore.avatar = BitmapFactory.decodeStream(img_avatar);
+                                        }
+                                    }
+
+                                    if (mapElement.getKey().equals("recipeCover")){
+                                        byte[] bytes = Base64.decode(mapElement.getValue().toString(), Base64.DEFAULT);
+                                        explore.icon =  BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                                    }
+                                    if (mapElement.getKey().equals("recipeContributorName")){
+                                        explore.tv_contributor_name = mapElement.getValue().toString();
+                                    }
+                                    if (mapElement.getKey().equals("recipeLikesNum")){
+                                        explore.tv_like_num = mapElement.getValue().toString();
+                                    }
+                                    if (mapElement.getKey().equals("recipeCommentsNum")){
+                                        explore.tv_comment_num = mapElement.getValue().toString();
+                                    }
+                                    if (mapElement.getKey().equals("recipeName")){
+                                        explore.title = mapElement.getValue().toString();
+                                    }
+                                }
+                                explore.id = document.getId();
+                                explore.icon_comment = R.drawable.ic_comment;
+                                explore.icon_like = R.drawable.ic_like;
+                                mData.add(explore);
+                            }
+                            showStagger(true, false);
+                        } else { // error handling
+                            Toast.makeText(MainActivity.this, "Error getting documents.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
     }
 
     private void showStagger(boolean isVertical, boolean isReverse) {
