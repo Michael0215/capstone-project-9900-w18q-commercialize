@@ -18,5 +18,6 @@ public class MacroDef {
     public static final  String KEY_RECIPE_NAME = "recipe_name";
     public static final  String KEY_RECIPE_DIFFICULTY = "recipe_difficulty";
     public static final  String KEY_RECIPE_SCHEDULED_TIME = "recipe_scheduled_time";
+    public static final  String KEY_RECIPE_ID = "recipe_id";
 
 }

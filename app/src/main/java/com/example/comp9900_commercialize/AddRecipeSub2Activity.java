@@ -194,11 +194,11 @@ public class AddRecipeSub2Activity extends AppCompatActivity implements View.OnC
                 result = false;
                 break;
             }
-            if(procedurePhoto != null){
-                step.setEncodedImage(encodeImage(((BitmapDrawable) procedurePhoto.getDrawable()).getBitmap()));
-            }else{
+            if(procedurePhoto.getDrawable().getCurrent().getConstantState() == getResources().getDrawable(R.drawable.template).getConstantState()){
                 result = false;
                 break;
+            }else{
+                step.setEncodedImage(encodeImage(((BitmapDrawable) procedurePhoto.getDrawable()).getBitmap()));
             }
             stepList.add(step);
         }
