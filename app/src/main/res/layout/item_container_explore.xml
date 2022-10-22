@@ -1,105 +1,121 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:padding="24dp"
-    android:layout_gravity="center_horizontal"
-    android:clipToPadding="false">
+    >
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFFFFF"
+        app:cardUseCompatPadding="true">
 
-    <ImageView
-        android:id="@+id/iv_recipe"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:src="@drawable/template"
-        android:scaleType="centerCrop"
-        android:background="@drawable/background_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
-    <TextView
-        android:id="@+id/tv_recipe"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:text="Recipe Title"
-        android:textColor="@color/black"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_recipe" />
-    <ImageView
-        android:id="@+id/iv_like"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_marginTop="5dp"
-        android:src="@drawable/ic_like"
-        android:scaleType="centerCrop"
-        android:background="@drawable/background_content"
-        app:layout_constraintStart_toStartOf="@+id/iv_recipe"
-        app:layout_constraintTop_toBottomOf="@+id/tv_recipe"
-        />
-    <TextView
-        android:id="@+id/tv_like_num"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="13"
-        android:textColor="@color/black"
-        android:textSize="10sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/iv_like"
-        app:layout_constraintTop_toTopOf="@+id/iv_like"
-        app:layout_constraintBottom_toBottomOf="@+id/iv_like"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="5dp"
+            >
+            <!--这里的imageView的width和height改为warp_content就能实现瀑布流的效果-->
+            <ImageView
+                android:id="@+id/iv_recipe"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                android:src="@mipmap/pic_01" />
+            <TextView
+                android:id="@+id/tv_recipe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/iv_recipe"
 
-    <ImageView
-        android:id="@+id/iv_comment"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginStart="10dp"
-        android:src="@drawable/ic_comment"
-        android:scaleType="centerCrop"
-        android:background="@drawable/background_content"
-        app:layout_constraintStart_toEndOf="@+id/tv_like_num"
-        app:layout_constraintTop_toBottomOf="@+id/tv_recipe"
-        />
-    <TextView
-        android:id="@+id/tv_comment_num"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="29"
-        android:textColor="@color/black"
-        android:textSize="10sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/iv_comment"
-        app:layout_constraintTop_toTopOf="@+id/iv_comment"
-        app:layout_constraintBottom_toBottomOf="@+id/iv_comment"/>
-    <com.makeramen.roundedimageview.RoundedImageView
-        android:id="@+id/riv_user_photo"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="8dp"
-        android:background="@color/white"
-        android:src="@drawable/template"
-        app:layout_constraintStart_toStartOf="@+id/iv_recipe"
-        app:layout_constraintTop_toBottomOf="@+id/iv_like"
-        app:riv_oval="true"/>
-    <TextView
-        android:id="@+id/tv_contributor_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="3dp"
-        android:text="Contributor"
-        android:textColor="@color/black"
-        android:textSize="13sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/riv_user_photo"
-        app:layout_constraintEnd_toEndOf="@+id/iv_recipe"
-        app:layout_constraintTop_toTopOf="@+id/riv_user_photo"
-        app:layout_constraintBottom_toBottomOf="@+id/riv_user_photo"/>
-</androidx.constraintlayout.widget.ConstraintLayout>
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:text="Title"
+                android:textSize="20sp" />
+            <ImageView
+                android:id="@+id/iv_like"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_recipe"
+                android:layout_alignStart="@+id/iv_recipe"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_like" />
+
+            <TextView
+                android:id="@+id/tv_like_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_recipe"
+                android:layout_toEndOf="@+id/iv_like"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:adjustViewBounds="true"
+                android:text="10"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/iv_comment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:adjustViewBounds="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="20dp"
+                android:layout_below="@+id/tv_recipe"
+                android:layout_toEndOf="@+id/tv_like_num"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_comment"/>
+            <TextView
+                android:id="@+id/tv_comment_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_recipe"
+                android:layout_toEndOf="@+id/iv_comment"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:adjustViewBounds="true"
+                android:text="25"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/riv_user_photo"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_below="@+id/iv_like"
+                android:layout_alignStart="@+id/iv_like"
+                android:layout_marginTop="8dp"
+                android:scaleType="fitXY"
+                android:adjustViewBounds="true"
+                android:background="@color/white"
+                android:src="@drawable/template"
+                app:riv_oval="true" />
+
+            <TextView
+                android:id="@+id/tv_contributor_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/riv_user_photo"
+                android:layout_alignTop="@+id/riv_user_photo"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:adjustViewBounds="true"
+                android:text="Contributor"
+                android:textColor="@color/black"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>
