@@ -208,6 +208,7 @@ public class MainActivity extends AppCompatActivity {
                 preferences.putString(MacroDef.KEY_RECIPE_ID, mData.get(position).id);
 //                Toast.makeText(MainActivity.this, "您点击的是第" + (position+1) + "个菜谱", Toast.LENGTH_SHORT).show();
                 Toast.makeText(MainActivity.this, "您点击的菜谱id为" + preferences.getString(MacroDef.KEY_RECIPE_ID), Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getApplicationContext(), RecipeDetailActivity.class));
             }
         }) ;
     }
