@@ -29,6 +29,7 @@ import com.example.comp9900_commercialize.adapters.StaggerAdapter;
 import com.example.comp9900_commercialize.bean.Datas;
 
 import com.example.comp9900_commercialize.bean.ItemProfileRecipe;
+import com.example.comp9900_commercialize.bean.Recipe;
 import com.example.comp9900_commercialize.databinding.ActivityProfileBinding;
 import com.example.comp9900_commercialize.utilities.MacroDef;
 import com.example.comp9900_commercialize.utilities.Preferences;
@@ -62,7 +63,7 @@ public class ProfileActivity extends AppCompatActivity {
     private List<ItemProfileRecipe> mData;
     private ProfileRecipeAdapter adapter;
     private SwipeRefreshLayout refreshLayout;
-
+    private Recipe recipes;
     public static ProfileActivity instance = null;
 
     @Override
@@ -109,15 +110,18 @@ public class ProfileActivity extends AppCompatActivity {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 ItemProfileRecipe recipe = new ItemProfileRecipe();
 //                                                Toast.makeText(MainActivity.this, "Refresh Success!", Toast.LENGTH_SHORT).show();
-                                for (Map.Entry<String, Object> mapElement : document.getData().entrySet()){
-                                    if (mapElement.getKey().equals("recipeCover")){
-                                        byte[] bytes = Base64.decode(mapElement.getValue().toString(), Base64.DEFAULT);
-                                        recipe.icon =  BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-                                    }
-                                    if (mapElement.getKey().equals("recipeName")){
-                                        recipe.title = mapElement.getValue().toString();
-                                    }
-                                }
+
+                                recipes = document.toObject(Recipe.class);
+                                byte[] bytes = Base64.decode(recipes.recipeCover, Base64.DEFAULT);
+                                recipe.icon =  BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+//                                    if (mapElement.getKey().equals("recipeCover")){
+//                                        byte[] bytes = Base64.decode(mapElement.getValue().toString(), Base64.DEFAULT);
+//                                        recipe.icon =  BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+//                                    }
+                                recipe.title = recipes.recipeName;
+//                                    if (mapElement.getKey().equals("recipeName")){
+//                                        recipe.title = mapElement.getValue().toString();
+//                                    }
                                 recipe.id = document.getId();
                                 mData.add(recipe);
                             }

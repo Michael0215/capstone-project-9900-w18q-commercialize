@@ -71,6 +71,7 @@ public class AddRecipeActivity extends AppCompatActivity {
                             InputStream inputStream = getContentResolver().openInputStream(imageUir);
                             Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
                             binding.ivAddCoverImage.setImageBitmap(bitmap);
+                            binding.tvAddCoverImage.setVisibility(View.GONE);
                             encodedImage = encodeImage(bitmap);
                         } catch (FileNotFoundException e) {
                             e.printStackTrace();

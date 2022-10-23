@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.example.comp9900_commercialize.adapters.StaggerAdapter;
 import com.example.comp9900_commercialize.bean.Datas;
 import com.example.comp9900_commercialize.bean.ItemExplore;
+import com.example.comp9900_commercialize.bean.Recipe;
 import com.example.comp9900_commercialize.databinding.ActivityMainBinding;
 import com.example.comp9900_commercialize.utilities.MacroDef;
 import com.example.comp9900_commercialize.utilities.Preferences;
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     private SwipeRefreshLayout refreshLayout;
     private FirebaseFirestore firebaseFirestore;
     private Preferences preferences;
-
+    private Recipe recipe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,34 +80,48 @@ public class MainActivity extends AppCompatActivity {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 ItemExplore explore = new ItemExplore();
 //                                                Toast.makeText(MainActivity.this, "Refresh Success!", Toast.LENGTH_SHORT).show();
-                                for (Map.Entry<String, Object> mapElement : document.getData().entrySet()){
-                                    if (mapElement.getKey().equals("recipeContributorAvatar")){
-                                        if (mapElement.getValue() != null){
-                                            byte[] bytes = Base64.decode(mapElement.getValue().toString(), Base64.DEFAULT);
-                                            explore.avatar = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-                                        } else {
-                                            @SuppressLint("ResourceType") InputStream img_avatar = getResources().openRawResource(R.drawable.default_avatar);
-                                            explore.avatar = BitmapFactory.decodeStream(img_avatar);
-                                        }
-                                    }
+//                                for (Map.Entry<String, Object> mapElement : document.getData().entrySet()){
+                                recipe = document.toObject(Recipe.class);
+                                 if(recipe.recipeContributorAvatar != null){
+                                     byte[] bytes = Base64.decode(recipe.recipeContributorAvatar, Base64.DEFAULT);
+                                     explore.avatar = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                                 } else {
+                                     @SuppressLint("ResourceType") InputStream img_avatar = getResources().openRawResource(R.drawable.default_avatar);
+                                     explore.avatar = BitmapFactory.decodeStream(img_avatar);
+                                 }
+                                byte[] bytes = Base64.decode(recipe.recipeCover, Base64.DEFAULT);
+                                explore.icon =  BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                                explore.tv_contributor_name = recipe.recipeContributorName;
+                                explore.tv_like_num = String.valueOf(recipe.recipeLikesNum);
+                                explore.tv_comment_num = String.valueOf(recipe.recipeCommentsNum);
+                                explore.title = recipe.recipeName;
+//                                    if (mapElement.getKey().equals("recipeContributorAvatar")){
+//                                        if (mapElement.getValue() != null){
+//                                            byte[] bytes = Base64.decode(mapElement.getValue().toString(), Base64.DEFAULT);
+//                                            explore.avatar = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+//                                        } else {
+//                                            @SuppressLint("ResourceType") InputStream img_avatar = getResources().openRawResource(R.drawable.default_avatar);
+//                                            explore.avatar = BitmapFactory.decodeStream(img_avatar);
+//                                        }
+//                                    }
 
-                                    if (mapElement.getKey().equals("recipeCover")){
-                                        byte[] bytes = Base64.decode(mapElement.getValue().toString(), Base64.DEFAULT);
-                                        explore.icon =  BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-                                    }
-                                    if (mapElement.getKey().equals("recipeContributorName")){
-                                        explore.tv_contributor_name = mapElement.getValue().toString();
-                                    }
-                                    if (mapElement.getKey().equals("recipeLikesNum")){
-                                        explore.tv_like_num = mapElement.getValue().toString();
-                                    }
-                                    if (mapElement.getKey().equals("recipeCommentsNum")){
-                                        explore.tv_comment_num = mapElement.getValue().toString();
-                                    }
-                                    if (mapElement.getKey().equals("recipeName")){
-                                        explore.title = mapElement.getValue().toString();
-                                    }
-                                }
+//                                    if (mapElement.getKey().equals("recipeCover")){
+//                                        byte[] bytes = Base64.decode(mapElement.getValue().toString(), Base64.DEFAULT);
+//                                        explore.icon =  BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+//                                    }
+//                                    if (mapElement.getKey().equals("recipeContributorName")){
+//                                        explore.tv_contributor_name = mapElement.getValue().toString();
+//                                    }
+//                                    if (mapElement.getKey().equals("recipeLikesNum")){
+//                                        explore.tv_like_num = mapElement.getValue().toString();
+//                                    }
+//                                    if (mapElement.getKey().equals("recipeCommentsNum")){
+//                                        explore.tv_comment_num = mapElement.getValue().toString();
+//                                    }
+//                                    if (mapElement.getKey().equals("recipeName")){
+//                                        explore.title = mapElement.getValue().toString();
+//                                    }
+//                                }
                                 explore.id = document.getId();
                                 explore.icon_comment = R.drawable.ic_comment;
                                 explore.icon_like = R.drawable.ic_like;

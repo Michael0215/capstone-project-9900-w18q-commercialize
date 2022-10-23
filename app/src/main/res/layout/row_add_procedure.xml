@@ -20,17 +20,30 @@
         app:layout_constraintEnd_toStartOf="@id/et_procedure_description"
         app:layout_constraintTop_toTopOf="@+id/et_procedure_description"
         app:layout_constraintBottom_toBottomOf="@+id/et_procedure_description"/>
-
+<FrameLayout
+    android:id="@+id/iv_procedure_photo_frame"
+    android:layout_width="260dp"
+    android:layout_height="260dp"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
     <ImageView
         android:id="@+id/iv_procedure_photo"
-        android:layout_width="260dp"
-        android:layout_height="260dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:background="@color/white"
-        android:src="@drawable/template"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:backgroundTint="#ECECEC"
         />
+    <TextView
+        android:id="@+id/tv_add_procedure_photo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Add Procedure Photo"
+        android:textColor="@color/secondary_text"
+        android:textSize="20sp"/>
+</FrameLayout>
+
 
     <EditText
         android:id="@+id/et_procedure_description"
@@ -42,8 +55,8 @@
         android:layout_marginTop="10dp"
         android:textSize="19sp"
         android:importantForAutofill="no"
-        app:layout_constraintStart_toStartOf="@id/iv_procedure_photo"
-        app:layout_constraintEnd_toEndOf="@id/iv_procedure_photo"
-        app:layout_constraintTop_toBottomOf="@id/iv_procedure_photo"/>
+        app:layout_constraintStart_toStartOf="@id/iv_procedure_photo_frame"
+        app:layout_constraintEnd_toEndOf="@id/iv_procedure_photo_frame"
+        app:layout_constraintTop_toBottomOf="@id/iv_procedure_photo_frame"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
