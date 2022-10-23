@@ -4,7 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -21,6 +24,10 @@ import com.example.comp9900_commercialize.bean.Recipe;
 import com.example.comp9900_commercialize.databinding.ActivityAddRecipeSub1Binding;
 import com.example.comp9900_commercialize.utilities.MacroDef;
 import com.example.comp9900_commercialize.utilities.Preferences;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +50,9 @@ public class AddRecipeSub1Activity extends AppCompatActivity implements View.OnC
         recipe = (Recipe) this.getIntent().getSerializableExtra("recipe");
         linearLayout = binding.llIngredients;
         init();
+        if(!preferences.getBoolean(MacroDef.KEY_MODE_CREATE)){
+            loadData();
+        }
         setListeners();
     }
 
@@ -52,6 +62,7 @@ public class AddRecipeSub1Activity extends AppCompatActivity implements View.OnC
 
     private void setListeners(){
         binding.btCancel.setOnClickListener(v -> {
+            preferences.putBoolean(MacroDef.KEY_MODE_CREATE, true);
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
             preferences.putString(MacroDef.KEY_RECIPE_NAME, null);
             preferences.putString(MacroDef.KEY_RECIPE_DESCRIPTION, null);
@@ -99,7 +110,26 @@ public class AddRecipeSub1Activity extends AppCompatActivity implements View.OnC
                 removeView(ingredientView);
             }
         });
+        linearLayout.addView(ingredientView);
 
+    }
+
+    private void loadView(int position) {
+
+        View ingredientView = getLayoutInflater().inflate(R.layout.row_add_ingredient, null, false);
+        EditText ingredientName = (EditText)ingredientView.findViewById(R.id.et_ingredient_name);
+        EditText amount = (EditText)ingredientView.findViewById(R.id.et_amounts);
+        ImageView remove = (ImageView)ingredientView.findViewById(R.id.iv_remove_ingredient);
+
+        ingredientName.setText(recipe.recipeIngredientList.get(position).getIngredientName());
+        amount.setText(recipe.recipeIngredientList.get(position).getAmount());
+
+        remove.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                removeView(ingredientView);
+            }
+        });
         linearLayout.addView(ingredientView);
 
     }
@@ -149,9 +179,17 @@ public class AddRecipeSub1Activity extends AppCompatActivity implements View.OnC
         }else if(!result){
             showToast("Input cannot be empty!");
         }
-
-
         return result;
+    }
+
+    private void loadData(){
+        if(recipe != null){
+            for(int i = 0; i < recipe.recipeIngredientList.size(); i++){
+            loadView(i);
+//            binding.spnTypeDifficulty.setSelection(recipe.recipeDifficulty);
+//            binding.etRecipeDescription.setText(recipe.recipeDescription);
+            }
+        }
     }
 
 }

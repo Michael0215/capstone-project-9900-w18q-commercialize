@@ -180,7 +180,10 @@ public class ProfileActivity extends AppCompatActivity {
         adapter.setOnItemClickListener(new ProfileRecipeAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                Toast.makeText(ProfileActivity.this, "您点击的是第" + (position+1) + "个菜谱", Toast.LENGTH_SHORT).show();
+                preferences.putString(MacroDef.KEY_RECIPE_ID, mData.get(position).id);
+                preferences.putBoolean(MacroDef.KEY_MODE_CREATE, false);
+                Toast.makeText(ProfileActivity.this, "您点击的菜谱id为" + preferences.getString(MacroDef.KEY_RECIPE_ID), Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getApplicationContext(), AddRecipeActivity.class));
             }
         }) ;
     }
