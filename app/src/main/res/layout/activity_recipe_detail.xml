@@ -83,7 +83,7 @@
                     />
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/bt_follow"
-                    android:layout_width="100dp"
+                    android:layout_width="90dp"
                     android:layout_height="60dp"
                     android:layout_marginStart="10dp"
                     android:backgroundTint="@color/dark_blue"
@@ -170,10 +170,10 @@
         android:id="@+id/view03"
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:layout_marginBottom="60dp"
+        android:layout_marginTop="5dp"
         android:background="@color/drak_blue"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/IngredientRecyclerView" />
     <View
         android:id="@+id/view04"
         android:layout_width="match_parent"
@@ -186,23 +186,23 @@
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_marginStart="15dp"
-        android:layout_marginBottom="15dp"
         android:background="@color/white"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_collection"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintTop_toTopOf="@+id/view03"
+        app:layout_constraintBottom_toTopOf="@+id/view04"/>
     <ImageButton
         android:id="@+id/ib_like"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginStart="10dp"
-        android:layout_marginBottom="12dp"
         android:background="@color/white"
         android:scaleType="center"
         android:src="@drawable/ic_like"
         app:layout_constraintStart_toEndOf="@+id/ib_collection"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintTop_toTopOf="@+id/view03"
+        app:layout_constraintBottom_toTopOf="@+id/view04"/>
 
     <TextView
         android:id="@+id/tv_like_num"
@@ -222,12 +222,12 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginStart="5dp"
-        android:layout_marginBottom="12dp"
         android:background="@color/white"
         android:scaleType="center"
         android:src="@drawable/ic_comment"
         app:layout_constraintStart_toEndOf="@+id/tv_like_num"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintTop_toTopOf="@+id/view03"
+        app:layout_constraintBottom_toTopOf="@+id/view04"/>
 
     <TextView
         android:id="@+id/tv_comment_num"

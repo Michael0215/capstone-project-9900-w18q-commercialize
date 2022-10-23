@@ -42,6 +42,7 @@ public class RecipeDetailActivity extends AppCompatActivity {
         linearLayoutProcedures = binding.llDetailProcedures;
         init();
         loadData();
+        setListeners();
     }
 
     private void init(){
@@ -105,6 +106,8 @@ public class RecipeDetailActivity extends AppCompatActivity {
 
     private void setListeners(){
         binding.btCancel.setOnClickListener(v -> onBackPressed());
+        binding.btNotice.setOnClickListener(v ->
+                startActivity(new Intent(getApplicationContext(), NoticeActivity.class)));
     }
 
 }
