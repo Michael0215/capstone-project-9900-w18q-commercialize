@@ -42,6 +42,7 @@ public class RecipeDetailActivity extends AppCompatActivity {
         linearLayoutProcedures = binding.llDetailProcedures;
         init();
         loadData();
+        setListeners();
     }
 
     private void init(){

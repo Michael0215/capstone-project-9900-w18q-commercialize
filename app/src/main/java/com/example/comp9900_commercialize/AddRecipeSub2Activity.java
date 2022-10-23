@@ -183,11 +183,14 @@ public class AddRecipeSub2Activity extends AppCompatActivity implements View.OnC
         EditText procedureDescription = (EditText)procedureView.findViewById(R.id.et_procedure_description);
         ImageView image = (ImageView) procedureView.findViewById(R.id.iv_procedure_photo);
         ImageView remove = (ImageView)procedureView.findViewById(R.id.iv_remove_procedure);
+        TextView text = procedureView.findViewById(R.id.tv_add_procedure_photo);
 
         procedureDescription.setText(recipe.recipeStepList.get(position).stepDescription);
         byte[] bytes = Base64.decode(recipe.recipeStepList.get(position).encodedImage, Base64.DEFAULT);
         Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
         image.setImageBitmap(bitmap);
+        text.setVisibility(View.INVISIBLE);
+
 
         image.setOnClickListener(v -> {
             imageView = image;

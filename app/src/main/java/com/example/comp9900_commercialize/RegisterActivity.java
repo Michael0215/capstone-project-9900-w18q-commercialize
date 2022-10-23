@@ -93,6 +93,7 @@ public class RegisterActivity extends AppCompatActivity {
                                             // jump from RegisterActivity.java to LoginActivity.java
                                             Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                                             startActivity(intent);
+                                            finish();
                                         }
                                     })
                                      // error handling if the registration is failed

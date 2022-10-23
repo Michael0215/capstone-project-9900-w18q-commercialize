@@ -139,6 +139,7 @@ public class AddRecipeActivity extends AppCompatActivity {
                     binding.etRecipeName.setText(recipe.recipeName);
                     binding.etRecipeDescription.setText(recipe.recipeDescription);
                 }
+                binding.tvAddCoverImage.setVisibility(View.INVISIBLE);
             }
         });
     }
