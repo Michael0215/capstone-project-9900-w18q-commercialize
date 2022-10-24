@@ -13,6 +13,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ImageButton;
+
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,8 +25,10 @@ import com.example.comp9900_commercialize.databinding.ActivityAddRecipeBinding;
 import com.example.comp9900_commercialize.databinding.ActivityRecipeDetailBinding;
 import com.example.comp9900_commercialize.utilities.MacroDef;
 import com.example.comp9900_commercialize.utilities.Preferences;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
@@ -35,6 +39,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class RecipeDetailActivity extends AppCompatActivity {
 
@@ -49,6 +55,21 @@ public class RecipeDetailActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private String recipeId;
     private Collection myCollection;
+    
+    
+    private ActivityRecipeDetailBinding binding;
+    private FirebaseUser user;
+    private FirebaseFirestore db;
+    private Preferences preferences;
+    private String id;
+    private String oldLike;
+    private TextView likeNum;
+    private String newLikeNum;
+    private String like;
+    private List likeList;
+    private String[] likeArray;
+    private ImageButton good;
+    private boolean judge;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +89,15 @@ public class RecipeDetailActivity extends AppCompatActivity {
         user = FirebaseAuth.getInstance().getCurrentUser();
         preferences = new Preferences(getApplicationContext());
         firebaseFirestore = FirebaseFirestore.getInstance();
+        
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_recipe_detail);
+        likeNum = findViewById(R.id.tv_like_num);
+        good = findViewById(R.id.ib_like);
+        binding = ActivityRecipeDetailBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        init();
+        setListeners();
     }
 
     private void loadData(){
