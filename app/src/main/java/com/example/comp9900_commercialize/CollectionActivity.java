@@ -71,7 +71,7 @@ public class CollectionActivity extends AppCompatActivity {
                 }
             }
         });
-        //email-> 一个array 里面存recipeId
+        //email-> 一个arraylist 里面存recipeId
         //adapter显示出来
     }
 }

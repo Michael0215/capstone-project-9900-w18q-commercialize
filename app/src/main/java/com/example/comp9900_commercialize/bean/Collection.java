@@ -19,7 +19,6 @@ public class Collection {
         this.collectionList = collectionList;
     }
     public Collection(){
-//        this.collectionList.add("init");
     }
 
 }
