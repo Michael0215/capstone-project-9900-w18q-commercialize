@@ -132,7 +132,7 @@ public class RecipeDetailActivity extends AppCompatActivity {
             String recipeId=preferences.getString(MacroDef.KEY_RECIPE_ID);
             //检查之前collection类是否含有数据.并添加新recipeId到里面去
             collectMainFunc();
-//            updateData();
+//            updateData();//
         });
     }
     private void collectMainFunc() {
