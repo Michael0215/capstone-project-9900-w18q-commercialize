@@ -1,10 +1,11 @@
 package com.example.comp9900_commercialize.bean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Collection {
 
-    public List<String> collectionList;
+    public List<String> collectionList = new ArrayList<>();
 
     public Collection(List<String> collectionList) {
         this.collectionList = collectionList;
@@ -17,6 +18,8 @@ public class Collection {
     public void setCollectionList(List<String> collectionList) {
         this.collectionList = collectionList;
     }
-    public Collection(){}
+    public Collection(){
+//        this.collectionList.add("init");
+    }
 
 }
