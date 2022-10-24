@@ -90,9 +90,11 @@ public class OtherProfileActivity extends AppCompatActivity {
                                         DocumentSnapshot document = task.getResult();
                                         if (document.exists()) {
                                             Map<String, Object> data = document.getData();
-                                            byte[] bytes = Base64.decode((String)data.get("Avatar"), Base64.DEFAULT);
-                                            Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-                                            binding.rivUserPhoto.setImageBitmap(bitmap);
+                                            if(data.get("Avatar") != null){
+                                                byte[] bytes = Base64.decode((String)data.get("Avatar"), Base64.DEFAULT);
+                                                Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                                                binding.rivUserPhoto.setImageBitmap(bitmap);
+                                            }
                                             binding.tvUserName.setText(recipes.recipeContributorName);
                                             binding.tvContactDetail.setText((String)data.get("Contact Detail"));
                                         }
