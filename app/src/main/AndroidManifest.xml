@@ -21,15 +21,15 @@
         <activity
             android:name=".AddRecipeSub2Activity"
             android:exported="false"
-            android:launchMode="singleInstance"/>
+            android:launchMode="singleInstance" />
         <activity
             android:name=".AddRecipeSub1Activity"
             android:exported="false"
-            android:launchMode="singleInstance"/>
+            android:launchMode="singleInstance" />
         <activity
             android:name=".AddRecipeActivity"
             android:exported="false"
-            android:launchMode="singleInstance"/>
+            android:launchMode="singleInstance" />
         <activity
             android:name=".NoticeActivity"
             android:exported="false" />
@@ -74,8 +74,7 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="false"
-            />
+            android:exported="false" />
         <activity
             android:name=".LoginActivity"
             android:exported="true">

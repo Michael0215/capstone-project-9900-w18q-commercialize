@@ -19,41 +19,161 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
-
-    <androidx.recyclerview.widget.RecyclerView
+    <ScrollView
         android:id="@+id/IngredientRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="570dp"
+        android:layout_height="550dp"
         android:layout_marginTop="5dp"
-        android:orientation="vertical"
-        android:overScrollMode="never"
-        android:padding="15sp"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_recipe_detail_page"
-        />
-    <View android:id="@+id/view01"
-        android:layout_width="2dp"
-        android:layout_height="match_parent"
-        android:background="@color/drak_blue"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
-    <View android:id="@+id/view02"
-        android:layout_width="2dp"
-        android:layout_height="match_parent"
-        android:background="@color/drak_blue"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/tv_recipe_detail_page">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <ImageView
+                android:id="@+id/iv_recipe_cover_image"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:scaleType="fitXY"
+                android:background="@color/white"
+                android:backgroundTint="#ECECEC"
+                />
+            <TextView
+                android:id="@+id/tv_recipe_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"
+                android:text="Title"
+                android:layout_gravity="center"
+                android:textColor="@color/black"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                />
+            <View
+                android:id="@+id/view1"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:background="@color/drak_blue"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="10dp"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/riv_user_photo"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="10dp"
+                    android:scaleType="fitXY"
+                    android:background="@color/white"
+                    android:src="@drawable/default_avatar"
+                    app:riv_oval="true" />
+                <TextView
+                    android:id="@+id/tv_contributor_name_title"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:text="Contributor"
+                    android:textColor="@color/black"
+                    android:textSize="19sp"
+                    android:textStyle="bold"
+                    />
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/bt_follow"
+                    android:layout_width="90dp"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="10dp"
+                    android:backgroundTint="@color/dark_blue"
+                    android:text="FOLLOW"
+                    android:textColor="@color/white"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:cornerRadius="8dp"
+                    />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/view3"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:background="@color/drak_blue"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                />
+
+            <LinearLayout
+                android:id="@+id/ll_detail_ingredients"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:overScrollMode="never"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+                <TextView
+                    android:id="@+id/tv_ingredients"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:text="Ingredients:"
+                    android:textColor="@color/black"
+                    android:textSize="19sp"
+                    android:textStyle="italic"
+                    />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/view4"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:background="@color/drak_blue"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                />
+
+            <LinearLayout
+                android:id="@+id/ll_detail_procedures"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:overScrollMode="never"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+                <TextView
+                    android:id="@+id/tv_procedures"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:text="Procedures:"
+                    android:textColor="@color/black"
+                    android:textSize="19sp"
+                    android:textStyle="italic"
+                    />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/view5"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:background="@color/drak_blue"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                />
+
+
+        </LinearLayout>
+    </ScrollView>
+
     <View
         android:id="@+id/view03"
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:layout_marginBottom="60dp"
+        android:layout_marginTop="5dp"
         android:background="@color/drak_blue"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/IngredientRecyclerView" />
     <View
         android:id="@+id/view04"
         android:layout_width="match_parent"
@@ -66,23 +186,23 @@
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_marginStart="15dp"
-        android:layout_marginBottom="15dp"
         android:background="@color/white"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_collection"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintTop_toTopOf="@+id/view03"
+        app:layout_constraintBottom_toTopOf="@+id/view04"/>
     <ImageButton
         android:id="@+id/ib_like"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginStart="10dp"
-        android:layout_marginBottom="12dp"
         android:background="@color/white"
         android:scaleType="center"
         android:src="@drawable/ic_like"
         app:layout_constraintStart_toEndOf="@+id/ib_collection"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintTop_toTopOf="@+id/view03"
+        app:layout_constraintBottom_toTopOf="@+id/view04"/>
 
     <TextView
         android:id="@+id/tv_like_num"
@@ -102,12 +222,12 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginStart="5dp"
-        android:layout_marginBottom="12dp"
         android:background="@color/white"
         android:scaleType="center"
         android:src="@drawable/ic_comment"
         app:layout_constraintStart_toEndOf="@+id/tv_like_num"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintTop_toTopOf="@+id/view03"
+        app:layout_constraintBottom_toTopOf="@+id/view04"/>
 
     <TextView
         android:id="@+id/tv_comment_num"

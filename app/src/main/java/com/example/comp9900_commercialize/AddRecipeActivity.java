@@ -71,6 +71,7 @@ public class AddRecipeActivity extends AppCompatActivity {
                             InputStream inputStream = getContentResolver().openInputStream(imageUir);
                             Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
                             binding.ivAddCoverImage.setImageBitmap(bitmap);
+                            binding.tvAddCoverImage.setVisibility(View.GONE);
                             encodedImage = encodeImage(bitmap);
                         } catch (FileNotFoundException e) {
                             e.printStackTrace();
@@ -138,6 +139,7 @@ public class AddRecipeActivity extends AppCompatActivity {
                     binding.etRecipeName.setText(recipe.recipeName);
                     binding.etRecipeDescription.setText(recipe.recipeDescription);
                 }
+                binding.tvAddCoverImage.setVisibility(View.INVISIBLE);
             }
         });
     }
