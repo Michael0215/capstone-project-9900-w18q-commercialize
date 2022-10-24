@@ -57,10 +57,7 @@ public class RecipeDetailActivity extends AppCompatActivity {
     private Collection myCollection;
     
     
-    private ActivityRecipeDetailBinding binding;
-    private FirebaseUser user;
     private FirebaseFirestore db;
-    private Preferences preferences;
     private String id;
     private String oldLike;
     private TextView likeNum;
@@ -212,6 +209,77 @@ public class RecipeDetailActivity extends AppCompatActivity {
             String recipeId=preferences.getString(MacroDef.KEY_RECIPE_ID);
             //检查之前collection类是否含有数据.并添加新recipeId到里面去
             collectMainFunc();
+        });
+        
+        
+        
+        
+        binding.ibLike.setOnClickListener(v -> {
+            if(judge == false){
+                binding.ibLike.setImageResource(R.drawable.ic_like2);
+                String newString;
+                if(like == ""){
+                    newString = id;
+                }else{
+                    newString = like + ',' + id;
+                }
+                int oldLike1 = Integer.parseInt(oldLike);
+                int newLike1 = oldLike1 + 1;
+                newLikeNum = String.valueOf(newLike1);
+                likeNum.setText(newLikeNum);
+
+
+                DocumentReference Ref = db.collection("recipes").document(id);
+                Ref.update("recipeLikesNum", newLike1)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {@Override
+                        public void onSuccess(Void aVoid) {
+                            Toast.makeText(getApplicationContext(), "Like succeed", Toast.LENGTH_SHORT).show();
+                        }
+                        });
+
+                DocumentReference Ref1 = db.collection("users").document(user.getEmail());
+                Ref1
+                        .update("Like List", newString)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                            }
+                        });
+                judge = true;
+                oldLike = newLikeNum;
+            }else{
+                binding.ibLike.setImageResource(R.drawable.ic_like);
+                List<String> arrList = new ArrayList<String>(likeList);
+                arrList.remove(id);
+
+                String newString = String.join(",", arrList);
+
+                int oldLike1 = Integer.parseInt(oldLike);
+                int newLike1 = oldLike1 - 1;
+                newLikeNum = String.valueOf(newLike1);
+                likeNum.setText(newLikeNum);
+
+                DocumentReference Ref = db.collection("recipes").document(id);
+                Ref.update("recipeLikesNum", newLike1)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {@Override
+                        public void onSuccess(Void aVoid) {
+                            Toast.makeText(getApplicationContext(), "Delete like succeed", Toast.LENGTH_SHORT).show();
+                        }
+                        });
+
+                DocumentReference Ref1 = db.collection("users").document(user.getEmail());
+                Ref1
+                        .update("Like List", newString)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                            }
+                        });
+                judge = false;
+                oldLike = newLikeNum;
+                good.setImageResource(R.drawable.ic_like);
+            }
+
         });
     }
     private void collectMainFunc() {
