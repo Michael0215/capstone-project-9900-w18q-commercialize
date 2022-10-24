@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.comp9900_commercialize.bean.Ingredient;
@@ -52,6 +53,7 @@ public class AddRecipeSub2Activity extends AppCompatActivity implements View.OnC
     Recipe recipe;
     private String encodedImage;
     private ImageView imageView;
+    private TextView textView;
     private FirebaseFirestore firebaseFirestore;
 
     private final ActivityResultLauncher<Intent> pickImage = registerForActivityResult(
@@ -67,6 +69,7 @@ public class AddRecipeSub2Activity extends AppCompatActivity implements View.OnC
                             byte[] bytes = Base64.decode(encodedImage, Base64.DEFAULT);
                             bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
                             imageView.setImageBitmap(bitmap);
+                            textView.setVisibility(View.GONE);
                         } catch (FileNotFoundException e) {
                             e.printStackTrace();
                         }
@@ -154,10 +157,12 @@ public class AddRecipeSub2Activity extends AppCompatActivity implements View.OnC
         View procedureView = getLayoutInflater().inflate(R.layout.row_add_procedure, null, false);
         EditText procedureDescription = (EditText)procedureView.findViewById(R.id.et_procedure_description);
         ImageView image = (ImageView) procedureView.findViewById(R.id.iv_procedure_photo);
+        TextView text = procedureView.findViewById(R.id.tv_add_procedure_photo);
         ImageView remove = (ImageView)procedureView.findViewById(R.id.iv_remove_procedure);
 
         image.setOnClickListener(v -> {
             imageView = image;
+            textView = text;
             Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             pickImage.launch(intent);
@@ -178,11 +183,14 @@ public class AddRecipeSub2Activity extends AppCompatActivity implements View.OnC
         EditText procedureDescription = (EditText)procedureView.findViewById(R.id.et_procedure_description);
         ImageView image = (ImageView) procedureView.findViewById(R.id.iv_procedure_photo);
         ImageView remove = (ImageView)procedureView.findViewById(R.id.iv_remove_procedure);
+        TextView text = procedureView.findViewById(R.id.tv_add_procedure_photo);
 
         procedureDescription.setText(recipe.recipeStepList.get(position).stepDescription);
         byte[] bytes = Base64.decode(recipe.recipeStepList.get(position).encodedImage, Base64.DEFAULT);
         Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
         image.setImageBitmap(bitmap);
+        text.setVisibility(View.INVISIBLE);
+
 
         image.setOnClickListener(v -> {
             imageView = image;

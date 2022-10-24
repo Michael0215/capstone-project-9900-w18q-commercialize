@@ -73,6 +73,7 @@ public class RegisterActivity extends AppCompatActivity {
         user.put("Contact Detail", contact);
         user.put("E-mail", email);
         user.put("Avatar", null);
+        user.put("Like List", "");
         progressDialog.setMessage("Registering User...");
         progressDialog.show();
 
@@ -93,6 +94,7 @@ public class RegisterActivity extends AppCompatActivity {
                                             // jump from RegisterActivity.java to LoginActivity.java
                                             Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                                             startActivity(intent);
+                                            finish();
                                         }
                                     })
                                      // error handling if the registration is failed
