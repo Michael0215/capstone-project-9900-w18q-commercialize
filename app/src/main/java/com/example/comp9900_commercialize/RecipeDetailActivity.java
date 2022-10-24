@@ -172,7 +172,7 @@ public class RecipeDetailActivity extends AppCompatActivity {
             }
         });
     }
-
+//
     private boolean contain(Collection myCollection, String recipeId) {
         //System.out.println("4444444  " + myCollection.collectionList);
         List<String> arr=myCollection.collectionList;
