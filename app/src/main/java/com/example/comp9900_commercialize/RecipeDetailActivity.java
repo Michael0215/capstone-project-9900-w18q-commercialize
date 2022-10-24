@@ -81,6 +81,9 @@ public class RecipeDetailActivity extends AppCompatActivity {
         init();
         loadData();
         setListeners();
+        
+        likeNum = findViewById(R.id.tv_like_num);
+        good = findViewById(R.id.ib_like);
     }
 
 
@@ -89,15 +92,6 @@ public class RecipeDetailActivity extends AppCompatActivity {
         user = FirebaseAuth.getInstance().getCurrentUser();
         preferences = new Preferences(getApplicationContext());
         firebaseFirestore = FirebaseFirestore.getInstance();
-        
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recipe_detail);
-        likeNum = findViewById(R.id.tv_like_num);
-        good = findViewById(R.id.ib_like);
-        binding = ActivityRecipeDetailBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-        init();
-        setListeners();
     }
 
     private void loadData(){
