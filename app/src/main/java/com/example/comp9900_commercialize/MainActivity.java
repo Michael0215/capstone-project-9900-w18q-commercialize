@@ -12,6 +12,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Base64;
+import android.view.View;
 import android.widget.Toast;
 
 import com.example.comp9900_commercialize.adapters.StaggerAdapter;
@@ -79,8 +80,6 @@ public class MainActivity extends AppCompatActivity {
                             // retrieve all posts in the 'posts' table
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 ItemExplore explore = new ItemExplore();
-//                                                Toast.makeText(MainActivity.this, "Refresh Success!", Toast.LENGTH_SHORT).show();
-//                                for (Map.Entry<String, Object> mapElement : document.getData().entrySet()){
                                 recipe = document.toObject(Recipe.class);
                                  if(recipe.recipeContributorAvatar != null){
                                      byte[] bytes = Base64.decode(recipe.recipeContributorAvatar, Base64.DEFAULT);
@@ -95,38 +94,13 @@ public class MainActivity extends AppCompatActivity {
                                 explore.tv_like_num = String.valueOf(recipe.recipeLikesNum);
                                 explore.tv_comment_num = String.valueOf(recipe.recipeCommentsNum);
                                 explore.title = recipe.recipeName;
-//                                    if (mapElement.getKey().equals("recipeContributorAvatar")){
-//                                        if (mapElement.getValue() != null){
-//                                            byte[] bytes = Base64.decode(mapElement.getValue().toString(), Base64.DEFAULT);
-//                                            explore.avatar = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-//                                        } else {
-//                                            @SuppressLint("ResourceType") InputStream img_avatar = getResources().openRawResource(R.drawable.default_avatar);
-//                                            explore.avatar = BitmapFactory.decodeStream(img_avatar);
-//                                        }
-//                                    }
-
-//                                    if (mapElement.getKey().equals("recipeCover")){
-//                                        byte[] bytes = Base64.decode(mapElement.getValue().toString(), Base64.DEFAULT);
-//                                        explore.icon =  BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-//                                    }
-//                                    if (mapElement.getKey().equals("recipeContributorName")){
-//                                        explore.tv_contributor_name = mapElement.getValue().toString();
-//                                    }
-//                                    if (mapElement.getKey().equals("recipeLikesNum")){
-//                                        explore.tv_like_num = mapElement.getValue().toString();
-//                                    }
-//                                    if (mapElement.getKey().equals("recipeCommentsNum")){
-//                                        explore.tv_comment_num = mapElement.getValue().toString();
-//                                    }
-//                                    if (mapElement.getKey().equals("recipeName")){
-//                                        explore.title = mapElement.getValue().toString();
-//                                    }
-//                                }
                                 explore.id = document.getId();
                                 explore.icon_comment = R.drawable.ic_comment;
                                 explore.icon_like = R.drawable.ic_like;
                                 mData.add(explore);
                             }
+                            binding.progressBar.setVisibility(View.GONE);
+                            binding.tvLoading.setVisibility(View.GONE);
                             showStagger(true, false);
                         } else { // error handling
                             Toast.makeText(MainActivity.this, "Error getting documents.", Toast.LENGTH_SHORT).show();
@@ -148,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
                     public void run() {
                         refresh();
                     }
-                },1000);
+                },2000);
             }
         });
 
@@ -159,28 +133,44 @@ public class MainActivity extends AppCompatActivity {
         //list<Data>-->Adapter-->SetAdapter-->显示数据
         //创建数据集合
         mData = new ArrayList<>();
-//        //创建模拟数据
-//        for (int i = 0; i < Datas.icons.length; i++){
-//            //创建数据对象
-//            ItemExplore data = new ItemExplore();
-//            data.id = String.valueOf(i);
-//            @SuppressLint("ResourceType") InputStream img_icon = getResources().openRawResource(Datas.icons[i]);
-//            data.icon = BitmapFactory.decodeStream(img_icon);
-//            data.title = "我是第" + (i+1) + "个菜谱";
-//            @SuppressLint("ResourceType") InputStream img_avatar = getResources().openRawResource(R.drawable.default_avatar);
-//            data.avatar = BitmapFactory.decodeStream(img_avatar);
-//            data.icon_comment = R.drawable.ic_comment;
-//            data.icon_like = R.drawable.ic_like;
-//            data.tv_comment_num = "12";
-//            data.tv_like_num = "25";
-//            data.tv_contributor_name = "Test Contributor";
-//            //添加到集合里头
-//            mData.add(data);
-//        }
-        //RecyclerView需要设置样式，其实就是设置布局管理器,在这里设置瀑布流，线性流，还是网格流
-        //瀑布流布局管理器
-        refresh();
-        showStagger(true, false);
+        CollectionReference posts = firebaseFirestore.collection("recipes");
+        // order the post in creating time order
+        Query query = posts.orderBy("recipeLikesNum", Query.Direction.DESCENDING);
+        query.get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            // retrieve all posts in the 'posts' table
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                ItemExplore explore = new ItemExplore();
+                                recipe = document.toObject(Recipe.class);
+                                if(recipe.recipeContributorAvatar != null){
+                                    byte[] bytes = Base64.decode(recipe.recipeContributorAvatar, Base64.DEFAULT);
+                                    explore.avatar = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                                } else {
+                                    @SuppressLint("ResourceType") InputStream img_avatar = getResources().openRawResource(R.drawable.default_avatar);
+                                    explore.avatar = BitmapFactory.decodeStream(img_avatar);
+                                }
+                                byte[] bytes = Base64.decode(recipe.recipeCover, Base64.DEFAULT);
+                                explore.icon =  BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                                explore.tv_contributor_name = recipe.recipeContributorName;
+                                explore.tv_like_num = String.valueOf(recipe.recipeLikesNum);
+                                explore.tv_comment_num = String.valueOf(recipe.recipeCommentsNum);
+                                explore.title = recipe.recipeName;
+                                explore.id = document.getId();
+                                explore.icon_comment = R.drawable.ic_comment;
+                                explore.icon_like = R.drawable.ic_like;
+                                mData.add(explore);
+                            }
+                            binding.progressBar.setVisibility(View.GONE);
+                            binding.tvLoading.setVisibility(View.GONE);
+                            showStagger(true, false);
+                        } else { // error handling
+                            Toast.makeText(MainActivity.this, "Error getting documents.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
     }
 
     private void showStagger(boolean isVertical, boolean isReverse) {
@@ -231,8 +221,5 @@ public class MainActivity extends AppCompatActivity {
                 });
         binding.btNotice.setOnClickListener(v ->
                 startActivity(new Intent(getApplicationContext(), NoticeActivity.class)));
-//        binding.btRefresh.setOnClickListener(v -> {
-//            refresh();
-//        });
     }
 }
