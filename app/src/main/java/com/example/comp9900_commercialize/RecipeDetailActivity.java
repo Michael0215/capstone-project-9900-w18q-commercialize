@@ -92,6 +92,54 @@ public class RecipeDetailActivity extends AppCompatActivity {
         user = FirebaseAuth.getInstance().getCurrentUser();
         preferences = new Preferences(getApplicationContext());
         firebaseFirestore = FirebaseFirestore.getInstance();
+        
+        db = FirebaseFirestore.getInstance();
+        DocumentReference Reference = db.collection("users").document(user.getEmail());
+        preferences = new Preferences(getApplicationContext());
+        likeNum = findViewById(R.id.tv_like_num);
+        id = preferences.getString(MacroDef.KEY_RECIPE_ID);
+        DocumentReference Ref = db.collection("recipes").document(id);
+        
+        Ref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        oldLike = document.get("recipeLikesNum").toString();
+                        likeNum.setText(oldLike);
+
+                    }
+                }
+            }
+        });
+        
+        Reference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        like = document.get("Like List").toString();
+                        likeArray = like.split(",");
+                        likeList = Arrays.asList(like.split(","));
+                        if (likeList.contains(id) == false){
+                            judge = false;
+                        }else{
+                            judge = true;
+                        }
+                        if(judge == false){
+                            binding.ibLike.setImageResource(R.drawable.ic_like);
+                        }
+                        else{
+                            binding.ibLike.setImageResource(R.drawable.ic_like2);
+                        }
+                        //Toast.makeText(getApplicationContext(), "OK1", Toast.LENGTH_SHORT).show();
+
+                    }
+                }
+            }
+        });
     }
 
     private void loadData(){
