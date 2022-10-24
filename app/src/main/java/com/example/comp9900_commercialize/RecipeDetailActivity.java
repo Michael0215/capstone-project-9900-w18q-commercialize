@@ -66,6 +66,7 @@ public class RecipeDetailActivity extends AppCompatActivity {
                         bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
                         binding.rivUserPhoto.setImageBitmap(bitmap);
                     }
+                    preferences.getString(MacroDef.KEY_RECIPE_ID);
                     binding.tvContributorNameTitle.setText(recipe.recipeContributorName);
                     for(int i = 0; i < recipe.recipeIngredientList.size(); i++){
                         loadView(i, linearLayoutIngredients);
@@ -73,6 +74,7 @@ public class RecipeDetailActivity extends AppCompatActivity {
                     for(int i = 0; i < recipe.recipeStepList.size(); i++){
                         loadView(i, linearLayoutProcedures);
                     }
+                    preferences.putString(MacroDef.KEY_CONTRIBUTOR_EMAIL, recipe.recipeContributorEmail);
                 }
             }
         });
@@ -108,6 +110,10 @@ public class RecipeDetailActivity extends AppCompatActivity {
         binding.btCancel.setOnClickListener(v -> onBackPressed());
         binding.btNotice.setOnClickListener(v ->
                 startActivity(new Intent(getApplicationContext(), NoticeActivity.class)));
+        binding.rivUserPhoto.setOnClickListener(v ->
+                startActivity(new Intent(getApplicationContext(), OtherProfileActivity.class)));
+        binding.tvContributorNameTitle.setOnClickListener(v ->
+                startActivity(new Intent(getApplicationContext(), OtherProfileActivity.class)));
     }
 
 }
