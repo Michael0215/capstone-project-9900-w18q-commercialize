@@ -73,6 +73,7 @@ public class RegisterActivity extends AppCompatActivity {
         user.put("Contact Detail", contact);
         user.put("E-mail", email);
         user.put("Avatar", null);
+        user.put("Like List", "");
         progressDialog.setMessage("Registering User...");
         progressDialog.show();
 
