@@ -131,7 +131,6 @@ public class RecipeDetailActivity extends AppCompatActivity {
                         else{
                             binding.ibLike.setImageResource(R.drawable.ic_like2);
                         }
-                        //Toast.makeText(getApplicationContext(), "OK1", Toast.LENGTH_SHORT).show();
 
                     }
                 }
