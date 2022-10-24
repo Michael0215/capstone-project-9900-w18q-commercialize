@@ -128,11 +128,18 @@ public class RecipeDetailActivity extends AppCompatActivity {
         binding.btCancel.setOnClickListener(v -> onBackPressed());
         binding.btNotice.setOnClickListener(v ->
                 startActivity(new Intent(getApplicationContext(), NoticeActivity.class)));
+        binding.tvContributorNameTitle.setOnClickListener(v -> {
+            preferences.putString(MacroDef.KEY_CONTRIBUTOR_EMAIL, recipe.recipeContributorEmail);
+            startActivity(new Intent(getApplicationContext(), OtherProfileActivity.class));
+        });
+        binding.rivUserPhoto.setOnClickListener(v -> {
+            preferences.putString(MacroDef.KEY_CONTRIBUTOR_EMAIL, recipe.recipeContributorEmail);
+            startActivity(new Intent(getApplicationContext(), OtherProfileActivity.class));
+        });
         binding.ibCollection.setOnClickListener(view -> {
             String recipeId=preferences.getString(MacroDef.KEY_RECIPE_ID);
             //检查之前collection类是否含有数据.并添加新recipeId到里面去
             collectMainFunc();
-//            updateData();//
         });
     }
     private void collectMainFunc() {
@@ -144,20 +151,17 @@ public class RecipeDetailActivity extends AppCompatActivity {
             public void onSuccess(DocumentSnapshot documentSnapshot) {
 
                 myCollection = documentSnapshot.toObject(Collection.class);
-                System.out.println(myCollection.collectionList);
-                System.out.println(myCollection.collectionList);
-                if (myCollection.collectionList != null && contain(myCollection, recipeId)) {
-                    myCollection.collectionList.remove(recipeId);
-                    System.out.println("1111111" + myCollection.collectionList);
-                    showToast("Collection Denied");
-                } else if (myCollection.collectionList != null) {
-                    myCollection.collectionList.add(recipeId);
-                    System.out.println("222222222" + myCollection.collectionList);
-                    showToast("Collection Success");
+                if(myCollection != null){
+                    if (myCollection.collectionList != null && contain(myCollection, recipeId)) {
+                        myCollection.collectionList.remove(recipeId);
+                        showToast("Collection Denied");
+                    } else if (myCollection.collectionList != null) {
+                        myCollection.collectionList.add(recipeId);
+                        showToast("Collection Success");
+                    }
                 }
                 else {
                     myCollection = new Collection(Collections.singletonList(recipeId));
-                    System.out.println("3333333333" + myCollection.collectionList);
                     showToast("This is your first time collect something");
 
                 }
@@ -172,9 +176,8 @@ public class RecipeDetailActivity extends AppCompatActivity {
             }
         });
     }
-//
+
     private boolean contain(Collection myCollection, String recipeId) {
-        //System.out.println("4444444  " + myCollection.collectionList);
         List<String> arr=myCollection.collectionList;
         return arr.contains(recipeId);
     }
