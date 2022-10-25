@@ -3,6 +3,7 @@ package com.example.comp9900_commercialize;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -20,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.comp9900_commercialize.bean.Collection;
+import com.example.comp9900_commercialize.bean.ItemCollection;
 import com.example.comp9900_commercialize.bean.Recipe;
 import com.example.comp9900_commercialize.databinding.ActivityAddRecipeBinding;
 import com.example.comp9900_commercialize.databinding.ActivityRecipeDetailBinding;
@@ -31,10 +33,16 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldPath;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
+import java.io.InputStream;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -67,6 +75,8 @@ public class RecipeDetailActivity extends AppCompatActivity {
     private String[] likeArray;
     private ImageButton good;
     private boolean judge;
+    private List<String> collection_list;
+    private boolean collected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +102,7 @@ public class RecipeDetailActivity extends AppCompatActivity {
         
         db = FirebaseFirestore.getInstance();
         DocumentReference Reference = db.collection("users").document(user.getEmail());
+        DocumentReference rf_collection_list = db.collection("collection").document(user.getEmail());
         preferences = new Preferences(getApplicationContext());
         likeNum = findViewById(R.id.tv_like_num);
         id = preferences.getString(MacroDef.KEY_RECIPE_ID);
@@ -110,7 +121,7 @@ public class RecipeDetailActivity extends AppCompatActivity {
                 }
             }
         });
-        
+
         Reference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -120,18 +131,36 @@ public class RecipeDetailActivity extends AppCompatActivity {
                         like = document.get("Like List").toString();
                         likeArray = like.split(",");
                         likeList = Arrays.asList(like.split(","));
-                        if (likeList.contains(id) == false){
-                            judge = false;
-                        }else{
-                            judge = true;
-                        }
-                        if(judge == false){
+                        judge = likeList.contains(id);
+                        if(!judge){
                             binding.ibLike.setImageResource(R.drawable.ic_like);
                         }
                         else{
                             binding.ibLike.setImageResource(R.drawable.ic_like2);
                         }
 
+                    }
+                }
+            }
+        });
+
+        rf_collection_list.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                myCollection = documentSnapshot.toObject(Collection.class);
+                if (myCollection != null) {
+                    collection_list = myCollection.collectionList;
+                    if (!collection_list.isEmpty()) {
+                        collected = collection_list.contains(id);
+                    }
+                    else{
+                        collected = false;
+                    }
+                    if(!collected){
+                        binding.ibCollection.setImageResource(R.drawable.ic_collection);
+                    }
+                    else{
+                        binding.ibCollection.setImageResource(R.drawable.ic_collection2);
                     }
                 }
             }
@@ -214,7 +243,7 @@ public class RecipeDetailActivity extends AppCompatActivity {
         
         
         binding.ibLike.setOnClickListener(v -> {
-            if(judge == false){
+            if(!judge){
                 binding.ibLike.setImageResource(R.drawable.ic_like2);
                 String newString;
                 if(like == ""){
@@ -293,14 +322,17 @@ public class RecipeDetailActivity extends AppCompatActivity {
                 if(myCollection != null){
                     if (myCollection.collectionList != null && contain(myCollection, recipeId)) {
                         myCollection.collectionList.remove(recipeId);
+                        binding.ibCollection.setImageResource(R.drawable.ic_collection);
                         showToast("Collection Denied");
                     } else if (myCollection.collectionList != null) {
                         myCollection.collectionList.add(recipeId);
+                        binding.ibCollection.setImageResource(R.drawable.ic_collection2);
                         showToast("Collection Success");
                     }
                 }
                 else {
                     myCollection = new Collection(Collections.singletonList(recipeId));
+                    binding.ibCollection.setImageResource(R.drawable.ic_collection2);
                     showToast("This is your first time collect something");
 
                 }
