@@ -33,8 +33,9 @@
         android:layout_height="80dp"
         android:layout_marginTop="30dp"
         android:layout_marginStart="10dp"
+        android:scaleType="fitXY"
         android:background="@color/white"
-        android:src="@drawable/template"
+        android:src="@drawable/default_avatar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_other_profile"
         app:riv_oval="true"/>
