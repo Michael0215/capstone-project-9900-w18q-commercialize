@@ -114,12 +114,24 @@ public class LiveChatActivity extends AppCompatActivity {
             @SuppressLint("ResourceType") InputStream img_avatar = getResources().openRawResource(R.drawable.default_avatar);
             sender_avatar =  BitmapFactory.decodeStream(img_avatar);
         }
-        chatAdapter = new ChatAdapter(
-                chatMessages,//list
-                preferenceManager.getString(MacroDef.KEY_EMAIL),//string
-                getBitmapFromEncodedString(receiveUser.avatar),//bitmap
-                sender_avatar
-        );
+
+        //If Receiver has null-value avatar, just use the local avatar
+        if (getBitmapFromEncodedString(receiveUser.avatar) == null) {
+            Bitmap bm_default_avatar = BitmapFactory.decodeResource(getResources(), R.drawable.default_avatar);
+            chatAdapter = new ChatAdapter(
+                    chatMessages,//list
+                    preferenceManager.getString(MacroDef.KEY_EMAIL),//string
+                    bm_default_avatar,//bitmap
+                    sender_avatar
+            );
+        } else {
+            chatAdapter = new ChatAdapter(
+                    chatMessages,//list
+                    preferenceManager.getString(MacroDef.KEY_EMAIL),//string
+                    getBitmapFromEncodedString(receiveUser.avatar),//bitmap
+                    sender_avatar
+            );
+        }
         binding.chatRecyclerView.setAdapter(chatAdapter);
         database = FirebaseFirestore.getInstance();
     }
