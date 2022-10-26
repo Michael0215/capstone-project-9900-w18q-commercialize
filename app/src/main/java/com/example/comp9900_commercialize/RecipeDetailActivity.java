@@ -224,7 +224,7 @@ public class RecipeDetailActivity extends AppCompatActivity {
     private void setListeners(){
         binding.btCancel.setOnClickListener(v -> onBackPressed());
         binding.btNotice.setOnClickListener(v ->
-                startActivity(new Intent(getApplicationContext(), NoticeActivity.class)));
+                startActivity(new Intent(getApplicationContext(), ChatMainActivity.class)));
         binding.tvContributorNameTitle.setOnClickListener(v -> {
             preferences.putString(MacroDef.KEY_CONTRIBUTOR_EMAIL, recipe.recipeContributorEmail);
             startActivity(new Intent(getApplicationContext(), OtherProfileActivity.class));

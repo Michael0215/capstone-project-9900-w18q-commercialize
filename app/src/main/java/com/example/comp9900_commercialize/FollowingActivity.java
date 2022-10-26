@@ -24,6 +24,6 @@ public class FollowingActivity extends AppCompatActivity {
         binding.btCancel.setOnClickListener(v ->
                 onBackPressed());
         binding.btNotice.setOnClickListener(v ->
-                startActivity(new Intent(getApplicationContext(), NoticeActivity.class)));
+                startActivity(new Intent(getApplicationContext(), ChatMainActivity.class)));
     }
 }

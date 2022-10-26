@@ -21,5 +21,18 @@ public class MacroDef {
     public static final  String KEY_RECIPE_ID = "recipe_id";
     public static final  String KEY_MODE_CREATE = "recipe_mode_create";
     public static final  String KEY_CONTRIBUTOR_EMAIL = "contributor_email";
-
+    //Live_Chat
+    public static final  String KEY_KEY_LIVECHATTABLE = "users";
+    public static final  String KEY_LIVECHATNAME = "Name";
+    public static final  String KEY_LIVECHATAVATAR = "Avatar";
+    public static final  String KEY_LIVECHATTYPE = "Type";
+    public static final  String KEY_USER = "user";
+    public static final  String KEY_COLLECTION_CHAT = "chat";
+    public static final  String KEY_SENDER_EMAIL = "senderEmail";
+    public static final  String KEY_SENDER_AVATAR = "senderAvatar";
+    public static final  String KEY_RECEIVER_EMAIL = "receiverEmail";
+    public static final  String KEY_MESSAGE = "message";
+    public static final  String KEY_TIMESTAMP = "timestamp";
+    public static final  String KEY_COLLECTION_CONVERSATIONS = "conversations";
+    public static final  String KEY_LAST_MESSAGE = "lastMessage";
 }
