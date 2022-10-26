@@ -90,6 +90,7 @@ public class ChatMainActivity extends AppCompatActivity implements ConversionLis
         database.collection(MacroDef.KEY_COLLECTION_CONVERSATIONS)
                 .whereEqualTo(MacroDef.KEY_RECEIVER_EMAIL, preferenceManager.getString(MacroDef.KEY_EMAIL))
                 .addSnapshotListener(eventListener);
+
     }
 
     // Event listener is provided by Firestore library.
@@ -118,6 +119,7 @@ public class ChatMainActivity extends AppCompatActivity implements ConversionLis
                     }
                     chatMessage.message = documentChange.getDocument().getString(MacroDef.KEY_LAST_MESSAGE);
                     chatMessage.dateObject = documentChange.getDocument().getDate(MacroDef.KEY_TIMESTAMP);
+//                    Toast.makeText(ChatMainActivity.this, chatMessage.conversionName, Toast.LENGTH_SHORT).show();
                     conversations.add(chatMessage);
                 }else if(documentChange.getType() == DocumentChange.Type.MODIFIED){
                     /* If an existing record has changed, usually when the last message is updated,

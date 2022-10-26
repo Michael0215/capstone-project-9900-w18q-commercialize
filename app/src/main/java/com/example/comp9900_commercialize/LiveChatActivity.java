@@ -79,6 +79,10 @@ public class LiveChatActivity extends AppCompatActivity {
             HashMap<String, Object> conversion = new HashMap<>();
             conversion.put(MacroDef.KEY_SENDER_EMAIL, preferenceManager.getString(MacroDef.KEY_EMAIL));
             conversion.put(MacroDef.KEY_RECEIVER_EMAIL, receiveUser.email);
+            conversion.put(MacroDef.KEY_RECEIVER_NAME,receiveUser.name);
+            conversion.put(MacroDef.KEY_RECEIVER_IMAGE,receiveUser.avatar);
+            conversion.put(MacroDef.KEY_SENDER_NAME,preferenceManager.getString(MacroDef.KEY_USERNAME));
+            conversion.put(MacroDef.KEY_SENDER_IMAGE,preferenceManager.getString(MacroDef.KEY_AVATAR));
             conversion.put(MacroDef.KEY_LAST_MESSAGE, binding.inputMessage.getText().toString());
             conversion.put(MacroDef.KEY_TIMESTAMP, new Date());
             addConversion(conversion);
@@ -104,16 +108,23 @@ public class LiveChatActivity extends AppCompatActivity {
         preferenceManager = new Preferences(getApplicationContext());
         chatMessages = new ArrayList<>();
         Bitmap sender_avatar;
+        Bitmap receiver_avatar;
         if (preferenceManager.getString(MacroDef.KEY_AVATAR) != null){
             sender_avatar = getBitmapFromEncodedString(preferenceManager.getString(MacroDef.KEY_AVATAR));
         } else {
             @SuppressLint("ResourceType") InputStream img_avatar = getResources().openRawResource(R.drawable.default_avatar);
             sender_avatar =  BitmapFactory.decodeStream(img_avatar);
         }
+        if (receiveUser.avatar != null){
+            receiver_avatar = getBitmapFromEncodedString(receiveUser.avatar);
+        } else {
+            @SuppressLint("ResourceType") InputStream img_avatar = getResources().openRawResource(R.drawable.default_avatar);
+            receiver_avatar =  BitmapFactory.decodeStream(img_avatar);
+        }
         chatAdapter = new ChatAdapter(
                 chatMessages,//list
                 preferenceManager.getString(MacroDef.KEY_EMAIL),//string
-                getBitmapFromEncodedString(receiveUser.avatar),//bitmap
+                receiver_avatar,//bitmap
                 sender_avatar
         );
         binding.chatRecyclerView.setAdapter(chatAdapter);

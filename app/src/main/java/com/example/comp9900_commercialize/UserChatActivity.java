@@ -2,8 +2,11 @@ package com.example.comp9900_commercialize;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.View;
 
 import com.example.comp9900_commercialize.adapters.UsersAdapter;
@@ -16,6 +19,7 @@ import com.google.firebase.firestore.FieldPath;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
