@@ -78,7 +78,11 @@ public class LiveChatActivity extends AppCompatActivity {
         } else {
             HashMap<String, Object> conversion = new HashMap<>();
             conversion.put(MacroDef.KEY_SENDER_EMAIL, preferenceManager.getString(MacroDef.KEY_EMAIL));
+            conversion.put(MacroDef.KEY_SENDER_NAME, preferenceManager.getString(MacroDef.KEY_USERNAME));
+            conversion.put(MacroDef.KEY_SENDER_IMAGE, preferenceManager.getString(MacroDef.KEY_AVATAR));
             conversion.put(MacroDef.KEY_RECEIVER_EMAIL, receiveUser.email);
+            conversion.put(MacroDef.KEY_RECEIVER_NAME, receiveUser.name);
+            conversion.put(MacroDef.KEY_RECEIVER_IMAGE, receiveUser.avatar);
             conversion.put(MacroDef.KEY_LAST_MESSAGE, binding.inputMessage.getText().toString());
             conversion.put(MacroDef.KEY_TIMESTAMP, new Date());
             addConversion(conversion);
