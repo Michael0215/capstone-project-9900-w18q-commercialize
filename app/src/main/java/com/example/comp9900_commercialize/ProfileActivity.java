@@ -140,7 +140,7 @@ public class ProfileActivity extends AppCompatActivity {
                     startActivity(new Intent(getApplicationContext(), SettingActivity.class));
                 });
         binding.ivNotice.setOnClickListener(v ->
-                startActivity(new Intent(getApplicationContext(), NoticeActivity.class)));
+                startActivity(new Intent(getApplicationContext(), ChatMainActivity.class)));
         binding.ivCollection.setOnClickListener(v ->
                 startActivity(new Intent(getApplicationContext(), CollectionActivity.class)));
         binding.ivFollowing.setOnClickListener(v ->

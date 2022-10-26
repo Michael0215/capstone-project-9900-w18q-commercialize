@@ -36,6 +36,6 @@ public class SubscribeActivity extends AppCompatActivity {
                     finish();
                 });
         binding.btNotice.setOnClickListener(v ->
-                startActivity(new Intent(getApplicationContext(), NoticeActivity.class)));
+                startActivity(new Intent(getApplicationContext(), ChatMainActivity.class)));
     }
 }

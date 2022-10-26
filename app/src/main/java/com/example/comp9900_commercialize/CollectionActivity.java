@@ -174,7 +174,7 @@ public class CollectionActivity extends AppCompatActivity {
         binding.btCancel.setOnClickListener(v ->
                 onBackPressed());
         binding.btNotice.setOnClickListener(v ->
-                startActivity(new Intent(getApplicationContext(), NoticeActivity.class)));
+                startActivity(new Intent(getApplicationContext(), ChatMainActivity.class)));
         userEmail = user.getEmail();
         //读取userEmail中所有collection
         DocumentReference docRef = db.collection("collection").document(userEmail);
