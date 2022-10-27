@@ -21,3 +21,7 @@ We finish the progressive demo A and retrospective A to evaluate and conclude th
 Week6 (2022.10.20)
 
 I'm working on pull the images from the Firestore to replace to local images for the data belong to StaggeredGridLayout. And the back-end part of the explore page in StaggeredGrid-style is almost done.
+
+Week7 (2022.10.27)
+
+I finished the live-chat function in the 'notice' part of our platform and fixed bugs about it. And I'm preparing for the Demo B.
