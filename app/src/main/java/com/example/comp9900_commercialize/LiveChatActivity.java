@@ -1,7 +1,5 @@
 package com.example.comp9900_commercialize;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -34,8 +32,9 @@ import java.util.List;
 import java.util.Locale;
 
 import java.util.List;
+import java.util.Objects;
 
-public class LiveChatActivity extends AppCompatActivity {
+public class LiveChatActivity extends BaseActivity {
 
     // This activity handles what happens in real-time chat.
     // Need an ActivityLiveChatBinding object to set content view.
@@ -50,6 +49,7 @@ public class LiveChatActivity extends AppCompatActivity {
     private Preferences preferenceManager;
     private FirebaseFirestore database;
     private String conversionId = null;
+    private Boolean isReceiverAvailable = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +89,29 @@ public class LiveChatActivity extends AppCompatActivity {
         }
         // Fill this blank message blob with the content of message.
         binding.inputMessage.setText(null);
+    }
+
+    private void listenAvailabilityOfReceiver() {
+        database.collection(MacroDef.KEY_COLLECTION_USERS).document(
+                receiveUser.email
+        ).addSnapshotListener(LiveChatActivity.this, (value, error) -> {
+            if (error != null) {
+                return;
+            }
+            if (value != null) {
+                if (value.getLong(MacroDef.KEY_AVAILABILITY) != null) {
+                    int availability = Objects.requireNonNull(
+                           value.getLong(MacroDef.KEY_AVAILABILITY)
+                    ).intValue();
+                    isReceiverAvailable = availability == 1;
+                }
+            }
+            if (isReceiverAvailable) {
+                binding.textAvailability.setVisibility(View.VISIBLE);
+            } else {
+                binding.textAvailability.setVisibility(View.GONE);
+            }
+        });
     }
 
     // Find all messages between two certain users for further displaying on the screen.
@@ -247,4 +270,10 @@ public class LiveChatActivity extends AppCompatActivity {
             conversionId = documentSnapshot.getId();
         }
     };
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        listenAvailabilityOfReceiver();
+    }
 }

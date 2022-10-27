@@ -1,7 +1,5 @@
 package com.example.comp9900_commercialize;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -19,7 +17,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserChatActivity extends AppCompatActivity implements UserListener {
+public class UserChatActivity extends BaseActivity implements UserListener {
 
     // This activity lists all available users you can chat with. And you can choose one of them to chat.
     private ActivityUserChatBinding binding;

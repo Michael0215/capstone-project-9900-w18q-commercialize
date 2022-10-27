@@ -1,7 +1,5 @@
 package com.example.comp9900_commercialize;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -26,7 +24,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class ChatMainActivity extends AppCompatActivity implements ConversionListener {
+public class ChatMainActivity extends BaseActivity implements ConversionListener {
 
     // The main page for chat feature, where shows recent chats.
     // Need to use the info stored in preference manager.
