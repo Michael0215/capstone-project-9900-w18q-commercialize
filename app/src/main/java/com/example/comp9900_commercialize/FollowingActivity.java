@@ -78,8 +78,6 @@ public class FollowingActivity extends AppCompatActivity {
         //创建数据集合
         mData = new ArrayList<>();
         //创建模拟数据
-        Log.d(TAG,"hello");
-        Log.d(TAG,preferences.getString(MacroDef.KEY_EMAIL));
         DocumentReference docRef = firebaseFirestore.collection("follow").document(preferences.getString(MacroDef.KEY_EMAIL));
         // retrieve all the post in the firestore's table 'posts'
         docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -155,9 +153,8 @@ public class FollowingActivity extends AppCompatActivity {
         adapter.setOnItemClickListener(new FollowAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                preferences.putString(MacroDef.KEY_RECIPE_ID, mData.get(position).id);
-//                Toast.makeText(CollectionActivity.this, "您点击的菜谱id为" + preferences.getString(MacroDef.KEY_RECIPE_ID), Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(getApplicationContext(), RecipeDetailActivity.class));
+                preferences.putString(MacroDef.KEY_CONTRIBUTOR_EMAIL, mData.get(position).id);
+                startActivity(new Intent(getApplicationContext(), OtherProfileActivity.class));
             }
         });
     }
