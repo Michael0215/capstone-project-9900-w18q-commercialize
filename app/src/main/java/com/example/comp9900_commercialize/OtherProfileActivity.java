@@ -1,7 +1,6 @@
 package com.example.comp9900_commercialize;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,8 +15,7 @@ import com.example.comp9900_commercialize.adapters.ProfileRecipeAdapter;
 import com.example.comp9900_commercialize.bean.ItemProfileRecipe;
 import com.example.comp9900_commercialize.bean.Recipe;
 import com.example.comp9900_commercialize.databinding.ActivityOtherProfileBinding;
-import com.example.comp9900_commercialize.databinding.ActivityProfileBinding;
-import com.example.comp9900_commercialize.databinding.ActivityRecipeDetailBinding;
+import com.example.comp9900_commercialize.models.User;
 import com.example.comp9900_commercialize.utilities.MacroDef;
 import com.example.comp9900_commercialize.utilities.Preferences;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -34,7 +32,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class OtherProfileActivity extends AppCompatActivity {
+
+public class OtherProfileActivity extends BaseActivity {
 
     private ActivityOtherProfileBinding binding;
     private Preferences preferences;
@@ -113,8 +112,16 @@ public class OtherProfileActivity extends AppCompatActivity {
         binding.btCancel.setOnClickListener(v -> onBackPressed());
         binding.btNotice.setOnClickListener(v ->
                 startActivity(new Intent(getApplicationContext(), ChatMainActivity.class)));
-//        binding.ivNotice.setOnClickListener(v ->
-//                startActivity(new Intent(getApplicationContext(), LiveChatActivity.class)));
+        //click on 'chat' in OtherProfile page and jump to LiveChat page directly
+        binding.ivNotice.setOnClickListener(v -> {
+            User user = new User();
+            user.email = recipes.recipeContributorEmail;
+            user.name = recipes.recipeContributorName;
+            user.avatar = recipes.recipeContributorAvatar;
+            Intent intent = new Intent(getApplicationContext(), LiveChatActivity.class);
+            intent.putExtra(MacroDef.KEY_USER, user);
+            startActivity(intent);
+        });
     }
 
     private void showGrid() {
