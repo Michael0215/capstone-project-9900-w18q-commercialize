@@ -11,7 +11,7 @@
         android:layout_width="34dp"
         android:layout_height="34dp"
         android:background="@drawable/background_image"
-        android:scaleType="fitXY"
+        android:scaleType="centerCrop"
         android:src="@drawable/default_avatar"
         app:layout_constraintBottom_toBottomOf="@+id/textMessage"
         app:layout_constraintStart_toStartOf="parent"

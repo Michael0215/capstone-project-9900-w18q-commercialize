@@ -23,7 +23,7 @@ public class RecentConversationsAdapter extends RecyclerView.Adapter<RecentConve
     private final ConversionListener conversionListener;
 
     // Constructor
-    public RecentConversationsAdapter(List<ChatMessage> chatMessages, ConversionListener conversionListener) {
+    public RecentConversationsAdapter(List<ChatMessage> chatMessages, ConversionListener conversionListener) {//, ConversionListener conversionListener
         this.chatMessages = chatMessages;
         this.conversionListener = conversionListener;
     }
@@ -71,8 +71,10 @@ public class RecentConversationsAdapter extends RecyclerView.Adapter<RecentConve
             binding.getRoot().setOnClickListener(v -> {
                 User user = new User();
                 user.email = chatMessage.conversionEmail;
+                user.name = chatMessage.conversionName;
+                user.avatar = chatMessage.conversionImage;
                 conversionListener.onConversionClicked(user);
-            });
+            });//6:37
         }
     }
 

@@ -111,6 +111,10 @@ public class OtherProfileActivity extends AppCompatActivity {
 
     private void setListeners(){
         binding.btCancel.setOnClickListener(v -> onBackPressed());
+        binding.btNotice.setOnClickListener(v ->
+                startActivity(new Intent(getApplicationContext(), ChatMainActivity.class)));
+//        binding.ivNotice.setOnClickListener(v ->
+//                startActivity(new Intent(getApplicationContext(), LiveChatActivity.class)));
     }
 
     private void showGrid() {

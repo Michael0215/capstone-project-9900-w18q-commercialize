@@ -1,7 +1,5 @@
 package com.example.comp9900_commercialize;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -34,8 +32,9 @@ import java.util.List;
 import java.util.Locale;
 
 import java.util.List;
+import java.util.Objects;
 
-public class LiveChatActivity extends AppCompatActivity {
+public class LiveChatActivity extends BaseActivity {
 
     // This activity handles what happens in real-time chat.
     // Need an ActivityLiveChatBinding object to set content view.
@@ -50,6 +49,7 @@ public class LiveChatActivity extends AppCompatActivity {
     private Preferences preferenceManager;
     private FirebaseFirestore database;
     private String conversionId = null;
+    private Boolean isReceiverAvailable = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,17 +78,40 @@ public class LiveChatActivity extends AppCompatActivity {
         } else {
             HashMap<String, Object> conversion = new HashMap<>();
             conversion.put(MacroDef.KEY_SENDER_EMAIL, preferenceManager.getString(MacroDef.KEY_EMAIL));
+            conversion.put(MacroDef.KEY_SENDER_NAME, preferenceManager.getString(MacroDef.KEY_USERNAME));
+            conversion.put(MacroDef.KEY_SENDER_IMAGE, preferenceManager.getString(MacroDef.KEY_AVATAR));
             conversion.put(MacroDef.KEY_RECEIVER_EMAIL, receiveUser.email);
-            conversion.put(MacroDef.KEY_RECEIVER_NAME,receiveUser.name);
-            conversion.put(MacroDef.KEY_RECEIVER_IMAGE,receiveUser.avatar);
-            conversion.put(MacroDef.KEY_SENDER_NAME,preferenceManager.getString(MacroDef.KEY_USERNAME));
-            conversion.put(MacroDef.KEY_SENDER_IMAGE,preferenceManager.getString(MacroDef.KEY_AVATAR));
+            conversion.put(MacroDef.KEY_RECEIVER_NAME, receiveUser.name);
+            conversion.put(MacroDef.KEY_RECEIVER_IMAGE, receiveUser.avatar);
             conversion.put(MacroDef.KEY_LAST_MESSAGE, binding.inputMessage.getText().toString());
             conversion.put(MacroDef.KEY_TIMESTAMP, new Date());
             addConversion(conversion);
         }
         // Fill this blank message blob with the content of message.
         binding.inputMessage.setText(null);
+    }
+
+    private void listenAvailabilityOfReceiver() {
+        database.collection(MacroDef.KEY_COLLECTION_USERS).document(
+                receiveUser.email
+        ).addSnapshotListener(LiveChatActivity.this, (value, error) -> {
+            if (error != null) {
+                return;
+            }
+            if (value != null) {
+                if (value.getLong(MacroDef.KEY_AVAILABILITY) != null) {
+                    int availability = Objects.requireNonNull(
+                           value.getLong(MacroDef.KEY_AVAILABILITY)
+                    ).intValue();
+                    isReceiverAvailable = availability == 1;
+                }
+            }
+            if (isReceiverAvailable) {
+                binding.textAvailability.setVisibility(View.VISIBLE);
+            } else {
+                binding.textAvailability.setVisibility(View.GONE);
+            }
+        });
     }
 
     // Find all messages between two certain users for further displaying on the screen.
@@ -108,25 +131,30 @@ public class LiveChatActivity extends AppCompatActivity {
         preferenceManager = new Preferences(getApplicationContext());
         chatMessages = new ArrayList<>();
         Bitmap sender_avatar;
-        Bitmap receiver_avatar;
         if (preferenceManager.getString(MacroDef.KEY_AVATAR) != null){
             sender_avatar = getBitmapFromEncodedString(preferenceManager.getString(MacroDef.KEY_AVATAR));
         } else {
             @SuppressLint("ResourceType") InputStream img_avatar = getResources().openRawResource(R.drawable.default_avatar);
             sender_avatar =  BitmapFactory.decodeStream(img_avatar);
         }
-        if (receiveUser.avatar != null){
-            receiver_avatar = getBitmapFromEncodedString(receiveUser.avatar);
+
+        //If Receiver has null-value avatar, just use the local avatar
+        if (getBitmapFromEncodedString(receiveUser.avatar) == null) {
+            Bitmap bm_default_avatar = BitmapFactory.decodeResource(getResources(), R.drawable.default_avatar);
+            chatAdapter = new ChatAdapter(
+                    chatMessages,//list
+                    preferenceManager.getString(MacroDef.KEY_EMAIL),//string
+                    bm_default_avatar,//bitmap
+                    sender_avatar
+            );
         } else {
-            @SuppressLint("ResourceType") InputStream img_avatar = getResources().openRawResource(R.drawable.default_avatar);
-            receiver_avatar =  BitmapFactory.decodeStream(img_avatar);
+            chatAdapter = new ChatAdapter(
+                    chatMessages,//list
+                    preferenceManager.getString(MacroDef.KEY_EMAIL),//string
+                    getBitmapFromEncodedString(receiveUser.avatar),//bitmap
+                    sender_avatar
+            );
         }
-        chatAdapter = new ChatAdapter(
-                chatMessages,//list
-                preferenceManager.getString(MacroDef.KEY_EMAIL),//string
-                receiver_avatar,//bitmap
-                sender_avatar
-        );
         binding.chatRecyclerView.setAdapter(chatAdapter);
         database = FirebaseFirestore.getInstance();
     }
@@ -242,4 +270,10 @@ public class LiveChatActivity extends AppCompatActivity {
             conversionId = documentSnapshot.getId();
         }
     };
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        listenAvailabilityOfReceiver();
+    }
 }
