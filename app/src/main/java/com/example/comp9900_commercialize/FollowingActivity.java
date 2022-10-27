@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Base64;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.comp9900_commercialize.adapters.CollectionAdapter;
@@ -42,13 +43,13 @@ import java.util.Map;
 
 
 public class FollowingActivity extends AppCompatActivity {
-
+    private static final String TAG="FollowingActivity";
     private ActivityFollowingBinding binding;
-    private FirebaseFirestore db;
+
     private List<String> myFollowList;
     Follow myFollow;
     private Preferences preferences;
-    private FirebaseUser user;
+//    private FirebaseUser user;
     private RecyclerView mList;
     private List<ItemFollow> mData;
     private FirebaseFirestore firebaseFirestore;
@@ -59,13 +60,16 @@ public class FollowingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityFollowingBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        mList = this.findViewById(R.id.rcv_all_following);
+        init();
+        loadData();
         setListeners();
     }
 
     private void init() {
         preferences = new Preferences(getApplicationContext());
-        user = FirebaseAuth.getInstance().getCurrentUser();
-        db = FirebaseFirestore.getInstance();
+//        user = FirebaseAuth.getInstance().getCurrentUser();
+        firebaseFirestore = FirebaseFirestore.getInstance();
     }
 
 
@@ -74,6 +78,8 @@ public class FollowingActivity extends AppCompatActivity {
         //创建数据集合
         mData = new ArrayList<>();
         //创建模拟数据
+        Log.d(TAG,"hello");
+        Log.d(TAG,preferences.getString(MacroDef.KEY_EMAIL));
         DocumentReference docRef = firebaseFirestore.collection("follow").document(preferences.getString(MacroDef.KEY_EMAIL));
         // retrieve all the post in the firestore's table 'posts'
         docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -105,8 +111,10 @@ public class FollowingActivity extends AppCompatActivity {
                                                         if (mapElement.getValue() != null){
                                                             byte[] bytes_avatar = Base64.decode(mapElement.getValue().toString(), Base64.DEFAULT);
                                                             follow_contributor.avatar = BitmapFactory.decodeByteArray(bytes_avatar, 0, bytes_avatar.length);
+                                                        } else {
+                                                            @SuppressLint("ResourceType") InputStream img_avatar = getResources().openRawResource(R.drawable.default_avatar);
+                                                            follow_contributor.avatar = BitmapFactory.decodeStream(img_avatar);
                                                         }
-
                                                     }
                                                 }
                                                 follow_contributor.id = document.getId();

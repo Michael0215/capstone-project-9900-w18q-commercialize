@@ -10,10 +10,11 @@
         <entry key="..\:/capstone-project-9900-w18q-commercialize/app/src/main/res/layout/activity_chat_main.xml" value="0.23489583333333333" />
         <entry key="..\:/capstone-project-9900-w18q-commercialize/app/src/main/res/layout/activity_following.xml" value="0.3115942028985507" />
         <entry key="..\:/capstone-project-9900-w18q-commercialize/app/src/main/res/layout/activity_live_chat.xml" value="0.264945652173913" />
-        <entry key="..\:/capstone-project-9900-w18q-commercialize/app/src/main/res/layout/activity_other_profile.xml" value="0.17806484295845998" />
+        <entry key="..\:/capstone-project-9900-w18q-commercialize/app/src/main/res/layout/activity_other_profile.xml" value="0.33" />
         <entry key="..\:/capstone-project-9900-w18q-commercialize/app/src/main/res/layout/activity_profile.xml" value="0.284375" />
         <entry key="..\:/capstone-project-9900-w18q-commercialize/app/src/main/res/layout/activity_recipe_detail.xml" value="0.21" />
         <entry key="..\:/capstone-project-9900-w18q-commercialize/app/src/main/res/layout/item_container_following.xml" value="0.3115942028985507" />
+        <entry key="..\:/capstone-project-9900-w18q-commercialize/app/src/main/res/layout/item_container_profile_recipe.xml" value="0.2884963768115942" />
         <entry key="..\:/capstone-project-9900-w18q-commercialize/app/src/main/res/layout/item_container_received_message.xml" value="0.264945652173913" />
         <entry key="..\:/capstone-project-9900-w18q-commercialize/app/src/main/res/layout/item_container_recent_chat.xml" value="0.278125" />
         <entry key="..\:/capstone-project-9900-w18q-commercialize/app/src/main/res/layout/item_container_recent_conversion.xml" value="0.278125" />
