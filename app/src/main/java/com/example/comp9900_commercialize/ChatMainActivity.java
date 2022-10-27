@@ -135,7 +135,8 @@ public class ChatMainActivity extends BaseActivity implements ConversionListener
             // Sort records in the list by date.
             // This ensures current chats are ordered by date when displaying.
             Collections.sort(conversations, (obj1, obj2) -> obj2.dateObject.compareTo(obj1.dateObject));
-            conversationsAdapter.notifyDataSetChanged();
+//            conversationsAdapter.notifyDataSetChanged();
+            binding.conversationsRecyclerView.setAdapter(conversationsAdapter);
             // Configure the scroll, show items, and remove the progress bar.
             binding.conversationsRecyclerView.smoothScrollToPosition(0);
             binding.conversationsRecyclerView.setVisibility(View.VISIBLE);

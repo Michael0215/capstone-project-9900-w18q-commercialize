@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.comp9900_commercialize.databinding.ItemContainerUserBinding;
+import com.example.comp9900_commercialize.databinding.ActivityOtherProfileBinding;
 import com.example.comp9900_commercialize.listeners.UserListener;
 import com.example.comp9900_commercialize.models.User;
 
@@ -54,6 +55,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
     // Extend basic ViewHolder, overwrite setData function to set what we want.
     class UserViewHolder extends RecyclerView.ViewHolder{
         ItemContainerUserBinding binding;
+
 
         UserViewHolder(ItemContainerUserBinding itemContainerUserBinding){
             super(itemContainerUserBinding.getRoot());
