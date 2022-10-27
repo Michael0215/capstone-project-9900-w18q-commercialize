@@ -11,7 +11,8 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:background="@color/white"
-        android:src="@drawable/template"
+        android:src="@drawable/default_avatar"
+        android:scaleType="fitXY"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:riv_oval="true"/>
