@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.comp9900_commercialize.bean.Collection;
+import com.example.comp9900_commercialize.bean.Follow;
 import com.example.comp9900_commercialize.bean.ItemCollection;
 import com.example.comp9900_commercialize.bean.Recipe;
 import com.example.comp9900_commercialize.databinding.ActivityAddRecipeBinding;
@@ -62,8 +63,9 @@ public class RecipeDetailActivity extends AppCompatActivity {
     private FirebaseUser user;
     private FirebaseAuth auth;
     private String recipeId;
+    private String user_email;
     private Collection myCollection;
-    
+    private Follow myFollow;
     
     private FirebaseFirestore db;
     private String id;
@@ -76,8 +78,9 @@ public class RecipeDetailActivity extends AppCompatActivity {
     private ImageButton good;
     private boolean judge;
     private List<String> collection_list;
+    private List<String> follow_list;
     private boolean collected;
-
+    private boolean followed;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,6 +106,8 @@ public class RecipeDetailActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         DocumentReference Reference = db.collection("users").document(user.getEmail());
         DocumentReference rf_collection_list = db.collection("collection").document(user.getEmail());
+        DocumentReference rf_follow_list = db.collection("follow").document(user.getEmail());
+
         preferences = new Preferences(getApplicationContext());
         likeNum = findViewById(R.id.tv_like_num);
         id = preferences.getString(MacroDef.KEY_RECIPE_ID);
@@ -119,6 +124,13 @@ public class RecipeDetailActivity extends AppCompatActivity {
 
                     }
                 }
+            }
+        });
+        Ref.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                recipe = documentSnapshot.toObject(Recipe.class);
+                user_email = recipe.recipeContributorEmail;
             }
         });
 
@@ -142,6 +154,7 @@ public class RecipeDetailActivity extends AppCompatActivity {
                     }
                 }
             }
+
         });
 
         rf_collection_list.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -165,6 +178,30 @@ public class RecipeDetailActivity extends AppCompatActivity {
                 }
             }
         });
+
+        rf_follow_list.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                myFollow = documentSnapshot.toObject(Follow.class);
+                if (myFollow != null) {
+                    follow_list = myFollow.followList;
+                    if (!follow_list.isEmpty()) {
+                        followed = follow_list.contains(user_email);
+                    }
+                    else{
+                        followed = false;
+                    }
+                    if(!followed){
+                        binding.btFollow.setText("Follow");
+                    }
+                    else{
+                        binding.btFollow.setText("Followed");
+                    }
+                }
+            }
+        });
+
     }
 
     private void loadData(){
@@ -237,6 +274,10 @@ public class RecipeDetailActivity extends AppCompatActivity {
             String recipeId=preferences.getString(MacroDef.KEY_RECIPE_ID);
             //检查之前collection类是否含有数据.并添加新recipeId到里面去
             collectMainFunc();
+        });
+        binding.btFollow.setOnClickListener(view -> {
+            //检查之前follow类是否含有数据.并添加新contributor email到里面去
+            followMainFunc();
         });
         
         
@@ -348,10 +389,57 @@ public class RecipeDetailActivity extends AppCompatActivity {
         });
     }
 
+    private void followMainFunc() {
+        firebaseFirestore = FirebaseFirestore.getInstance();
+        user_email = recipe.recipeContributorEmail;
+        DocumentReference docRef = firebaseFirestore.collection("follow").document(preferences.getString(MacroDef.KEY_EMAIL));
+        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+
+                myFollow = documentSnapshot.toObject(Follow.class);
+                if(myFollow != null){
+                    if (myFollow.followList != null && containFollow(myFollow, user_email)) {
+                        myFollow.followList.remove(user_email);
+                        binding.btFollow.setText("Follow");
+                        showToast("Follow Denied");
+                    } else if (myFollow.followList != null) {
+                        myFollow.followList.add(user_email);
+                        binding.btFollow.setText("Followed");
+                        showToast("Follow Success");
+                    }
+                }
+                else {
+                    myFollow = new Follow(Collections.singletonList(user_email));
+                    binding.btFollow.setText("Followed");
+                    showToast("This is your first time follow someone");
+                }
+                String currentEmail=preferences.getString(MacroDef.KEY_EMAIL);
+                firebaseFirestore.collection("follow").document(currentEmail)
+                        .set(myFollow).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                Log.d(TAG,"successfully written!");
+                            }
+                        });
+            }
+        });
+    }
+
+
+
+
     private boolean contain(Collection myCollection, String recipeId) {
         List<String> arr=myCollection.collectionList;
         return arr.contains(recipeId);
     }
+
+    private boolean containFollow(Follow myFollow, String user_email) {
+        List<String> arr=myFollow.followList;
+        return arr.contains(user_email);
+    }
+
     private void showToast(String message) {
         Toast.makeText(getApplicationContext(), message,Toast.LENGTH_SHORT).show();
     }

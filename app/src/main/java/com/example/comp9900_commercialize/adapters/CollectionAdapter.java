@@ -87,13 +87,13 @@ public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.In
         }
 
         //这个方法用于设置数据
-        public void setData(ItemCollection itemExplore, int position) {
+        public void setData(ItemCollection itemCollection, int position) {
             this.mPosition = position;
             //开始设置数据
-            mIcon.setImageBitmap(itemExplore.icon);
-            mTitle.setText(itemExplore.title);
-            mContributor.setText(itemExplore.tv_contributor_name);
-            mAvatar.setImageBitmap(itemExplore.avatar);
+            mIcon.setImageBitmap(itemCollection.icon);
+            mTitle.setText(itemCollection.title);
+            mContributor.setText(itemCollection.tv_contributor_name);
+            mAvatar.setImageBitmap(itemCollection.avatar);
         }
     }
 }
