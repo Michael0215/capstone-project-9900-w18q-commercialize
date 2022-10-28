@@ -227,6 +227,17 @@ public class RecipeDetailActivity extends AppCompatActivity {
                     for(int i = 0; i < recipe.recipeStepList.size(); i++){
                         loadView(i, linearLayoutProcedures);
                     }
+                    if (!preferences.getString(MacroDef.KEY_EMAIL).equals(recipe.recipeContributorEmail)) {
+                        System.out.println(preferences.getString(MacroDef.KEY_EMAIL));
+                        System.out.println(recipe.recipeContributorEmail);
+                        binding.tvContributorNameTitle.setOnClickListener(v -> {
+                            preferences.putString(MacroDef.KEY_CONTRIBUTOR_EMAIL, recipe.recipeContributorEmail);
+                            startActivity(new Intent(getApplicationContext(), OtherProfileActivity.class));
+                        });
+                    } else {
+                        System.out.println(preferences.getString(MacroDef.KEY_EMAIL));
+                        System.out.println(recipe.recipeContributorEmail);
+                    }
                 }
             }
         });
@@ -262,10 +273,6 @@ public class RecipeDetailActivity extends AppCompatActivity {
         binding.btCancel.setOnClickListener(v -> onBackPressed());
         binding.btNotice.setOnClickListener(v ->
                 startActivity(new Intent(getApplicationContext(), ChatMainActivity.class)));
-        binding.tvContributorNameTitle.setOnClickListener(v -> {
-            preferences.putString(MacroDef.KEY_CONTRIBUTOR_EMAIL, recipe.recipeContributorEmail);
-            startActivity(new Intent(getApplicationContext(), OtherProfileActivity.class));
-        });
         binding.rivUserPhoto.setOnClickListener(v -> {
             preferences.putString(MacroDef.KEY_CONTRIBUTOR_EMAIL, recipe.recipeContributorEmail);
             startActivity(new Intent(getApplicationContext(), OtherProfileActivity.class));
