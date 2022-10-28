@@ -94,9 +94,48 @@
                     app:cornerRadius="8dp"
                     />
             </LinearLayout>
-
             <View
                 android:id="@+id/view3"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:background="@color/drak_blue"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/tv_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:textColor="@color/black"
+                    android:textSize="19sp"
+                    android:textStyle="italic"
+                    />
+                <TextView
+                    android:id="@+id/tv_difficulty_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:textColor="@color/black"
+                    android:textSize="19sp"
+                    android:textStyle="italic"
+                    />
+                <TextView
+                    android:id="@+id/tv_scheduled_time_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:textColor="@color/black"
+                    android:textSize="19sp"
+                    android:textStyle="italic"
+                    />
+            </LinearLayout>
+            <View
+                android:id="@+id/view6"
                 android:layout_width="match_parent"
                 android:layout_height="3dp"
                 android:background="@color/drak_blue"
@@ -209,7 +248,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
-        android:text="0"
         android:textColor="@color/black"
         android:textSize="15sp"
         android:textStyle="bold"
@@ -234,7 +272,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
-        android:text="12"
         android:textColor="@color/black"
         android:textSize="15sp"
         android:textStyle="bold"

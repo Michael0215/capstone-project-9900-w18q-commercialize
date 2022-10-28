@@ -215,6 +215,9 @@ public class RecipeDetailActivity extends AppCompatActivity {
                     Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
                     binding.ivRecipeCoverImage.setImageBitmap(bitmap);
                     binding.tvRecipeTitle.setText(recipe.recipeName);
+                    binding.tvType.setText("Type: " + recipe.recipeType);
+                    binding.tvDifficultyDetail.setText("Difficulty: " + recipe.recipeDifficulty);
+                    binding.tvScheduledTimeDetail.setText("Scheduled time: " + recipe.recipeScheduledTime);
                     if(recipe.recipeContributorAvatar != null){
                         bytes = Base64.decode(recipe.recipeContributorAvatar, Base64.DEFAULT);
                         bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
