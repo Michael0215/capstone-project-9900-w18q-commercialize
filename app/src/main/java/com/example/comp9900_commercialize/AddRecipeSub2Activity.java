@@ -123,6 +123,7 @@ public class AddRecipeSub2Activity extends AppCompatActivity implements View.OnC
                 String recipeID = "";
                 if(preferences.getBoolean(MacroDef.KEY_MODE_CREATE)){
                     recipeID = UUID.randomUUID().toString().replace("-", "");
+                    recipe.setRecipeId(recipeID);
                 }else{
                     recipeID = preferences.getString(MacroDef.KEY_RECIPE_ID);
                 }
