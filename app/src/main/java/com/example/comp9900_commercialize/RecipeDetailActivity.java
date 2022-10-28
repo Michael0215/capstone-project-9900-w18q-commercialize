@@ -227,16 +227,22 @@ public class RecipeDetailActivity extends AppCompatActivity {
                     for(int i = 0; i < recipe.recipeStepList.size(); i++){
                         loadView(i, linearLayoutProcedures);
                     }
-                    if (!preferences.getString(MacroDef.KEY_EMAIL).equals(recipe.recipeContributorEmail)) {
-                        System.out.println(preferences.getString(MacroDef.KEY_EMAIL));
-                        System.out.println(recipe.recipeContributorEmail);
+                    if (preferences.getString(MacroDef.KEY_EMAIL).equals(recipe.recipeContributorEmail)) {
+                        binding.tvContributorNameTitle.setOnClickListener(v -> {
+                            Toast.makeText(getApplicationContext(), "You can not view your profile from here!", Toast.LENGTH_SHORT).show();
+                        });
+                        binding.rivUserPhoto.setOnClickListener(v -> {
+                            Toast.makeText(getApplicationContext(), "You can not view your profile from here!", Toast.LENGTH_SHORT).show();
+                        });
+                    } else {
                         binding.tvContributorNameTitle.setOnClickListener(v -> {
                             preferences.putString(MacroDef.KEY_CONTRIBUTOR_EMAIL, recipe.recipeContributorEmail);
                             startActivity(new Intent(getApplicationContext(), OtherProfileActivity.class));
                         });
-                    } else {
-                        System.out.println(preferences.getString(MacroDef.KEY_EMAIL));
-                        System.out.println(recipe.recipeContributorEmail);
+                        binding.rivUserPhoto.setOnClickListener(v -> {
+                            preferences.putString(MacroDef.KEY_CONTRIBUTOR_EMAIL, recipe.recipeContributorEmail);
+                            startActivity(new Intent(getApplicationContext(), OtherProfileActivity.class));
+                        });
                     }
                 }
             }
@@ -273,10 +279,6 @@ public class RecipeDetailActivity extends AppCompatActivity {
         binding.btCancel.setOnClickListener(v -> onBackPressed());
         binding.btNotice.setOnClickListener(v ->
                 startActivity(new Intent(getApplicationContext(), ChatMainActivity.class)));
-        binding.rivUserPhoto.setOnClickListener(v -> {
-            preferences.putString(MacroDef.KEY_CONTRIBUTOR_EMAIL, recipe.recipeContributorEmail);
-            startActivity(new Intent(getApplicationContext(), OtherProfileActivity.class));
-        });
         binding.ibCollection.setOnClickListener(view -> {
             String recipeId=preferences.getString(MacroDef.KEY_RECIPE_ID);
             //检查之前collection类是否含有数据.并添加新recipeId到里面去
