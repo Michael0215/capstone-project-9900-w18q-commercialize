@@ -16,9 +16,11 @@ import com.example.comp9900_commercialize.models.User;
 import com.example.comp9900_commercialize.utilities.MacroDef;
 import com.example.comp9900_commercialize.utilities.Preferences;
 import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -45,6 +47,7 @@ public class ChatMainActivity extends BaseActivity implements ConversionListener
         preferenceManager = new Preferences(getApplicationContext());
         init();
         loadUserDetails();
+        getToken();
         setListeners();
         listenConversations();
     }
@@ -78,6 +81,23 @@ public class ChatMainActivity extends BaseActivity implements ConversionListener
 
     private void showToast(String message) {
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+    }
+
+    private void getToken() {
+        FirebaseMessaging.getInstance().getToken().addOnSuccessListener(this::updateToken);
+    }
+
+    private void updateToken(String token) {
+        preferenceManager.putString(MacroDef.KEY_FCM_TOKEN, token);
+        FirebaseFirestore database = FirebaseFirestore.getInstance();
+        DocumentReference documentReference =
+                database.collection(MacroDef.KEY_COLLECTION_USERS).document(
+                       preferenceManager.getString(MacroDef.KEY_EMAIL)
+                );
+        documentReference.update(MacroDef.KEY_FCM_TOKEN, token)
+                .addOnFailureListener(e -> showToast("Unable to update token"));
+//                .addOnSuccessListener(unused -> showToast("Token updated successfully"))
+
     }
 
     // The function gets the record of the info of last chat between two users from Firestore.

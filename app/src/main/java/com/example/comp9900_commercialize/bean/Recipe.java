@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 public class Recipe implements Serializable {
+    public String recipeId;
     public String recipeCover;
     public String recipeContributorEmail;
     public String recipeName;
@@ -23,7 +24,8 @@ public class Recipe implements Serializable {
 
     }
 
-    public Recipe(String recipeCover, String recipeContributorEmail, String recipeName, String recipeDescription, List<Ingredient> recipeIngredientList, String recipeDifficulty, String recipeScheduledTime, List<Step> recipeStepList, int recipeLikesNum, int recipeCommentsNum, String recipePublishTime, String recipeContributorName, String recipeContributorAvatar, String recipeType) {
+    public Recipe(String recipeId, String recipeCover, String recipeContributorEmail, String recipeName, String recipeDescription, List<Ingredient> recipeIngredientList, String recipeDifficulty, String recipeScheduledTime, List<Step> recipeStepList, int recipeLikesNum, int recipeCommentsNum, String recipePublishTime, String recipeContributorName, String recipeContributorAvatar, String recipeType) {
+        this.recipeId = recipeId;
         this.recipeCover = recipeCover;
         this.recipeContributorEmail = recipeContributorEmail;
         this.recipeName = recipeName;
@@ -38,6 +40,14 @@ public class Recipe implements Serializable {
         this.recipeContributorName = recipeContributorName;
         this.recipeContributorAvatar = recipeContributorAvatar;
         this.recipeType = recipeType;
+    }
+
+    public String getRecipeId() {
+        return recipeId;
+    }
+
+    public void setRecipeId(String recipeId) {
+        this.recipeId = recipeId;
     }
 
     public String getRecipeType() {

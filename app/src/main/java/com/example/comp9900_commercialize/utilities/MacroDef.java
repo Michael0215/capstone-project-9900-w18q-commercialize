@@ -3,6 +3,7 @@ package com.example.comp9900_commercialize.utilities;
 import com.example.comp9900_commercialize.bean.Ingredient;
 import com.example.comp9900_commercialize.bean.Recipe;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class MacroDef {
@@ -42,4 +43,27 @@ public class MacroDef {
     public static final String KEY_RECEIVER_IMAGE = "receiverImage";
     public static final String KEY_LAST_MESSAGE = "lastMessage";
     public static final String KEY_AVAILABILITY = "availability";
+    //
+    public static final String KEY_FCM_TOKEN = "fcmToken";
+    public static final String REMOTE_MSG_AUTHORIZATION = "Authorization";
+    public static final String REMOTE_MSG_CONTENT_TYPE = "Content-Type";
+    public static final String REMOTE_MSG_DATA = "data";
+    public static final String REMOTE_MSG_REGISTRATION_IDS = "registration_ids";
+
+    public static HashMap<String, String> remoteMsgHeaders = null;
+
+    public static HashMap<String, String> getRemoteMsgHeaders() {
+        if (remoteMsgHeaders == null) {
+            remoteMsgHeaders = new HashMap<>();
+            remoteMsgHeaders.put(
+                    REMOTE_MSG_AUTHORIZATION,
+                    "key=AAAA7iD5f4g:APA91bG1BSq3epZtKC7sqftqqL4O-LBgU2WiIGPi-RM46KuUEh7vOTlkvJzPlBn_JDz6vxopn6mbBBEnlCCHbwO5L5X__iwyV05ehb4zofxngIJqABlD7NN95Ry0vXqwLwUckm0mlyxM"
+            );
+            remoteMsgHeaders.put(
+                    REMOTE_MSG_CONTENT_TYPE,
+                    "application/json"
+            );
+        }
+        return remoteMsgHeaders;
+    }
 }

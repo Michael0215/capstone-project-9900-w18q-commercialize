@@ -13,8 +13,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="5dp"
-            >
+            android:padding="5dp">
             <!--这里的imageView的width和height改为warp_content就能实现瀑布流的效果-->
             <ImageView
                 android:id="@+id/iv_recipe"
@@ -24,6 +23,7 @@
                 android:adjustViewBounds="true"
                 android:scaleType="fitXY"
                 android:src="@mipmap/pic_01" />
+
             <TextView
                 android:id="@+id/tv_recipe"
                 android:layout_width="wrap_content"
@@ -34,6 +34,7 @@
                 android:layout_marginTop="10dp"
                 android:text="Title"
                 android:textSize="20sp" />
+
             <ImageView
                 android:id="@+id/iv_like"
                 android:layout_width="wrap_content"
@@ -51,10 +52,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_recipe"
-                android:layout_toEndOf="@+id/iv_like"
                 android:layout_centerHorizontal="true"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
+                android:layout_toEndOf="@+id/iv_like"
                 android:adjustViewBounds="true"
                 android:text="10"
                 android:textColor="@color/black"
@@ -65,23 +66,24 @@
                 android:id="@+id/iv_comment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:adjustViewBounds="true"
-                android:layout_marginTop="10dp"
-                android:layout_marginStart="20dp"
                 android:layout_below="@+id/tv_recipe"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
                 android:layout_toEndOf="@+id/tv_like_num"
+                android:adjustViewBounds="true"
                 android:scaleType="fitXY"
-                android:src="@drawable/ic_comment"/>
+                android:src="@drawable/ic_comment" />
+
             <TextView
                 android:id="@+id/tv_comment_num"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_recipe"
-                android:layout_toEndOf="@+id/iv_comment"
                 android:layout_centerHorizontal="true"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
+                android:layout_toEndOf="@+id/iv_comment"
                 android:adjustViewBounds="true"
                 android:text="25"
                 android:textColor="@color/black"
@@ -95,9 +97,9 @@
                 android:layout_below="@+id/iv_like"
                 android:layout_alignStart="@+id/iv_like"
                 android:layout_marginTop="8dp"
-                android:scaleType="fitXY"
                 android:adjustViewBounds="true"
                 android:background="@color/white"
+                android:scaleType="fitXY"
                 android:src="@drawable/template"
                 app:riv_oval="true" />
 
@@ -105,10 +107,10 @@
                 android:id="@+id/tv_contributor_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toEndOf="@+id/riv_user_photo"
                 android:layout_alignTop="@+id/riv_user_photo"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="5dp"
+                android:layout_toEndOf="@+id/riv_user_photo"
                 android:adjustViewBounds="true"
                 android:text="Contributor"
                 android:textColor="@color/black"
