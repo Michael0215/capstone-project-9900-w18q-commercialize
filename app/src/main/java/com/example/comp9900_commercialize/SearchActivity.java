@@ -9,11 +9,13 @@ import android.os.Bundle;
 import com.example.comp9900_commercialize.databinding.ActivitySearchBinding;
 import com.example.comp9900_commercialize.utilities.MacroDef;
 import com.example.comp9900_commercialize.utilities.Preferences;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class SearchActivity extends AppCompatActivity {
 
     private Preferences preferences;
     private ActivitySearchBinding binding;
+    private FirebaseFirestore firebaseFirestore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +28,7 @@ public class SearchActivity extends AppCompatActivity {
 
     private void init(){
         preferences = new Preferences(getApplicationContext());
+        firebaseFirestore = FirebaseFirestore.getInstance();
     }
 
     private void setListeners(){
@@ -47,9 +50,41 @@ public class SearchActivity extends AppCompatActivity {
         binding.btNotice.setOnClickListener(v ->
                 startActivity(new Intent(getApplicationContext(), ChatMainActivity.class)));
         binding.btSearch.setOnClickListener(v -> {
+            preferences.putString(MacroDef.KEY_SEARCH_MODE, "By keywords");
             preferences.putString(MacroDef.KEY_SEARCH_CONTENT, binding.etSearchBar.getText().toString());
             startActivity(new Intent(getApplicationContext(), SearchResultActivity.class));
         });
+        binding.btSelectType1.setOnClickListener(v -> {
+            preferences.putString(MacroDef.KEY_SEARCH_MODE, "By type");
+            preferences.putString(MacroDef.KEY_SEARCH_TYPE, "Snack");
+            startActivity(new Intent(getApplicationContext(), SearchResultActivity.class));
+        });
+        binding.btSelectType2.setOnClickListener(v -> {
+            preferences.putString(MacroDef.KEY_SEARCH_MODE, "By type");
+            preferences.putString(MacroDef.KEY_SEARCH_TYPE, "Breakfast");
+            startActivity(new Intent(getApplicationContext(), SearchResultActivity.class));
+        });
+        binding.btSelectType3.setOnClickListener(v -> {
+            preferences.putString(MacroDef.KEY_SEARCH_MODE, "By type");
+            preferences.putString(MacroDef.KEY_SEARCH_TYPE, "Brunch");
+            startActivity(new Intent(getApplicationContext(), SearchResultActivity.class));
+        });
+        binding.btSelectType4.setOnClickListener(v -> {
+            preferences.putString(MacroDef.KEY_SEARCH_MODE, "By type");
+            preferences.putString(MacroDef.KEY_SEARCH_TYPE, "Lunch");
+            startActivity(new Intent(getApplicationContext(), SearchResultActivity.class));
+        });
+        binding.btSelectType5.setOnClickListener(v -> {
+            preferences.putString(MacroDef.KEY_SEARCH_MODE, "By type");
+            preferences.putString(MacroDef.KEY_SEARCH_TYPE, "Afternoon tea");
+            startActivity(new Intent(getApplicationContext(), SearchResultActivity.class));
+        });
+        binding.btSelectType6.setOnClickListener(v -> {
+            preferences.putString(MacroDef.KEY_SEARCH_MODE, "By type");
+            preferences.putString(MacroDef.KEY_SEARCH_TYPE, "Dinner");
+            startActivity(new Intent(getApplicationContext(), SearchResultActivity.class));
+        });
+
     }
 
 }

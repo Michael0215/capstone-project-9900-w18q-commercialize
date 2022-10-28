@@ -1,5 +1,6 @@
 package com.example.comp9900_commercialize;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
@@ -10,15 +11,25 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Base64;
+import android.view.View;
+import android.widget.Toast;
 
 import com.algolia.search.DefaultSearchClient;
 import com.algolia.search.SearchClient;
 import com.algolia.search.SearchIndex;
 import com.example.comp9900_commercialize.adapters.StaggerAdapter;
 import com.example.comp9900_commercialize.bean.ItemExplore;
+import com.example.comp9900_commercialize.bean.Recipe;
 import com.example.comp9900_commercialize.databinding.ActivitySearchResultBinding;
 import com.example.comp9900_commercialize.utilities.MacroDef;
 import com.example.comp9900_commercialize.utilities.Preferences;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -34,6 +45,8 @@ public class SearchResultActivity extends AppCompatActivity {
     private RecyclerView mList;
     private StaggerAdapter mAdapter;
     private List<ItemExplore> mData;
+    private Recipe recipe;
+    private FirebaseFirestore firebaseFirestore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,14 +57,19 @@ public class SearchResultActivity extends AppCompatActivity {
         mList = this.findViewById(R.id.lv_search_result);
         init();
         setListeners();
-        sendFeedbackJob job = new sendFeedbackJob();
-        job.execute();
+        if(preferences.getString(MacroDef.KEY_SEARCH_MODE).equals("By keywords")){
+            sendFeedbackJob job = new sendFeedbackJob();
+            job.execute();
+        }else{
+            searchByType(preferences.getString(MacroDef.KEY_SEARCH_TYPE));
+        }
 
     }
 
     private void init(){
 
         preferences = new Preferences(getApplicationContext());
+        firebaseFirestore = FirebaseFirestore.getInstance();
 
     }
 
@@ -59,7 +77,7 @@ public class SearchResultActivity extends AppCompatActivity {
         binding.btCancel.setOnClickListener(v -> onBackPressed());
     }
 
-    private void search(){
+    private void searchByKeywords(){
 
         mData = new ArrayList<>();
         SearchClient client =
@@ -108,6 +126,49 @@ public class SearchResultActivity extends AppCompatActivity {
 
     }
 
+    private void searchByType(String recipeType) {
+
+        mData = new ArrayList<>();
+        CollectionReference collectionReference = firebaseFirestore.collection("recipes");
+        Query query = collectionReference.whereEqualTo("recipeType", recipeType)
+                .orderBy("recipeLikesNum", Query.Direction.DESCENDING);
+        query.get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                ItemExplore explore = new ItemExplore();
+                                recipe = document.toObject(Recipe.class);
+                                if(recipe.recipeContributorAvatar != null){
+                                    byte[] bytes = Base64.decode(recipe.recipeContributorAvatar, Base64.DEFAULT);
+                                    explore.avatar = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                                } else {
+                                    @SuppressLint("ResourceType") InputStream img_avatar = getResources().openRawResource(R.drawable.default_avatar);
+                                    explore.avatar = BitmapFactory.decodeStream(img_avatar);
+                                }
+                                byte[] bytes = Base64.decode(recipe.recipeCover, Base64.DEFAULT);
+                                explore.icon =  BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                                explore.tv_contributor_name = recipe.recipeContributorName;
+                                explore.tv_like_num = String.valueOf(recipe.recipeLikesNum);
+                                explore.tv_comment_num = String.valueOf(recipe.recipeCommentsNum);
+                                explore.title = recipe.recipeName;
+                                explore.id = document.getId();
+                                explore.icon_comment = R.drawable.ic_comment;
+                                explore.icon_like = R.drawable.ic_like;
+                                mData.add(explore);
+                            }
+                            binding.resProgressBar.setVisibility(View.GONE);
+                            binding.tvResLoading.setVisibility(View.GONE);
+                            showStagger(true, false);
+                        } else { // error handling
+                            Toast.makeText(SearchResultActivity.this, "Error getting documents."+task.getException(), Toast.LENGTH_SHORT).show();
+                            System.out.println("Error getting documents."+task.getException());
+                        }
+                    }
+                });
+    }
+
     private void showStagger(boolean isVertical, boolean isReverse) {
 
         StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, isVertical?StaggeredGridLayoutManager.VERTICAL:StaggeredGridLayoutManager.HORIZONTAL);
@@ -136,13 +197,15 @@ public class SearchResultActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(String[] params) {
             // do above Server call here
-            search();
+            searchByKeywords();
             return "Executed";
         }
 
         @Override
         protected void onPostExecute(String message) {
             //process message
+            binding.resProgressBar.setVisibility(View.GONE);
+            binding.tvResLoading.setVisibility(View.GONE);
             showStagger(true, false);
         }
 

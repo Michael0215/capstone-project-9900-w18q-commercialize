@@ -22,6 +22,8 @@ public class MacroDef {
     public static final String KEY_MODE_CREATE = "recipe_mode_create";
     public static final String KEY_CONTRIBUTOR_EMAIL = "contributor_email";
     public static final String KEY_SEARCH_CONTENT = "search_content";
+    public static final String KEY_SEARCH_TYPE = "search_type";
+    public static final String KEY_SEARCH_MODE = "search_mode";
     //Live_Chat
     public static final String KEY_KEY_LIVECHATTABLE = "users";
     public static final String KEY_LIVECHATNAME = "Name";

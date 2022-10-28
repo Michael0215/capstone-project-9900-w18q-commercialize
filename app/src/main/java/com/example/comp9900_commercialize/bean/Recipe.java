@@ -17,12 +17,13 @@ public class Recipe implements Serializable {
     public String recipePublishTime;
     public String recipeContributorName;
     public String recipeContributorAvatar;
+    public String recipeType;
 
     public Recipe(){
 
     }
 
-    public Recipe(String recipeCover, String recipeContributorEmail, String recipeName, String recipeDescription, List<Ingredient> recipeIngredientList, String recipeDifficulty, String recipeScheduledTime, List<Step> recipeStepList, int recipeLikesNum, int recipeCommentsNum, String recipePublishTime, String recipeContributorName, String recipeContributorAvatar) {
+    public Recipe(String recipeCover, String recipeContributorEmail, String recipeName, String recipeDescription, List<Ingredient> recipeIngredientList, String recipeDifficulty, String recipeScheduledTime, List<Step> recipeStepList, int recipeLikesNum, int recipeCommentsNum, String recipePublishTime, String recipeContributorName, String recipeContributorAvatar, String recipeType) {
         this.recipeCover = recipeCover;
         this.recipeContributorEmail = recipeContributorEmail;
         this.recipeName = recipeName;
@@ -36,6 +37,15 @@ public class Recipe implements Serializable {
         this.recipePublishTime = recipePublishTime;
         this.recipeContributorName = recipeContributorName;
         this.recipeContributorAvatar = recipeContributorAvatar;
+        this.recipeType = recipeType;
+    }
+
+    public String getRecipeType() {
+        return recipeType;
+    }
+
+    public void setRecipeType(String recipeType) {
+        this.recipeType = recipeType;
     }
 
     public String getRecipeContributorAvatar() {

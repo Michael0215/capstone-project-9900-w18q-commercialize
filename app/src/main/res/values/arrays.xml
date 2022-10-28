@@ -8,15 +8,19 @@
     </string-array>
     <string-array name="time">
         <item></item>
-        <item>15min</item>
-        <item>30min</item>
-        <item>1hour</item>
+        <item>15 min</item>
+        <item>30 min</item>
+        <item>1 hour</item>
+        <item>2 hours</item>
+        <item>More than 2 hours</item>
     </string-array>
     <string-array name="classification">
         <item></item>
+        <item>Snack</item>
         <item>Breakfast</item>
         <item>Brunch</item>
         <item>Lunch</item>
-        <item>Supper</item>
+        <item>Afternoon tea</item>
+        <item>Dinner</item>
     </string-array>
 </resources>

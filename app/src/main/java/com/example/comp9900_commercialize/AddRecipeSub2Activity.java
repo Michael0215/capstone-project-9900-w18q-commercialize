@@ -119,6 +119,7 @@ public class AddRecipeSub2Activity extends AppCompatActivity implements View.OnC
                 recipe.setRecipeContributorEmail(preferences.getString(MacroDef.KEY_EMAIL));
                 recipe.setRecipeContributorName(preferences.getString(MacroDef.KEY_USERNAME));
                 recipe.setRecipeContributorAvatar(preferences.getString(MacroDef.KEY_AVATAR));
+                recipe.setRecipeType(binding.spnClassification.getSelectedItem().toString());
                 String recipeID = "";
                 if(preferences.getBoolean(MacroDef.KEY_MODE_CREATE)){
                     recipeID = UUID.randomUUID().toString().replace("-", "");
