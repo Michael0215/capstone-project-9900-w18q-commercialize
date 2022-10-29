@@ -14,8 +14,6 @@ import android.util.Base64;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.comp9900_commercialize.MainActivity;
-import com.example.comp9900_commercialize.NoticeActivity;
 import com.example.comp9900_commercialize.bean.Recipe;
 import com.example.comp9900_commercialize.databinding.ActivityAddRecipeBinding;
 import com.example.comp9900_commercialize.utilities.MacroDef;

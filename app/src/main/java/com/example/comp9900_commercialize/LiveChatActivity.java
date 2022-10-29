@@ -108,7 +108,7 @@ public class LiveChatActivity extends BaseActivity {
                 data.put(MacroDef.KEY_EMAIL, preferenceManager.getString(MacroDef.KEY_EMAIL));
                 data.put(MacroDef.KEY_USERNAME, preferenceManager.getString(MacroDef.KEY_USERNAME));
                 data.put(MacroDef.KEY_FCM_TOKEN, preferenceManager.getString(MacroDef.KEY_FCM_TOKEN));
-                data.put(MacroDef.KEY_MESSAGE, binding.inputMessage.getText().toString());
+                data.put(MacroDef.KEY_LAST_MESSAGE, binding.inputMessage.getText().toString());
 
                 JSONObject body = new JSONObject();
                 body.put(MacroDef.REMOTE_MSG_DATA, data);
