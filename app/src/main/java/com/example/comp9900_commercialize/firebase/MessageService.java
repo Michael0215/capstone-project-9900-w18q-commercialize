@@ -52,13 +52,13 @@ public class MessageService extends FirebaseMessagingService {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, channelId);
         builder.setSmallIcon(R.drawable.ic_notification);
         builder.setContentTitle(user.name);
-        builder.setContentText(remoteMessage.getData().get(MacroDef.KEY_MESSAGE));
+        builder.setContentText(remoteMessage.getData().get(MacroDef.KEY_LAST_MESSAGE));
 
-        System.out.println(remoteMessage.getData().get(MacroDef.KEY_MESSAGE));
-        System.out.println("S            S            S");
+//        System.out.println(remoteMessage.getData().get(MacroDef.KEY_MESSAGE));
+//        System.out.println("S            S            S");
 
         builder.setStyle(new NotificationCompat.BigTextStyle().bigText(
-                remoteMessage.getData().get(MacroDef.KEY_MESSAGE)
+                remoteMessage.getData().get(MacroDef.KEY_LAST_MESSAGE)
         ));
         builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
         builder.setContentIntent(pendingIntent);
