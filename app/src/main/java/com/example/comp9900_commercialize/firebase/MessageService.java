@@ -54,9 +54,6 @@ public class MessageService extends FirebaseMessagingService {
         builder.setContentTitle(user.name);
         builder.setContentText(remoteMessage.getData().get(MacroDef.KEY_LAST_MESSAGE));
 
-//        System.out.println(remoteMessage.getData().get(MacroDef.KEY_MESSAGE));
-//        System.out.println("S            S            S");
-
         builder.setStyle(new NotificationCompat.BigTextStyle().bigText(
                 remoteMessage.getData().get(MacroDef.KEY_LAST_MESSAGE)
         ));
