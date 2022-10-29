@@ -29,14 +29,36 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rcv_subscribe"
+
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="550dp"
-        android:layout_marginTop="15dp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@id/tv_subscribe_page">
-    </androidx.recyclerview.widget.RecyclerView>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcv_subscribe"
+            android:layout_width="match_parent"
+            android:layout_height="535dp"
+            android:layout_marginTop="5dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_subscribe_page">
+        </androidx.recyclerview.widget.RecyclerView>
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="25sp"
+            android:layout_height="25sp"
+            android:layout_gravity="center"/>
+        <TextView
+            android:id="@+id/tv_loading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_marginTop="40dp"
+            android:text="Loading..."
+            android:textColor="@color/secondary_text"
+            android:textSize="18sp" />
+    </FrameLayout>
+
     <View
         android:id="@+id/view1"
         android:layout_width="match_parent"

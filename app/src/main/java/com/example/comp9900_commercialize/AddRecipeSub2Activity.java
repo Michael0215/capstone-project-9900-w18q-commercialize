@@ -133,7 +133,6 @@ public class AddRecipeSub2Activity extends AppCompatActivity implements View.OnC
                             public void onSuccess(Void aVoid) {
                                 showToast("Success");
                                 preferences.putBoolean(MacroDef.KEY_MODE_CREATE, true);
-                                startActivity(new Intent(getApplicationContext(), MainActivity.class));
                                 new AddRecipeSub1Activity().instance.finish();
                                 new AddRecipeActivity().instance.finish();
                                 finish();

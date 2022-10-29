@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="24dp"
+    android:padding="5dp"
     >
     <ImageView
         android:id="@+id/iv_recipe"
@@ -14,9 +14,7 @@
         android:background="@drawable/background_content"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_recipe"
-
-        />
+        app:layout_constraintTop_toBottomOf="@+id/tv_recipe"/>
     <TextView
         android:id="@+id/tv_recipe"
         android:layout_width="wrap_content"
@@ -25,7 +23,6 @@
         android:text="Recipe introduction..."
         android:textColor="@color/black"
         android:textSize="12sp"
-        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/riv_user_photo_subscribe"
         app:layout_constraintTop_toBottomOf="@+id/riv_user_photo_subscribe" />
     <ImageView
@@ -37,8 +34,7 @@
         android:scaleType="centerCrop"
         android:background="@drawable/background_content"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_recipe"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/iv_recipe"/>
     <TextView
         android:id="@+id/tv_like_num"
         android:layout_width="wrap_content"
@@ -50,7 +46,6 @@
         app:layout_constraintStart_toEndOf="@+id/iv_like"
         app:layout_constraintTop_toTopOf="@+id/iv_like"
         app:layout_constraintBottom_toBottomOf="@+id/iv_like"/>
-
     <ImageView
         android:id="@+id/iv_comment"
         android:layout_width="20dp"
@@ -61,8 +56,7 @@
         android:scaleType="centerCrop"
         android:background="@drawable/background_content"
         app:layout_constraintStart_toEndOf="@+id/tv_like_num"
-        app:layout_constraintTop_toBottomOf="@+id/iv_recipe"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/iv_recipe"/>
     <TextView
         android:id="@+id/tv_comment_num"
         android:layout_width="wrap_content"
@@ -80,6 +74,7 @@
         android:layout_height="30dp"
         android:background="@color/white"
         android:src="@drawable/default_avatar"
+        android:scaleType="fitXY"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:riv_oval="true"/>
@@ -93,7 +88,6 @@
         android:textSize="13sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/riv_user_photo_subscribe"
-
         app:layout_constraintTop_toTopOf="@+id/riv_user_photo_subscribe"
         app:layout_constraintBottom_toBottomOf="@+id/riv_user_photo_subscribe"/>
     <TextView
@@ -101,10 +95,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:textColor="@color/black"
         android:textSize="10sp"
-        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textStyle="italic"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iv_like" />
-
+    <View
+        app:layout_goneMarginTop="5dp"
+        android:id="@+id/view3"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_datetime"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

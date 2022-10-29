@@ -37,8 +37,9 @@ public class SearchActivity extends AppCompatActivity {
                     finish();
                 });
         binding.ibCreate.setOnClickListener(v -> {
-                    startActivity(new Intent(getApplicationContext(), AddRecipeActivity.class));
-                });
+            preferences.putBoolean(MacroDef.KEY_MODE_CREATE, true);
+            startActivity(new Intent(getApplicationContext(), AddRecipeActivity.class));
+        });
         binding.ibSubscribe.setOnClickListener(v -> {
                     startActivity(new Intent(getApplicationContext(), SubscribeActivity.class));
                     finish();

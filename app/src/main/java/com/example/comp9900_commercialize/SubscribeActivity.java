@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import com.example.comp9900_commercialize.adapters.ProfileRecipeAdapter;
@@ -60,8 +61,9 @@ public class SubscribeActivity extends AppCompatActivity {
                     finish();
                 });
         binding.ibCreate.setOnClickListener(v -> {
-                    startActivity(new Intent(getApplicationContext(), AddRecipeActivity.class));
-                });
+            preferences.putBoolean(MacroDef.KEY_MODE_CREATE, true);
+            startActivity(new Intent(getApplicationContext(), AddRecipeActivity.class));
+        });
         binding.ibProfile.setOnClickListener(v -> {
                     startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                     finish();
@@ -89,7 +91,7 @@ public class SubscribeActivity extends AppCompatActivity {
                                 loadData();
                             }
                         }else { // error handling
-                            Toast.makeText(SubscribeActivity.this, "Error getting documents."+task.getException(), Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(SubscribeActivity.this, "Error getting documents."+task.getException(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -109,6 +111,8 @@ public class SubscribeActivity extends AppCompatActivity {
                                 Recipe recipe = document.toObject(Recipe.class);
                                 mData.add(recipe);
                             }
+                            binding.progressBar.setVisibility(View.GONE);
+                            binding.tvLoading.setVisibility(View.GONE);
                             showRecycler();
                         } else { // error handling
 //                            Toast.makeText(SubscribeActivity.this, "Error getting documents."+task.getException(), Toast.LENGTH_SHORT).show();
@@ -124,7 +128,7 @@ public class SubscribeActivity extends AppCompatActivity {
         adapter = new SubscribeAdapter(mData);
         recyclerView.setAdapter(adapter);
         initListener();
-        System.out.println(mData.get(0).recipeName+mData.get(1).recipeName);
+//        System.out.println(mData.get(0).recipeName+mData.get(1).recipeName);
 
     }
 
@@ -134,7 +138,6 @@ public class SubscribeActivity extends AppCompatActivity {
             public void onItemClick(int position) {
                 preferences.putString(MacroDef.KEY_RECIPE_ID, mData.get(position).recipeId);
                 preferences.putBoolean(MacroDef.KEY_MODE_CREATE, false);
-                Toast.makeText(SubscribeActivity.this, "您点击的菜谱id为" + preferences.getString(MacroDef.KEY_RECIPE_ID), Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(getApplicationContext(), RecipeDetailActivity.class));
             }
         }) ;

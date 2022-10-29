@@ -154,8 +154,9 @@ public class ProfileActivity extends AppCompatActivity {
                     finish();
                 });
         binding.ibCreate.setOnClickListener(v -> {
-                    startActivity(new Intent(getApplicationContext(), AddRecipeActivity.class));
-                });
+            preferences.putBoolean(MacroDef.KEY_MODE_CREATE, true);
+            startActivity(new Intent(getApplicationContext(), AddRecipeActivity.class));
+        });
         binding.ibSubscribe.setOnClickListener(v -> {
                     startActivity(new Intent(getApplicationContext(), SubscribeActivity.class));
                     finish();
@@ -186,7 +187,6 @@ public class ProfileActivity extends AppCompatActivity {
             public void onItemClick(int position) {
                 preferences.putString(MacroDef.KEY_RECIPE_ID, mData.get(position).id);
                 preferences.putBoolean(MacroDef.KEY_MODE_CREATE, false);
-                Toast.makeText(ProfileActivity.this, "您点击的菜谱id为" + preferences.getString(MacroDef.KEY_RECIPE_ID), Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(getApplicationContext(), AddRecipeActivity.class));
             }
         }) ;

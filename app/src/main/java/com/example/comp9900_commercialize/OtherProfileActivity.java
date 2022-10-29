@@ -146,7 +146,6 @@ public class OtherProfileActivity extends BaseActivity {
             public void onItemClick(int position) {
                 preferences.putString(MacroDef.KEY_RECIPE_ID, mData.get(position).id);
                 preferences.putBoolean(MacroDef.KEY_MODE_CREATE, false);
-                Toast.makeText(OtherProfileActivity.this, "您点击的菜谱id为" + preferences.getString(MacroDef.KEY_RECIPE_ID), Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(getApplicationContext(), RecipeDetailActivity.class));
             }
         }) ;

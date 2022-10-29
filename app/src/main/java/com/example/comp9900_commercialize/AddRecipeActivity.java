@@ -91,7 +91,7 @@ public class AddRecipeActivity extends AppCompatActivity {
             if(new AddRecipeSub1Activity().instance != null){
                 new AddRecipeSub1Activity().instance.finish();
             }
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+//            startActivity(new Intent(getApplicationContext(), MainActivity.class));
             finish();
         });
 

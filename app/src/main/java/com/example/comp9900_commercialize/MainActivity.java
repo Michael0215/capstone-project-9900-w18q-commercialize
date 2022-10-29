@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
                 });
 //                        mAdapter.notifyDataSetChanged();
         refreshLayout.setRefreshing(false);
-        Toast.makeText(MainActivity.this, "Refresh Succeed !!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(MainActivity.this, "Refresh Succeed!", Toast.LENGTH_SHORT).show();
     }
 
     private void handlerDownPullUpdate() {
@@ -209,8 +209,9 @@ public class MainActivity extends AppCompatActivity {
                     finish();
                 });
         binding.ibCreate.setOnClickListener(v -> {
-                    startActivity(new Intent(getApplicationContext(), AddRecipeActivity.class));
-                });
+            preferences.putBoolean(MacroDef.KEY_MODE_CREATE, true);
+            startActivity(new Intent(getApplicationContext(), AddRecipeActivity.class));
+        });
         binding.ibSubscribe.setOnClickListener(v -> {
                     startActivity(new Intent(getApplicationContext(), SubscribeActivity.class));
                     finish();
