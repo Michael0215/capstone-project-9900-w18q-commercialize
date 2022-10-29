@@ -50,6 +50,8 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
                                 Toast.makeText(getApplicationContext(), "Email sent.", Toast.LENGTH_SHORT).show();
+                            } else {// if can't get the email of the table 'users' from the firestore
+                                Toast.makeText(getApplicationContext(), "Sorry, this Email doesn't exist.", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });

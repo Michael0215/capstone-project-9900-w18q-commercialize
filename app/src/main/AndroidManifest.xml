@@ -53,9 +53,6 @@
             android:exported="false"
             android:launchMode="singleInstance" />
         <activity
-            android:name=".NoticeActivity"
-            android:exported="false" />
-        <activity
             android:name=".CollectionActivity"
             android:exported="false" />
         <activity
