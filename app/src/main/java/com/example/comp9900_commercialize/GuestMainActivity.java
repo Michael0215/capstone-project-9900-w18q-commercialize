@@ -212,9 +212,6 @@ public class GuestMainActivity extends AppCompatActivity {
             startActivity(new Intent(getApplicationContext(), GuestProfileActivity.class));
             finish();
         });
-        binding.imageBack.setOnClickListener(v -> {
-                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-                finish();
-        });
+        binding.imageBack.setOnClickListener(v -> onBackPressed());
     }
 }
