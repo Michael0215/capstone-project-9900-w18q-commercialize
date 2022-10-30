@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipToPadding="false"
+    android:padding="24dp">
+
+    <TextView
+        android:id="@+id/tv_personal_center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#1C2E46"
+        android:gravity="center_horizontal"
+        android:text="Personal Center"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/riv_user_photo"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="30dp"
+        android:scaleType="fitXY"
+        android:background="@color/white"
+        android:src="@drawable/default_avatar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_personal_center"
+        app:riv_oval="true" />
+
+    <TextView
+        android:id="@+id/tv_user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="40dp"
+        android:text="Visitor"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/riv_user_photo"
+        app:layout_constraintTop_toBottomOf="@+id/tv_personal_center" />
+
+    <View
+        android:id="@+id/view0"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/drak_blue"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/riv_user_photo" />
+
+
+    <TextView
+        android:id="@+id/tv_notice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="Don't have an account yet? Click here to create a new one."
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view0" />
+
+    <View
+        android:id="@+id/view01"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="50dp"
+        android:background="@color/drak_blue"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_notice" />
+
+    <View
+        android:id="@+id/view02"
+        android:layout_width="2dp"
+        android:layout_height="match_parent"
+        android:background="@color/drak_blue"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <View
+        android:id="@+id/view03"
+        android:layout_width="2dp"
+        android:layout_height="match_parent"
+        android:background="@color/drak_blue"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_recipe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:text="Recipes"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view01" />
+    <!--    <ListView-->
+    <!--        android:id="@+id/lv_all_post"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="260dp"-->
+    <!--        android:layout_marginTop="4dp"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/tv_recipe"-->
+    <!--        />-->
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcv_all_post"
+        android:layout_width="match_parent"
+        android:layout_height="260dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_recipe">
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <View
+        android:id="@+id/view1"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginBottom="60dp"
+        android:background="@color/drak_blue"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/ib_explore"
+        android:layout_width="42dp"
+        android:layout_height="35dp"
+        android:layout_marginBottom="20dp"
+        android:background="@color/white"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_explore"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/view2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:tint="@color/secondary_text" />
+
+    <TextView
+        android:id="@+id/tv_explore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="2dp"
+        android:text="Explore"
+        android:textColor="@color/secondary_text"
+        android:textSize="10sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/ib_explore"
+        app:layout_constraintTop_toBottomOf="@+id/ib_explore" />
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="2dp"
+        android:layout_height="60dp"
+        android:background="@color/drak_blue"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/ib_search"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/ib_explore" />
+
+    <ImageButton
+        android:id="@+id/ib_search"
+        android:layout_width="42dp"
+        android:layout_height="35dp"
+        android:layout_marginBottom="20dp"
+        android:background="@color/white"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_search"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/view3"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/view2"
+        app:tint="@color/secondary_text" />
+
+    <TextView
+        android:id="@+id/tv_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="2dp"
+        android:text="Search"
+        android:textColor="@color/secondary_text"
+        android:textSize="10sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/ib_search"
+        app:layout_constraintTop_toBottomOf="@+id/ib_search" />
+
+    <View
+        android:id="@+id/view3"
+        android:layout_width="2dp"
+        android:layout_height="60dp"
+        android:background="@color/drak_blue"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/ib_create"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/ib_search" />
+
+    <ImageButton
+        android:id="@+id/ib_create"
+        android:layout_width="42dp"
+        android:layout_height="35dp"
+        android:layout_marginBottom="20dp"
+        android:background="@color/white"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_create"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/view4"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/view3"
+        app:tint="@color/secondary_text" />
+
+    <TextView
+        android:id="@+id/tv_create"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="2dp"
+        android:text="Create"
+        android:textColor="@color/secondary_text"
+        android:textSize="10sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/ib_create"
+        app:layout_constraintTop_toBottomOf="@+id/ib_create" />
+
+    <View
+        android:id="@+id/view4"
+        android:layout_width="2dp"
+        android:layout_height="60dp"
+        android:background="@color/drak_blue"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/ib_subscribe"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/ib_create" />
+
+    <ImageButton
+        android:id="@+id/ib_subscribe"
+        android:layout_width="42dp"
+        android:layout_height="35dp"
+        android:layout_marginBottom="20dp"
+        android:background="@color/white"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_subscribe"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/view5"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/view4"
+        app:tint="@color/secondary_text" />
+
+    <TextView
+        android:id="@+id/tv_subscribe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="-3dp"
+        android:layout_marginTop="2dp"
+        android:text="Subscribe"
+        android:textColor="@color/secondary_text"
+        android:textSize="10sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/ib_subscribe"
+        app:layout_constraintTop_toBottomOf="@+id/ib_subscribe" />
+
+    <View
+        android:id="@+id/view5"
+        android:layout_width="2dp"
+        android:layout_height="60dp"
+        android:background="@color/drak_blue"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/ib_profile"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/ib_subscribe" />
+
+    <ImageButton
+        android:id="@+id/ib_profile"
+        android:layout_width="42dp"
+        android:layout_height="35dp"
+        android:layout_marginBottom="20dp"
+        android:background="@color/white"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_profile"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/view5" />
+
+    <TextView
+        android:id="@+id/tv_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="2dp"
+        android:text="Profile"
+        android:textColor="@color/black"
+        android:textSize="10sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/ib_profile"
+        app:layout_constraintTop_toBottomOf="@+id/ib_profile" />
+
+    <View
+        android:id="@+id/view6"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/drak_blue"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

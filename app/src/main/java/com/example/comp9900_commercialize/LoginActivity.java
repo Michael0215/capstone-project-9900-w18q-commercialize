@@ -49,6 +49,8 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), ForgotPasswordActivity.class)));
         binding.tvSignUp.setOnClickListener(v ->
                 startActivity(new Intent(getApplicationContext(), RegisterActivity.class)));
+        binding.tvBrowseAsGuest.setOnClickListener(v ->
+                startActivity(new Intent(getApplicationContext(), GuestMainActivity.class)));
     }
 
     private void init(){

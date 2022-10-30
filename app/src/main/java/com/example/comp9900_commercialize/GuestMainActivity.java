@@ -14,11 +14,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
 import com.example.comp9900_commercialize.adapters.StaggerAdapter;
 import com.example.comp9900_commercialize.bean.ItemExplore;
 import com.example.comp9900_commercialize.bean.Recipe;
-import com.example.comp9900_commercialize.databinding.ActivityMainBinding;
+import com.example.comp9900_commercialize.databinding.ActivityGuestMainBinding;
 import com.example.comp9900_commercialize.utilities.MacroDef;
 import com.example.comp9900_commercialize.utilities.Preferences;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -33,10 +32,9 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+public class GuestMainActivity extends AppCompatActivity {
 
-public class MainActivity extends AppCompatActivity {
-
-    private ActivityMainBinding binding;
+    private ActivityGuestMainBinding binding;
     private RecyclerView mList;
     private List<ItemExplore> mData;
     private StaggerAdapter mAdapter;
@@ -48,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        binding = ActivityGuestMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setListeners();
         //找到控件
@@ -78,13 +76,13 @@ public class MainActivity extends AppCompatActivity {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 ItemExplore explore = new ItemExplore();
                                 recipe = document.toObject(Recipe.class);
-                                 if(recipe.recipeContributorAvatar != null){
-                                     byte[] bytes = Base64.decode(recipe.recipeContributorAvatar, Base64.DEFAULT);
-                                     explore.avatar = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-                                 } else {
-                                     @SuppressLint("ResourceType") InputStream img_avatar = getResources().openRawResource(R.drawable.default_avatar);
-                                     explore.avatar = BitmapFactory.decodeStream(img_avatar);
-                                 }
+                                if(recipe.recipeContributorAvatar != null){
+                                    byte[] bytes = Base64.decode(recipe.recipeContributorAvatar, Base64.DEFAULT);
+                                    explore.avatar = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                                } else {
+                                    @SuppressLint("ResourceType") InputStream img_avatar = getResources().openRawResource(R.drawable.default_avatar);
+                                    explore.avatar = BitmapFactory.decodeStream(img_avatar);
+                                }
                                 byte[] bytes = Base64.decode(recipe.recipeCover, Base64.DEFAULT);
                                 explore.icon =  BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
                                 explore.tv_contributor_name = recipe.recipeContributorName;
@@ -100,13 +98,13 @@ public class MainActivity extends AppCompatActivity {
                             binding.tvLoading.setVisibility(View.GONE);
                             showStagger(true, false);
                         } else { // error handling
-                            Toast.makeText(MainActivity.this, "Error getting documents.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(GuestMainActivity.this, "Error getting documents.", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
 //                        mAdapter.notifyDataSetChanged();
         refreshLayout.setRefreshing(false);
-        Toast.makeText(MainActivity.this, "Refresh Succeed!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(GuestMainActivity.this, "Refresh Succeed!", Toast.LENGTH_SHORT).show();
     }
 
     private void handlerDownPullUpdate() {
@@ -164,7 +162,7 @@ public class MainActivity extends AppCompatActivity {
                             binding.tvLoading.setVisibility(View.GONE);
                             showStagger(true, false);
                         } else { // error handling
-                            Toast.makeText(MainActivity.this, "Error getting documents.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(GuestMainActivity.this, "Error getting documents.", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -195,29 +193,27 @@ public class MainActivity extends AppCompatActivity {
                 preferences.putString(MacroDef.KEY_RECIPE_ID, mData.get(position).id);
 //                Toast.makeText(MainActivity.this, "您点击的是第" + (position+1) + "个菜谱", Toast.LENGTH_SHORT).show();
 //                Toast.makeText(MainActivity.this, "您点击的菜谱id为" + preferences.getString(MacroDef.KEY_RECIPE_ID), Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(getApplicationContext(), RecipeDetailActivity.class));
+                startActivity(new Intent(getApplicationContext(), GuestRecipeDetailActivity.class));
             }
         }) ;
     }
 
     private void setListeners(){
         binding.ibSearch.setOnClickListener(v -> {
-                    startActivity(new Intent(getApplicationContext(), SearchActivity.class));
-                    finish();
-                });
-        binding.ibCreate.setOnClickListener(v -> {
-            preferences.putBoolean(MacroDef.KEY_MODE_CREATE, true);
-            startActivity(new Intent(getApplicationContext(), AddRecipeActivity.class));
+            startActivity(new Intent(getApplicationContext(), GuestSearchActivity.class));
+            finish();
         });
-        binding.ibSubscribe.setOnClickListener(v -> {
-                    startActivity(new Intent(getApplicationContext(), SubscribeActivity.class));
-                    finish();
-                });
+        binding.ibCreate.setOnClickListener(v ->
+            Toast.makeText(GuestMainActivity.this, "Please register a new account!", Toast.LENGTH_SHORT).show());
+        binding.ibSubscribe.setOnClickListener(v ->
+                Toast.makeText(GuestMainActivity.this, "Please register a new account!", Toast.LENGTH_SHORT).show());
         binding.ibProfile.setOnClickListener(v -> {
-                    startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
-                    finish();
-                });
-        binding.btNotice.setOnClickListener(v ->
-                startActivity(new Intent(getApplicationContext(), ChatMainActivity.class)));
+            startActivity(new Intent(getApplicationContext(), GuestProfileActivity.class));
+            finish();
+        });
+        binding.imageBack.setOnClickListener(v -> {
+                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                finish();
+        });
     }
 }
