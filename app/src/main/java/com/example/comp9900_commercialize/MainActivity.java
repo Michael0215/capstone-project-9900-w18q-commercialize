@@ -388,6 +388,9 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
+        refreshLayout.setRefreshing(false);
+        Toast.makeText(MainActivity.this, "Refresh Succeed!", Toast.LENGTH_SHORT).show();
+
     }
 
     private void handlerDownPullUpdate() {
