@@ -24,4 +24,4 @@ I'm working on pull the images from the Firestore to replace to local images for
 
 Week7 (2022.10.27)
 
-I finished the live-chat function in the 'notice' part of our platform and fixed bugs about it. I completed the directly chatting function in 'OtherProfile' Page and the user can directly talk to any one now. I add message pushing function to mobile notification page. And I'm preparing for the Demo B.
+I finished the live-chat function in the 'notice' part of our platform and fixed bugs about it. I completed the directly chatting function in 'OtherProfile' Page and the user can directly talk to any one now. I add message pushing function to mobile notification page and finished guest mode function. And I'm preparing for the Demo B.
