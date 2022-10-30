@@ -34,9 +34,12 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import me.xdrop.fuzzywuzzy.FuzzySearch;
 
 public class SearchResultActivity extends AppCompatActivity {
 
@@ -54,12 +57,13 @@ public class SearchResultActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivitySearchResultBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        mList = this.findViewById(R.id.lv_search_result);
+        mList = binding.lvSearchResult;
         init();
         setListeners();
         if(preferences.getString(MacroDef.KEY_SEARCH_MODE).equals("By keywords")){
-            sendFeedbackJob job = new sendFeedbackJob();
-            job.execute();
+//            sendFeedbackJob job = new sendFeedbackJob();
+//            job.execute();
+            searchByKeywords(preferences.getString(MacroDef.KEY_SEARCH_CONTENT));
         }else{
             searchByType(preferences.getString(MacroDef.KEY_SEARCH_TYPE));
         }
@@ -79,7 +83,7 @@ public class SearchResultActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), ChatMainActivity.class)));
     }
 
-    private void searchByKeywords(){
+    private void searchByKeywordsAlgolia(){
 
         mData = new ArrayList<>();
         SearchClient client =
@@ -128,6 +132,58 @@ public class SearchResultActivity extends AppCompatActivity {
 
     }
 
+    private void searchByKeywords(String keywords) {
+
+        mData = new ArrayList<>();
+        CollectionReference collectionReference = firebaseFirestore.collection("recipes");
+        Query query = collectionReference
+                .orderBy("recipeLikesNum", Query.Direction.DESCENDING);
+        query.get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                ItemExplore explore = new ItemExplore();
+                                recipe = document.toObject(Recipe.class);
+                                Collection<String> fields = new ArrayList<String>();
+                                fields.add(recipe.recipeName);
+                                fields.add(recipe.recipeDescription);
+                                fields.add(recipe.recipeType);
+                                fields.add(recipe.recipeContributorName);
+                                if(FuzzySearch
+                                        .extractOne(preferences.getString(MacroDef.KEY_SEARCH_CONTENT), fields)
+                                        .getScore() >= 90){
+                                    if(recipe.recipeContributorAvatar != null){
+                                        byte[] bytes = Base64.decode(recipe.recipeContributorAvatar, Base64.DEFAULT);
+                                        explore.avatar = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                                    } else {
+                                        @SuppressLint("ResourceType") InputStream img_avatar = getResources().openRawResource(R.drawable.default_avatar);
+                                        explore.avatar = BitmapFactory.decodeStream(img_avatar);
+                                    }
+                                    byte[] bytes = Base64.decode(recipe.recipeCover, Base64.DEFAULT);
+                                    explore.icon =  BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                                    explore.tv_contributor_name = recipe.recipeContributorName;
+                                    explore.tv_like_num = String.valueOf(recipe.recipeLikesNum);
+                                    explore.tv_comment_num = String.valueOf(recipe.recipeCommentsNum);
+                                    explore.title = recipe.recipeName;
+                                    explore.id = document.getId();
+                                    explore.icon_comment = R.drawable.ic_comment;
+                                    explore.icon_like = R.drawable.ic_like;
+                                    mData.add(explore);
+                                }
+                            }
+                            binding.resProgressBar.setVisibility(View.GONE);
+                            binding.tvResLoading.setVisibility(View.GONE);
+                            showStagger(true, false);
+                        } else { // error handling
+                            Toast.makeText(SearchResultActivity.this, "Error getting documents."+task.getException(), Toast.LENGTH_SHORT).show();
+                            System.out.println("Error getting documents."+task.getException());
+                        }
+                    }
+                });
+    }
+
     private void searchByType(String recipeType) {
 
         mData = new ArrayList<>();
@@ -160,6 +216,8 @@ public class SearchResultActivity extends AppCompatActivity {
                                 explore.icon_like = R.drawable.ic_like;
                                 mData.add(explore);
                             }
+                            binding.resProgressBar.setVisibility(View.GONE);
+                            binding.tvResLoading.setVisibility(View.GONE);
                             showStagger(true, false);
                         } else { // error handling
                             Toast.makeText(SearchResultActivity.this, "Error getting documents."+task.getException(), Toast.LENGTH_SHORT).show();
@@ -176,8 +234,6 @@ public class SearchResultActivity extends AppCompatActivity {
         mList.setLayoutManager(layoutManager);
         mAdapter = new StaggerAdapter(mData);
         mList.setAdapter(mAdapter);
-        binding.resProgressBar.setVisibility(View.GONE);
-        binding.tvResLoading.setVisibility(View.GONE);
         mList.postInvalidate();
         initListener();
 
@@ -200,7 +256,7 @@ public class SearchResultActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(String[] params) {
             // do above Server call here
-            searchByKeywords();
+            searchByKeywordsAlgolia();
             return "Executed";
         }
 

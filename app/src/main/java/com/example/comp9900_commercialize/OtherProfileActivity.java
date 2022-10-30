@@ -48,7 +48,7 @@ public class OtherProfileActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityOtherProfileBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        mList = this.findViewById(R.id.rcv_all_post);
+        mList = binding.rcvAllPost;
         init();
         loadData();
         setListeners();
