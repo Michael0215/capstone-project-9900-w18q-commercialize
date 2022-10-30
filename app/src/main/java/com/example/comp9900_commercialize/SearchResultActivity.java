@@ -146,14 +146,7 @@ public class SearchResultActivity extends AppCompatActivity {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 ItemExplore explore = new ItemExplore();
                                 recipe = document.toObject(Recipe.class);
-                                Collection<String> fields = new ArrayList<String>();
-                                fields.add(recipe.recipeName);
-                                fields.add(recipe.recipeDescription);
-                                fields.add(recipe.recipeType);
-                                fields.add(recipe.recipeContributorName);
-                                if(FuzzySearch
-                                        .extractOne(preferences.getString(MacroDef.KEY_SEARCH_CONTENT), fields)
-                                        .getScore() >= 90){
+                                if(preferences.getString(MacroDef.KEY_SEARCH_CONTENT) == ""){
                                     if(recipe.recipeContributorAvatar != null){
                                         byte[] bytes = Base64.decode(recipe.recipeContributorAvatar, Base64.DEFAULT);
                                         explore.avatar = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
@@ -171,6 +164,33 @@ public class SearchResultActivity extends AppCompatActivity {
                                     explore.icon_comment = R.drawable.ic_comment;
                                     explore.icon_like = R.drawable.ic_like;
                                     mData.add(explore);
+                                }else{
+                                    Collection<String> fields = new ArrayList<String>();
+                                    fields.add(recipe.recipeName);
+                                    fields.add(recipe.recipeDescription);
+                                    fields.add(recipe.recipeType);
+                                    fields.add(recipe.recipeContributorName);
+                                    if(FuzzySearch
+                                            .extractOne(preferences.getString(MacroDef.KEY_SEARCH_CONTENT), fields)
+                                            .getScore() >= 90){
+                                        if(recipe.recipeContributorAvatar != null){
+                                            byte[] bytes = Base64.decode(recipe.recipeContributorAvatar, Base64.DEFAULT);
+                                            explore.avatar = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                                        } else {
+                                            @SuppressLint("ResourceType") InputStream img_avatar = getResources().openRawResource(R.drawable.default_avatar);
+                                            explore.avatar = BitmapFactory.decodeStream(img_avatar);
+                                        }
+                                        byte[] bytes = Base64.decode(recipe.recipeCover, Base64.DEFAULT);
+                                        explore.icon =  BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                                        explore.tv_contributor_name = recipe.recipeContributorName;
+                                        explore.tv_like_num = String.valueOf(recipe.recipeLikesNum);
+                                        explore.tv_comment_num = String.valueOf(recipe.recipeCommentsNum);
+                                        explore.title = recipe.recipeName;
+                                        explore.id = document.getId();
+                                        explore.icon_comment = R.drawable.ic_comment;
+                                        explore.icon_like = R.drawable.ic_like;
+                                        mData.add(explore);
+                                    }
                                 }
                             }
                             binding.resProgressBar.setVisibility(View.GONE);
