@@ -75,6 +75,8 @@ public class SearchResultActivity extends AppCompatActivity {
 
     private void setListeners(){
         binding.btCancel.setOnClickListener(v -> onBackPressed());
+        binding.btNotice.setOnClickListener(v ->
+                startActivity(new Intent(getApplicationContext(), ChatMainActivity.class)));
     }
 
     private void searchByKeywords(){
