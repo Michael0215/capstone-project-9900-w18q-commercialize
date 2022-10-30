@@ -158,8 +158,6 @@ public class GuestSearchResultActivity extends AppCompatActivity {
                                 explore.icon_like = R.drawable.ic_like;
                                 mData.add(explore);
                             }
-                            binding.resProgressBar.setVisibility(View.GONE);
-                            binding.tvResLoading.setVisibility(View.GONE);
                             showStagger(true, false);
                         } else { // error handling
                             Toast.makeText(GuestSearchResultActivity.this, "Error getting documents."+task.getException(), Toast.LENGTH_SHORT).show();
@@ -176,6 +174,9 @@ public class GuestSearchResultActivity extends AppCompatActivity {
         mList.setLayoutManager(layoutManager);
         mAdapter = new StaggerAdapter(mData);
         mList.setAdapter(mAdapter);
+        binding.resProgressBar.setVisibility(View.GONE);
+        binding.tvResLoading.setVisibility(View.GONE);
+        mList.postInvalidate();
         initListener();
 
     }

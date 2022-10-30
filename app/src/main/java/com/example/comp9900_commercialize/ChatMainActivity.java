@@ -163,6 +163,7 @@ public class ChatMainActivity extends BaseActivity implements ConversionListener
             binding.conversationsRecyclerView.smoothScrollToPosition(0);
             binding.conversationsRecyclerView.setVisibility(View.VISIBLE);
             binding.progressBar.setVisibility(View.GONE);
+            binding.conversationsRecyclerView.postInvalidate();
         }
     };
 

@@ -87,6 +87,7 @@ public class UserChatActivity extends BaseActivity implements UserListener {
             binding.progressBar.setVisibility(View.VISIBLE);
         }else{
             binding.progressBar.setVisibility(View.INVISIBLE);
+            binding.usersRecyclerView.postInvalidate();
         }
     }
 

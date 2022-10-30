@@ -155,6 +155,7 @@ public class CollectionActivity extends AppCompatActivity {
         adapter = new CollectionAdapter(mData);
         //设置适配器
         mList.setAdapter(adapter);
+        mList.postInvalidate();
         //初始化事件RecyclerView
         initListener();
     }

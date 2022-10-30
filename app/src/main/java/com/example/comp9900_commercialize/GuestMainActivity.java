@@ -94,8 +94,6 @@ public class GuestMainActivity extends AppCompatActivity {
                                 explore.icon_like = R.drawable.ic_like;
                                 mData.add(explore);
                             }
-                            binding.progressBar.setVisibility(View.GONE);
-                            binding.tvLoading.setVisibility(View.GONE);
                             showStagger(true, false);
                         } else { // error handling
                             Toast.makeText(GuestMainActivity.this, "Error getting documents.", Toast.LENGTH_SHORT).show();
@@ -179,6 +177,9 @@ public class GuestMainActivity extends AppCompatActivity {
         mAdapter = new StaggerAdapter(mData);
         //设置适配器
         mList.setAdapter(mAdapter);
+        binding.progressBar.setVisibility(View.GONE);
+        binding.tvLoading.setVisibility(View.GONE);
+        mList.postInvalidate();
         //初始化事件RecyclerView
         initListener();
     }

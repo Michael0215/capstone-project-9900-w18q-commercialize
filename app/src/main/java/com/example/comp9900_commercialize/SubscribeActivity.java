@@ -111,8 +111,6 @@ public class SubscribeActivity extends AppCompatActivity {
                                 Recipe recipe = document.toObject(Recipe.class);
                                 mData.add(recipe);
                             }
-                            binding.progressBar.setVisibility(View.GONE);
-                            binding.tvLoading.setVisibility(View.GONE);
                             showRecycler();
                         } else { // error handling
 //                            Toast.makeText(SubscribeActivity.this, "Error getting documents."+task.getException(), Toast.LENGTH_SHORT).show();
@@ -127,6 +125,9 @@ public class SubscribeActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         adapter = new SubscribeAdapter(mData);
         recyclerView.setAdapter(adapter);
+        binding.progressBar.setVisibility(View.GONE);
+        binding.tvLoading.setVisibility(View.GONE);
+        recyclerView.postInvalidate();
         initListener();
 //        System.out.println(mData.get(0).recipeName+mData.get(1).recipeName);
 
