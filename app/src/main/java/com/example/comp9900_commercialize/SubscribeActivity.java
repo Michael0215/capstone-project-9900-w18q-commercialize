@@ -45,7 +45,7 @@ public class SubscribeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivitySubscribeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        recyclerView = this.findViewById(R.id.rcv_subscribe);
+        recyclerView = binding.rcvSubscribe;
         init();
         setListeners();
         getFollowList();

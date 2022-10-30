@@ -50,8 +50,8 @@ public class GuestMainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         setListeners();
         //找到控件
-        mList = this.findViewById(R.id.recycler_view);
-        refreshLayout = this.findViewById(R.id.refresh_layout);
+        mList = binding.recyclerView;
+        refreshLayout = binding.refreshLayout;
         firebaseFirestore = FirebaseFirestore.getInstance();
         preferences = new Preferences(getApplicationContext());
         //准备数据

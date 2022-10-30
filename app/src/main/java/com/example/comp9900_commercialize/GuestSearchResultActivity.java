@@ -54,7 +54,7 @@ public class GuestSearchResultActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityGuestSearchResultBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        mList = this.findViewById(R.id.lv_search_result);
+        mList = binding.lvSearchResult;
         init();
         setListeners();
         if(preferences.getString(MacroDef.KEY_SEARCH_MODE).equals("By keywords")){

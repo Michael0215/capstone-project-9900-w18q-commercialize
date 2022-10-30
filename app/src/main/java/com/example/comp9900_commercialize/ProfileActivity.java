@@ -72,7 +72,7 @@ public class ProfileActivity extends AppCompatActivity {
         mUser = FirebaseAuth.getInstance().getCurrentUser();
         binding = ActivityProfileBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        mList = this.findViewById(R.id.rcv_all_post);
+        mList = binding.rcvAllPost;
         firebaseFirestore = FirebaseFirestore.getInstance();
         instance = this;
         init();
