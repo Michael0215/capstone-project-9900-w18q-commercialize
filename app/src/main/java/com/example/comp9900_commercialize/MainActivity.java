@@ -716,6 +716,7 @@ public class MainActivity extends AppCompatActivity {
         mAdapter = new StaggerAdapter(mData);
         //设置适配器
         mList.setAdapter(mAdapter);
+        mList.postInvalidate();
         //初始化事件RecyclerView
         initListener();
     }

@@ -173,6 +173,8 @@ public class SearchResultActivity extends AppCompatActivity {
                                     mData.add(explore);
                                 }
                             }
+                            binding.resProgressBar.setVisibility(View.GONE);
+                            binding.tvResLoading.setVisibility(View.GONE);
                             showStagger(true, false);
                         } else { // error handling
                             Toast.makeText(SearchResultActivity.this, "Error getting documents."+task.getException(), Toast.LENGTH_SHORT).show();
@@ -214,6 +216,8 @@ public class SearchResultActivity extends AppCompatActivity {
                                 explore.icon_like = R.drawable.ic_like;
                                 mData.add(explore);
                             }
+                            binding.resProgressBar.setVisibility(View.GONE);
+                            binding.tvResLoading.setVisibility(View.GONE);
                             showStagger(true, false);
                         } else { // error handling
                             Toast.makeText(SearchResultActivity.this, "Error getting documents."+task.getException(), Toast.LENGTH_SHORT).show();
@@ -230,8 +234,6 @@ public class SearchResultActivity extends AppCompatActivity {
         mList.setLayoutManager(layoutManager);
         mAdapter = new StaggerAdapter(mData);
         mList.setAdapter(mAdapter);
-        binding.resProgressBar.setVisibility(View.GONE);
-        binding.tvResLoading.setVisibility(View.GONE);
         mList.postInvalidate();
         initListener();
 
