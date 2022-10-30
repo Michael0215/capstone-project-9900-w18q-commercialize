@@ -147,7 +147,7 @@ public class GuestSearchResultActivity extends AppCompatActivity {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 ItemExplore explore = new ItemExplore();
                                 recipe = document.toObject(Recipe.class);
-                                if(preferences.getString(MacroDef.KEY_SEARCH_CONTENT) == ""){
+                                if(preferences.getString(MacroDef.KEY_SEARCH_CONTENT).equals("")){
                                     if(recipe.recipeContributorAvatar != null){
                                         byte[] bytes = Base64.decode(recipe.recipeContributorAvatar, Base64.DEFAULT);
                                         explore.avatar = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
