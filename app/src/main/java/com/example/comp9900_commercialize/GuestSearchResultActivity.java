@@ -21,6 +21,7 @@ import com.example.comp9900_commercialize.adapters.StaggerAdapter;
 import com.example.comp9900_commercialize.bean.ItemExplore;
 import com.example.comp9900_commercialize.bean.Recipe;
 import com.example.comp9900_commercialize.databinding.ActivityGuestSearchResultBinding;
+import com.example.comp9900_commercialize.databinding.ActivitySearchResultBinding;
 import com.example.comp9900_commercialize.utilities.MacroDef;
 import com.example.comp9900_commercialize.utilities.Preferences;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -34,13 +35,16 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import me.xdrop.fuzzywuzzy.FuzzySearch;
+
 public class GuestSearchResultActivity extends AppCompatActivity {
 
-    private ActivityGuestSearchResultBinding binding;
+    private ActivitySearchResultBinding binding;
     private Preferences preferences;
     private RecyclerView mList;
     private StaggerAdapter mAdapter;
@@ -52,14 +56,15 @@ public class GuestSearchResultActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        binding = ActivityGuestSearchResultBinding.inflate(getLayoutInflater());
+        binding = ActivitySearchResultBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        mList = this.findViewById(R.id.lv_search_result);
+        mList = binding.lvSearchResult;
         init();
         setListeners();
         if(preferences.getString(MacroDef.KEY_SEARCH_MODE).equals("By keywords")){
-            guestSendFeedbackJob job = new guestSendFeedbackJob();
-            job.execute();
+//            sendFeedbackJob job = new sendFeedbackJob();
+//            job.execute();
+            searchByKeywords(preferences.getString(MacroDef.KEY_SEARCH_CONTENT));
         }else{
             searchByType(preferences.getString(MacroDef.KEY_SEARCH_TYPE));
         }
@@ -75,9 +80,11 @@ public class GuestSearchResultActivity extends AppCompatActivity {
 
     private void setListeners(){
         binding.btCancel.setOnClickListener(v -> onBackPressed());
+        binding.btNotice.setOnClickListener(v ->
+                startActivity(new Intent(getApplicationContext(), ChatMainActivity.class)));
     }
 
-    private void searchByKeywords(){
+    private void searchByKeywordsAlgolia(){
 
         mData = new ArrayList<>();
         SearchClient client =
@@ -126,6 +133,58 @@ public class GuestSearchResultActivity extends AppCompatActivity {
 
     }
 
+    private void searchByKeywords(String keywords) {
+
+        mData = new ArrayList<>();
+        CollectionReference collectionReference = firebaseFirestore.collection("recipes");
+        Query query = collectionReference
+                .orderBy("recipeLikesNum", Query.Direction.DESCENDING);
+        query.get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                ItemExplore explore = new ItemExplore();
+                                recipe = document.toObject(Recipe.class);
+                                Collection<String> fields = new ArrayList<String>();
+                                fields.add(recipe.recipeName);
+                                fields.add(recipe.recipeDescription);
+                                fields.add(recipe.recipeType);
+                                fields.add(recipe.recipeContributorName);
+                                if(FuzzySearch
+                                        .extractOne(preferences.getString(MacroDef.KEY_SEARCH_CONTENT), fields)
+                                        .getScore() >= 90){
+                                    if(recipe.recipeContributorAvatar != null){
+                                        byte[] bytes = Base64.decode(recipe.recipeContributorAvatar, Base64.DEFAULT);
+                                        explore.avatar = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                                    } else {
+                                        @SuppressLint("ResourceType") InputStream img_avatar = getResources().openRawResource(R.drawable.default_avatar);
+                                        explore.avatar = BitmapFactory.decodeStream(img_avatar);
+                                    }
+                                    byte[] bytes = Base64.decode(recipe.recipeCover, Base64.DEFAULT);
+                                    explore.icon =  BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                                    explore.tv_contributor_name = recipe.recipeContributorName;
+                                    explore.tv_like_num = String.valueOf(recipe.recipeLikesNum);
+                                    explore.tv_comment_num = String.valueOf(recipe.recipeCommentsNum);
+                                    explore.title = recipe.recipeName;
+                                    explore.id = document.getId();
+                                    explore.icon_comment = R.drawable.ic_comment;
+                                    explore.icon_like = R.drawable.ic_like;
+                                    mData.add(explore);
+                                }
+                            }
+                            binding.resProgressBar.setVisibility(View.GONE);
+                            binding.tvResLoading.setVisibility(View.GONE);
+                            showStagger(true, false);
+                        } else { // error handling
+                            Toast.makeText(GuestSearchResultActivity.this, "Error getting documents."+task.getException(), Toast.LENGTH_SHORT).show();
+                            System.out.println("Error getting documents."+task.getException());
+                        }
+                    }
+                });
+    }
+
     private void searchByType(String recipeType) {
 
         mData = new ArrayList<>();
@@ -158,6 +217,8 @@ public class GuestSearchResultActivity extends AppCompatActivity {
                                 explore.icon_like = R.drawable.ic_like;
                                 mData.add(explore);
                             }
+                            binding.resProgressBar.setVisibility(View.GONE);
+                            binding.tvResLoading.setVisibility(View.GONE);
                             showStagger(true, false);
                         } else { // error handling
                             Toast.makeText(GuestSearchResultActivity.this, "Error getting documents."+task.getException(), Toast.LENGTH_SHORT).show();
@@ -174,8 +235,6 @@ public class GuestSearchResultActivity extends AppCompatActivity {
         mList.setLayoutManager(layoutManager);
         mAdapter = new StaggerAdapter(mData);
         mList.setAdapter(mAdapter);
-        binding.resProgressBar.setVisibility(View.GONE);
-        binding.tvResLoading.setVisibility(View.GONE);
         mList.postInvalidate();
         initListener();
 
@@ -193,12 +252,12 @@ public class GuestSearchResultActivity extends AppCompatActivity {
 
     }
 
-    private class guestSendFeedbackJob extends AsyncTask<String, Void, String> {
+    private class sendFeedbackJob extends AsyncTask<String, Void, String> {
 
         @Override
         protected String doInBackground(String[] params) {
             // do above Server call here
-            searchByKeywords();
+            searchByKeywordsAlgolia();
             return "Executed";
         }
 
@@ -211,6 +270,5 @@ public class GuestSearchResultActivity extends AppCompatActivity {
         }
 
     }
-
 
 }
