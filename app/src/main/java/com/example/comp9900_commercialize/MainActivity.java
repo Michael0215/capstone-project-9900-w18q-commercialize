@@ -17,6 +17,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.comp9900_commercialize.adapters.StaggerAdapter;
 import com.example.comp9900_commercialize.bean.Collection;
+import com.example.comp9900_commercialize.bean.Follow;
 import com.example.comp9900_commercialize.bean.ItemExplore;
 import com.example.comp9900_commercialize.bean.Recipe;
 import com.example.comp9900_commercialize.databinding.ActivityMainBinding;
@@ -81,6 +82,9 @@ public class MainActivity extends AppCompatActivity {
     private int time1;
     private int time2;
 
+    private Follow myFollow;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -114,8 +118,13 @@ public class MainActivity extends AppCompatActivity {
         Ref.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                myCollection = documentSnapshot.toObject(Collection.class);
-                allCollection = myCollection.collectionList;
+                myFollow = documentSnapshot.toObject(Follow.class);
+                if(myFollow != null){
+                    allCollection = myCollection.collectionList;
+                }
+                else{
+                    allCollection = new ArrayList<>();
+                }
             }
         });
 
@@ -131,48 +140,53 @@ public class MainActivity extends AppCompatActivity {
                         likeArray = like.split(",");
                         likeList = Arrays.asList(likeArray);
                         allType = new HashMap<String, Integer>();
-                        for(String recep : likeArray){
-                            DocumentReference Ref = firebaseFirestore.collection("recipes").document(recep);
-                            Ref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                                @Override
-                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                    if (task.isSuccessful()) {
-                                        DocumentSnapshot document = task.getResult();
-                                        if (document.exists()) {
-                                            recipetype = document.get("recipeType").toString();
-                                            //Toast.makeText(MainActivity.this, recipetype, Toast.LENGTH_SHORT).show();
-                                            if(allType.containsKey(recipetype)){
-                                                int old = allType.get(recipetype);
-                                                allType.put(recipetype,old+1);
-                                            }
-                                            else{
-                                                allType.put(recipetype,1);
-                                            }
-                                            mostType = "";
-                                            max1 = 0;
-                                            temp2 = 0;
-                                            for (Map.Entry<String, Integer> entry : allType.entrySet()){
-                                                temp1 = entry.getKey();
-                                                temp2 = entry.getValue();
-                                                //Toast.makeText(MainActivity.this, temp1, Toast.LENGTH_SHORT).show();
-                                                //Toast.makeText(MainActivity.this, String.valueOf(temp2), Toast.LENGTH_SHORT).show();
-                                                if(temp2 > max1){
-                                                    max1 = temp2;
-                                                    mostType = temp1;
+                        if(like != ""){
+                            for(String recep : likeArray){
+                                DocumentReference Ref = firebaseFirestore.collection("recipes").document(recep);
+                                Ref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                        if (task.isSuccessful()) {
+                                            DocumentSnapshot document = task.getResult();
+                                            if (document.exists()) {
+                                                recipetype = document.get("recipeType").toString();
+                                                //Toast.makeText(MainActivity.this, recipetype, Toast.LENGTH_SHORT).show();
+                                                if(allType.containsKey(recipetype)){
+                                                    int old = allType.get(recipetype);
+                                                    allType.put(recipetype,old+1);
                                                 }
-                                            }
-                                            //Toast.makeText(MainActivity.this, mostType, Toast.LENGTH_SHORT).show();
-                                            //Toast.makeText(MainActivity.this, String.valueOf(max1), Toast.LENGTH_SHORT).show();
-                                            if(max1 == 1){
+                                                else{
+                                                    allType.put(recipetype,1);
+                                                }
                                                 mostType = "";
-                                            }
-                                            //Toast.makeText(MainActivity.this, mostType, Toast.LENGTH_SHORT).show();
-                                            //Toast.makeText(MainActivity.this, String.valueOf(max1), Toast.LENGTH_SHORT).show();
+                                                max1 = 0;
+                                                temp2 = 0;
+                                                for (Map.Entry<String, Integer> entry : allType.entrySet()){
+                                                    temp1 = entry.getKey();
+                                                    temp2 = entry.getValue();
+                                                    //Toast.makeText(MainActivity.this, temp1, Toast.LENGTH_SHORT).show();
+                                                    //Toast.makeText(MainActivity.this, String.valueOf(temp2), Toast.LENGTH_SHORT).show();
+                                                    if(temp2 > max1){
+                                                        max1 = temp2;
+                                                        mostType = temp1;
+                                                    }
+                                                }
+                                                //Toast.makeText(MainActivity.this, mostType, Toast.LENGTH_SHORT).show();
+                                                //Toast.makeText(MainActivity.this, String.valueOf(max1), Toast.LENGTH_SHORT).show();
+                                                if(max1 == 1){
+                                                    mostType = "";
+                                                }
+                                                //Toast.makeText(MainActivity.this, mostType, Toast.LENGTH_SHORT).show();
+                                                //Toast.makeText(MainActivity.this, String.valueOf(max1), Toast.LENGTH_SHORT).show();
 
+                                            }
                                         }
                                     }
-                                }
-                            });
+                                });
+                            }
+                        }
+                        else {
+                            mostType = "";
                         }
                     }
                 }
@@ -431,8 +445,20 @@ public class MainActivity extends AppCompatActivity {
         Ref.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                myCollection = documentSnapshot.toObject(Collection.class);
-                allCollection = myCollection.collectionList;
+                myFollow = documentSnapshot.toObject(Follow.class);
+                if(myFollow != null){
+                    allCollection = myCollection.collectionList;
+                }
+                else{
+                    allCollection = new ArrayList<>();
+                }
+                /*myCollection = documentSnapshot.toObject(Collection.class);
+                if(myCollection != null){
+                    allCollection = new ArrayList<>();
+                }
+                else{
+                    allCollection = myCollection.collectionList;
+                }*/
             }
         });
 
@@ -448,49 +474,55 @@ public class MainActivity extends AppCompatActivity {
                         likeArray = like.split(",");
                         likeList = Arrays.asList(likeArray);
                         allType = new HashMap<String, Integer>();
-                        for(String recep : likeArray){
-                            DocumentReference Ref = firebaseFirestore.collection("recipes").document(recep);
-                            Ref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                                @Override
-                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                    if (task.isSuccessful()) {
-                                        DocumentSnapshot document = task.getResult();
-                                        if (document.exists()) {
-                                            recipetype = document.get("recipeType").toString();
-                                            //Toast.makeText(MainActivity.this, recipetype, Toast.LENGTH_SHORT).show();
-                                            if(allType.containsKey(recipetype)){
-                                                int old = allType.get(recipetype);
-                                                allType.put(recipetype,old+1);
-                                            }
-                                            else{
-                                                allType.put(recipetype,1);
-                                            }
-                                            mostType = "";
-                                            max1 = 0;
-                                            temp2 = 0;
-                                            for (Map.Entry<String, Integer> entry : allType.entrySet()){
-                                                temp1 = entry.getKey();
-                                                temp2 = entry.getValue();
-                                                //Toast.makeText(MainActivity.this, temp1, Toast.LENGTH_SHORT).show();
-                                                //Toast.makeText(MainActivity.this, String.valueOf(temp2), Toast.LENGTH_SHORT).show();
-                                                if(temp2 > max1){
-                                                    max1 = temp2;
-                                                    mostType = temp1;
+                        if(like != ""){
+                            for(String recep : likeArray){
+                                DocumentReference Ref = firebaseFirestore.collection("recipes").document(recep);
+                                Ref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                        if (task.isSuccessful()) {
+                                            DocumentSnapshot document = task.getResult();
+                                            if (document.exists()) {
+                                                recipetype = document.get("recipeType").toString();
+                                                //Toast.makeText(MainActivity.this, recipetype, Toast.LENGTH_SHORT).show();
+                                                if(allType.containsKey(recipetype)){
+                                                    int old = allType.get(recipetype);
+                                                    allType.put(recipetype,old+1);
                                                 }
-                                            }
-                                            //Toast.makeText(MainActivity.this, mostType, Toast.LENGTH_SHORT).show();
-                                            //Toast.makeText(MainActivity.this, String.valueOf(max1), Toast.LENGTH_SHORT).show();
-                                            if(max1 == 1){
+                                                else{
+                                                    allType.put(recipetype,1);
+                                                }
                                                 mostType = "";
-                                            }
-                                            //Toast.makeText(MainActivity.this, mostType, Toast.LENGTH_SHORT).show();
-                                            //Toast.makeText(MainActivity.this, String.valueOf(max1), Toast.LENGTH_SHORT).show();
+                                                max1 = 0;
+                                                temp2 = 0;
+                                                for (Map.Entry<String, Integer> entry : allType.entrySet()){
+                                                    temp1 = entry.getKey();
+                                                    temp2 = entry.getValue();
+                                                    //Toast.makeText(MainActivity.this, temp1, Toast.LENGTH_SHORT).show();
+                                                    //Toast.makeText(MainActivity.this, String.valueOf(temp2), Toast.LENGTH_SHORT).show();
+                                                    if(temp2 > max1){
+                                                        max1 = temp2;
+                                                        mostType = temp1;
+                                                    }
+                                                }
+                                                //Toast.makeText(MainActivity.this, mostType, Toast.LENGTH_SHORT).show();
+                                                //Toast.makeText(MainActivity.this, String.valueOf(max1), Toast.LENGTH_SHORT).show();
+                                                if(max1 == 1){
+                                                    mostType = "";
+                                                }
+                                                //Toast.makeText(MainActivity.this, mostType, Toast.LENGTH_SHORT).show();
+                                                //Toast.makeText(MainActivity.this, String.valueOf(max1), Toast.LENGTH_SHORT).show();
 
+                                            }
                                         }
                                     }
-                                }
-                            });
+                                });
+                            }
                         }
+                        else {
+                            mostType = "";
+                        }
+
                     }
                 }
             }
