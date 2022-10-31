@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
     private int time1;
     private int time2;
 
-    private Follow myFollow;
+    //private Follow myFollow;
 
 
     @Override
@@ -118,8 +118,8 @@ public class MainActivity extends AppCompatActivity {
         Ref.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                myFollow = documentSnapshot.toObject(Follow.class);
-                if(myFollow != null){
+                myCollection = documentSnapshot.toObject(Collection.class);
+                if(myCollection != null){
                     allCollection = myCollection.collectionList;
                 }
                 else{
@@ -445,8 +445,8 @@ public class MainActivity extends AppCompatActivity {
         Ref.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                myFollow = documentSnapshot.toObject(Follow.class);
-                if(myFollow != null){
+                myCollection = documentSnapshot.toObject(Collection.class);
+                if(myCollection != null){
                     allCollection = myCollection.collectionList;
                 }
                 else{
@@ -798,4 +798,3 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), ChatMainActivity.class)));
     }
 }
-
