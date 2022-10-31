@@ -38,6 +38,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -77,6 +78,8 @@ public class MainActivity extends AppCompatActivity {
     private String recipetype;
     private Collection myCollection;
     private List allCollection;
+    private int time1;
+    private int time2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +93,8 @@ public class MainActivity extends AppCompatActivity {
         firebaseFirestore = FirebaseFirestore.getInstance();
         preferences = new Preferences(getApplicationContext());
         //准备数据
+        time1 = 0;
+        time2 = 0;
         initData();
 
         handlerDownPullUpdate();
@@ -216,6 +221,8 @@ public class MainActivity extends AppCompatActivity {
                                                     explore.icon_like = R.drawable.ic_like;
                                                     mData.add(explore);
                                                 }
+                                                Collections.rotate(mData,-2*time1);
+                                                time1 += 1;
                                                 binding.progressBar.setVisibility(View.GONE);
                                                 binding.tvLoading.setVisibility(View.GONE);
                                                 showStagger(true, false);
@@ -369,6 +376,8 @@ public class MainActivity extends AppCompatActivity {
                                                                 }
 
                                                             }
+                                                            Collections.rotate(mData,-2*time2);
+                                                            time2 += 1;
                                                             binding.progressBar.setVisibility(View.GONE);
                                                             binding.tvLoading.setVisibility(View.GONE);
                                                             showStagger(true, false);
@@ -529,6 +538,7 @@ public class MainActivity extends AppCompatActivity {
                                                     explore.icon_like = R.drawable.ic_like;
                                                     mData.add(explore);
                                                 }
+                                                time1 += 1;
                                                 binding.progressBar.setVisibility(View.GONE);
                                                 binding.tvLoading.setVisibility(View.GONE);
                                                 showStagger(true, false);
@@ -682,6 +692,7 @@ public class MainActivity extends AppCompatActivity {
                                                                 }
 
                                                             }
+                                                            time2 += 1;
                                                             binding.progressBar.setVisibility(View.GONE);
                                                             binding.tvLoading.setVisibility(View.GONE);
                                                             showStagger(true, false);
@@ -755,3 +766,4 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), ChatMainActivity.class)));
     }
 }
+
