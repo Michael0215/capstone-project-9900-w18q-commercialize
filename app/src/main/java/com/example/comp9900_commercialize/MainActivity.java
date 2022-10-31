@@ -338,7 +338,7 @@ public class MainActivity extends AppCompatActivity {
                                                                         }
                                                                         else{
                                                                             if(count2 < 2){
-                                                                                if(recipe.recipeType == mostType){
+                                                                                if(recipe.recipeType.equals(mostType)){
                                                                                     mData.add(count1+count2,explore);
                                                                                     count2 += 1;
                                                                                     //Toast.makeText(MainActivity.this, "2", Toast.LENGTH_SHORT).show();
@@ -654,7 +654,7 @@ public class MainActivity extends AppCompatActivity {
                                                                         }
                                                                         else{
                                                                             if(count2 < 2){
-                                                                                if(recipe.recipeType == mostType){
+                                                                                if(recipe.recipeType.equals(mostType)){
                                                                                     mData.add(count1+count2,explore);
                                                                                     count2 += 1;
                                                                                     //Toast.makeText(MainActivity.this, "2", Toast.LENGTH_SHORT).show();
