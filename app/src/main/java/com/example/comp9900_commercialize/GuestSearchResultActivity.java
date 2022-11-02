@@ -166,7 +166,6 @@ public class GuestSearchResultActivity extends AppCompatActivity {
                                     Collection<String> fields = new ArrayList<String>();
                                     fields.add(recipe.recipeName);
                                     fields.add(recipe.recipeDescription);
-                                    fields.add(recipe.recipeType);
                                     fields.add(recipe.recipeContributorName);
                                     if(FuzzySearch
                                             .extractOne(preferences.getString(MacroDef.KEY_SEARCH_CONTENT), fields)
