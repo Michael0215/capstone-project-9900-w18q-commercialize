@@ -1,0 +1,31 @@
+Week 1 (2022.9.16)
+
+we form a group sign up for jira and linked our account to github. and then discuss which project to do. we finally choose meal app
+
+Week 2 (2022.9.22)
+
+we hold 2 meetings to talk about the features and start to writing the proposal +
+
+Week 3
+
+we complete the proposal and the assigned workload to every team member in sprint 1
+
+Week 4
+
+get the coding environment complete ( android studio ) this is a whole new tools and coding style for me
+
+Week 5
+
+We finished demo A and i learn about firebase api and android studio and  take a brief review of java
+
+Week6
+
+I write the collection function like how to collect and discollect recipe.
+
+Week7
+
+working on the comment system which is really hard and i tried several layout and coding stuff. Also we are preparing for the demo B
+
+Week8
+
+finished demo B. work for the sprint3
