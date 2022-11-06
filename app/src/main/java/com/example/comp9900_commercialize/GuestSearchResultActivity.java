@@ -21,7 +21,6 @@ import com.example.comp9900_commercialize.adapters.StaggerAdapter;
 import com.example.comp9900_commercialize.bean.ItemExplore;
 import com.example.comp9900_commercialize.bean.Recipe;
 import com.example.comp9900_commercialize.databinding.ActivityGuestSearchResultBinding;
-import com.example.comp9900_commercialize.databinding.ActivitySearchResultBinding;
 import com.example.comp9900_commercialize.utilities.MacroDef;
 import com.example.comp9900_commercialize.utilities.Preferences;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -44,7 +43,7 @@ import me.xdrop.fuzzywuzzy.FuzzySearch;
 
 public class GuestSearchResultActivity extends AppCompatActivity {
 
-    private ActivitySearchResultBinding binding;
+    private ActivityGuestSearchResultBinding binding;
     private Preferences preferences;
     private RecyclerView mList;
     private StaggerAdapter mAdapter;
@@ -56,7 +55,7 @@ public class GuestSearchResultActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        binding = ActivitySearchResultBinding.inflate(getLayoutInflater());
+        binding = ActivityGuestSearchResultBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         mList = binding.lvSearchResult;
         init();
@@ -80,8 +79,6 @@ public class GuestSearchResultActivity extends AppCompatActivity {
 
     private void setListeners(){
         binding.btCancel.setOnClickListener(v -> onBackPressed());
-        binding.btNotice.setOnClickListener(v ->
-                startActivity(new Intent(getApplicationContext(), ChatMainActivity.class)));
     }
 
     private void searchByKeywordsAlgolia(){
@@ -169,7 +166,6 @@ public class GuestSearchResultActivity extends AppCompatActivity {
                                     Collection<String> fields = new ArrayList<String>();
                                     fields.add(recipe.recipeName);
                                     fields.add(recipe.recipeDescription);
-                                    fields.add(recipe.recipeType);
                                     fields.add(recipe.recipeContributorName);
                                     if(FuzzySearch
                                             .extractOne(preferences.getString(MacroDef.KEY_SEARCH_CONTENT), fields)
