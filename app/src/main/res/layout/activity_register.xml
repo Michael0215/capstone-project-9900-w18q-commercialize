@@ -149,17 +149,29 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/tv_back_to_login"
+        android:id="@+id/tv_back_to_login_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="600dp"
         android:gravity="center"
-        android:text="Already have an account?\n SIGN IN HERE"
+        android:text="Already have an account?"
         android:textColor="@color/primary_text"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        />
+    <TextView
+        android:id="@+id/tv_back_to_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="SIGN IN HERE"
+        android:textColor="@color/red"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_back_to_login_text"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -22,9 +22,13 @@ public class GuestProfileActivity extends AppCompatActivity {
     }
 
     private void setListeners(){
-        binding.tvNotice.setOnClickListener(v -> {
+        binding.tvRegister.setOnClickListener(v -> {
                 startActivity(new Intent(getApplicationContext(), RegisterActivity.class));
                 finish();
+        });
+        binding.tvLogIn.setOnClickListener(v -> {
+            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+            finish();
         });
         binding.ibExplore.setOnClickListener(v -> {
             startActivity(new Intent(getApplicationContext(), GuestMainActivity.class));
