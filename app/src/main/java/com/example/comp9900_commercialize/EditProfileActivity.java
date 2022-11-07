@@ -18,14 +18,19 @@ import android.widget.Toast;
 import com.example.comp9900_commercialize.databinding.ActivityEditProfileBinding;
 import com.example.comp9900_commercialize.utilities.MacroDef;
 import com.example.comp9900_commercialize.utilities.Preferences;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.WriteBatch;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
@@ -42,19 +47,24 @@ public class EditProfileActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         binding = ActivityEditProfileBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         init();
         loadData();
         setListeners();
+
     }
 
     private void init(){
+
         preferences = new Preferences(getApplicationContext());
+
     }
 
     private void loadData(){
+
         binding.etUserName.setText(preferences.getString(MacroDef.KEY_USERNAME));
         binding.etContact.setText(preferences.getString(MacroDef.KEY_CONTACT));
         if (preferences.getString(MacroDef.KEY_AVATAR) != null){
@@ -66,13 +76,16 @@ public class EditProfileActivity extends AppCompatActivity {
     }
 
     private String encodeImage(Bitmap bitmap) {
+
         int previewWidth = 150;
         int previewHeight = bitmap.getHeight() * previewWidth / bitmap.getWidth();
         Bitmap previewBitmap = Bitmap.createScaledBitmap(bitmap, previewWidth, previewHeight, false);
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         previewBitmap.compress(Bitmap.CompressFormat.JPEG, 50, byteArrayOutputStream);
         byte[] bytes = byteArrayOutputStream.toByteArray();
+
         return Base64.encodeToString(bytes, Base64.DEFAULT);
+
     }
 
     private final ActivityResultLauncher<Intent> pickImage = registerForActivityResult(
@@ -97,6 +110,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
 
     private void save(){
+
         String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
         FirebaseFirestore database = FirebaseFirestore.getInstance();
         if (encodedImage == null){
@@ -113,11 +127,30 @@ public class EditProfileActivity extends AppCompatActivity {
                         preferences.putString(MacroDef.KEY_AVATAR, encodedImage);
                         preferences.putString(MacroDef.KEY_USERNAME, binding.etUserName.getText().toString().trim());
                         preferences.putString(MacroDef.KEY_CONTACT, binding.etContact.getText().toString().trim());
-                        Toast.makeText(EditProfileActivity.this, "Update Successfully!", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
-                        new ProfileActivity().instance.finish();
-                        new SettingActivity().instance.finish();
-                        finish();
+                        WriteBatch batch = database.batch();
+                        Query query = database.collection("recipes").whereEqualTo("recipeContributorEmail", preferences.getString(MacroDef.KEY_EMAIL));
+                        query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    for (QueryDocumentSnapshot document : task.getResult()) {
+                                        DocumentReference documentReference = database.collection("recipes").document(document.getId());
+                                        batch.update(documentReference, "recipeContributorName", binding.etUserName.getText().toString().trim());
+                                        batch.update(documentReference, "recipeContributorAvatar", encodedImage);
+                                    }
+                                    batch.commit().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            Toast.makeText(EditProfileActivity.this, "Update Successfully!", Toast.LENGTH_SHORT).show();
+                                            startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+                                            new ProfileActivity().instance.finish();
+                                            new SettingActivity().instance.finish();
+                                            finish();
+                                        }
+                                    });
+                                }
+                            }
+                        });
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -126,9 +159,11 @@ public class EditProfileActivity extends AppCompatActivity {
                         Toast.makeText(EditProfileActivity.this, "Update failed, try again", Toast.LENGTH_SHORT).show();
                     }
                 });
+
     }
 
     private void setListeners(){
+
         binding.btCancel.setOnClickListener(v ->
                 onBackPressed());
         binding.ivUserPhoto.setOnClickListener(v -> {
@@ -141,9 +176,11 @@ public class EditProfileActivity extends AppCompatActivity {
                 save();
             }
         });
+
     }
 
     private boolean isValidInput(){
+
         if (binding.etUserName.getText().toString().trim().isEmpty()
                 || binding.etContact.getText().toString().trim().isEmpty()){
             showToast("Input cannot be empty");
@@ -151,9 +188,13 @@ public class EditProfileActivity extends AppCompatActivity {
         } else{
             return true;
         }
+
     }
 
     private void showToast(String message) {
+
         Toast.makeText(getApplicationContext(), message,Toast.LENGTH_SHORT).show();
+
     }
+
 }
