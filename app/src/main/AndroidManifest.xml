@@ -91,6 +91,9 @@
             android:name=".CollectionActivity"
             android:exported="false" />
         <activity
+            android:name=".CommentActivity"
+            android:exported="false" />
+        <activity
             android:name=".FollowingActivity"
             android:exported="false" />
         <activity

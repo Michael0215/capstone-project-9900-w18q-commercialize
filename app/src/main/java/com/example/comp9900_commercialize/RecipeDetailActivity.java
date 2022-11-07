@@ -288,6 +288,7 @@ public class RecipeDetailActivity extends AppCompatActivity {
             //检查之前collection类是否含有数据.并添加新recipeId到里面去
             collectMainFunc();
         });
+        binding.ibComment.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), CommentActivity.class)));
         binding.btFollow.setOnClickListener(view -> {
             //检查之前follow类是否含有数据.并添加新contributor email到里面去
             followMainFunc();
