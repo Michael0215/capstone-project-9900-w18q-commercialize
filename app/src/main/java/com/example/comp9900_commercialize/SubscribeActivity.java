@@ -6,9 +6,11 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Toast;
 
@@ -39,6 +41,7 @@ public class SubscribeActivity extends AppCompatActivity {
     private List<String> followList;
     private RecyclerView recyclerView;
     private SubscribeAdapter adapter;
+    private SwipeRefreshLayout refreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,9 +49,26 @@ public class SubscribeActivity extends AppCompatActivity {
         binding = ActivitySubscribeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         recyclerView = binding.rcvSubscribe;
+        refreshLayout = binding.refreshLayout;
         init();
+        handlerDownPullUpdate();
         setListeners();
-        getFollowList();
+//        getFollowList();
+    }
+
+    private void handlerDownPullUpdate() {
+        refreshLayout.setEnabled(true);
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        getFollowList();
+                    }
+                },2000);
+            }
+        });
     }
 
     private void setListeners(){
@@ -76,9 +96,11 @@ public class SubscribeActivity extends AppCompatActivity {
         preferences = new Preferences(getApplicationContext());
         firebaseFirestore = FirebaseFirestore.getInstance();
         followList = new ArrayList<String>();
+        getFollowList();
     }
 
     private void getFollowList(){
+
         CollectionReference collectionReference = firebaseFirestore.collection("follow");
         Query query = collectionReference.whereEqualTo(FieldPath.documentId(),preferences.getString(MacroDef.KEY_EMAIL));
         query.get()
@@ -95,6 +117,8 @@ public class SubscribeActivity extends AppCompatActivity {
                         }
                     }
                 });
+        refreshLayout.setRefreshing(false);
+        Toast.makeText(SubscribeActivity.this, "Refresh Succeed!", Toast.LENGTH_SHORT).show();
     }
 
     private void loadData(){
