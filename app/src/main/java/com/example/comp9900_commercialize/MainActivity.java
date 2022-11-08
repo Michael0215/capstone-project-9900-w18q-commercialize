@@ -779,21 +779,21 @@ public class MainActivity extends AppCompatActivity {
 
     private void setListeners(){
         binding.ibSearch.setOnClickListener(v -> {
-                    startActivity(new Intent(getApplicationContext(), SearchActivity.class));
-                    finish();
-                });
+            startActivity(new Intent(getApplicationContext(), SearchActivity.class));
+            finish();
+        });
         binding.ibCreate.setOnClickListener(v -> {
             preferences.putBoolean(MacroDef.KEY_MODE_CREATE, true);
             startActivity(new Intent(getApplicationContext(), AddRecipeActivity.class));
         });
         binding.ibSubscribe.setOnClickListener(v -> {
-                    startActivity(new Intent(getApplicationContext(), SubscribeActivity.class));
-                    finish();
-                });
+            startActivity(new Intent(getApplicationContext(), SubscribeActivity.class));
+            finish();
+        });
         binding.ibProfile.setOnClickListener(v -> {
-                    startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
-                    finish();
-                });
+            startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+            finish();
+        });
         binding.btNotice.setOnClickListener(v ->
                 startActivity(new Intent(getApplicationContext(), ChatMainActivity.class)));
     }
