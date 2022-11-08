@@ -31,7 +31,7 @@ public class CommentAdapter  extends RecyclerView.Adapter<CommentAdapter.SimpleH
         View view =  View.inflate(parent.getContext(), R.layout.item_container_comment, null);
         return new SimpleHolder(view);
     }
-
+//
     @Override
     public void onBindViewHolder(@NonNull SimpleHolder holder, int position) {
         holder.setData(mData.get(position),position);

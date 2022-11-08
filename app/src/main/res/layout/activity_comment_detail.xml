@@ -8,7 +8,7 @@
     tools:context=".CommentActivity"
     android:clipToPadding="false">
 
-
+<!--d-->
     <TextView
         android:id="@+id/tv_comment"
         android:layout_width="match_parent"

@@ -80,6 +80,7 @@ public class RecipeDetailActivity extends AppCompatActivity {
     private List<String> collection_list;
     private List<String> follow_list;
     private boolean collected;
+//
     private boolean followed;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

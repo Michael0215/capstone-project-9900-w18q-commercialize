@@ -14,6 +14,7 @@ public class itemComment {
         this.date = date;
         this.username = username;
     }
+    //add
     public itemComment(){
     }
 

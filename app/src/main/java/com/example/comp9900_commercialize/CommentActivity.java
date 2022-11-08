@@ -94,7 +94,7 @@ public class CommentActivity extends AppCompatActivity {
             }
         });
     }
-
+//d
 
     private void showLinear() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
