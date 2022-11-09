@@ -54,7 +54,7 @@ public class CommentActivity extends AppCompatActivity {
     //private List<itemComment> myCommentList;
     Comment myComment;
     private FirebaseUser user;
-    private FirebaseFirestore db;
+    private FirebaseFirestore db,fbs;
     private RecyclerView RCVlist;
     private Preferences preferences;
     private DatabaseReference reference;
@@ -62,6 +62,8 @@ public class CommentActivity extends AppCompatActivity {
     String recipeId, publishEmail,username,date,avatar;
     String commentsInput;
     private CommentAdapter adapter;
+    private Recipe recipeObj;
+    private int commentNum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +74,25 @@ public class CommentActivity extends AppCompatActivity {
         init();
         setListener();
         loadData();
+    }
+
+    private void updateCommentNum() {
+        DocumentReference commentDocRef=db.collection("recipes").document(preferences.getString(MacroDef.KEY_RECIPE_ID));
+        commentDocRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+              recipeObj=documentSnapshot.toObject(Recipe.class);
+              recipeObj.setRecipeCommentsNum(commentNum);
+
+                db.collection("recipes").document(preferences.getString(MacroDef.KEY_RECIPE_ID)).set(recipeObj).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Log.d(TAG,"successfully written!");
+                        System.out.println(commentNum+" 评论数已经被设置为了++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+                    }
+                });
+            }
+        });
     }
 
     public void refresh(){
@@ -92,7 +113,7 @@ public class CommentActivity extends AppCompatActivity {
                 myComment=documentSnapshot.toObject(Comment.class);
                 if(myComment != null) {
                     mData = myComment.commentList;
-                    System.out.println(mData.size());
+//                    System.out.println(mData.size());
                 }
                 showLinear();
             }
@@ -131,6 +152,7 @@ public class CommentActivity extends AppCompatActivity {
                         showToast("You comment something");
                         //onResume();
                         binding.ivAddComment.setText("");
+
                     }
                 }else{
                     myComment=new Comment(newComment);
@@ -142,8 +164,13 @@ public class CommentActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(Void unused) {
                         Log.d(TAG,"successfully written!");
+                        commentNum=myComment.commentList.size();
+                        updateCommentNum();
+                        //System.out.println(commentNum+"++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+
                     }
                 });
+                updateCommentNum();
                 recreate();
             }
         });
