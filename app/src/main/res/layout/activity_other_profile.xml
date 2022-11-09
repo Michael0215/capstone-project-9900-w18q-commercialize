@@ -73,7 +73,7 @@
         app:layout_constraintTop_toBottomOf="@+id/riv_user_photo"/>
 
     <ImageView
-        android:id="@+id/iv_follow"
+        android:id="@+id/bt_follow"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginTop="30dp"
@@ -93,8 +93,8 @@
         android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/iv_follow"
-        app:layout_constraintTop_toBottomOf="@+id/iv_follow" />
+        app:layout_constraintStart_toStartOf="@+id/bt_follow"
+        app:layout_constraintTop_toBottomOf="@+id/bt_follow" />
 
     <ImageView
         android:id="@+id/iv_notice"

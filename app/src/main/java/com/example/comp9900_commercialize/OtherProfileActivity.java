@@ -4,14 +4,17 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Base64;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.comp9900_commercialize.adapters.ProfileRecipeAdapter;
+import com.example.comp9900_commercialize.bean.Follow;
 import com.example.comp9900_commercialize.bean.ItemProfileRecipe;
 import com.example.comp9900_commercialize.bean.Recipe;
 import com.example.comp9900_commercialize.databinding.ActivityOtherProfileBinding;
@@ -19,7 +22,10 @@ import com.example.comp9900_commercialize.models.User;
 import com.example.comp9900_commercialize.utilities.MacroDef;
 import com.example.comp9900_commercialize.utilities.Preferences;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -29,6 +35,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -42,6 +49,13 @@ public class OtherProfileActivity extends BaseActivity {
     private Recipe recipes;
     private RecyclerView mList;
     private ProfileRecipeAdapter adapter;
+    private FirebaseFirestore db;
+    private FirebaseUser user;
+    private String user_email;
+    private Follow myFollow;
+    private List<String> follow_list;
+    private boolean followed;
+    private static final String TAG="OtherProfileActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,10 +69,33 @@ public class OtherProfileActivity extends BaseActivity {
     }
 
     private void init(){
-
         firebaseFirestore = FirebaseFirestore.getInstance();
+        user = FirebaseAuth.getInstance().getCurrentUser();
         preferences = new Preferences(getApplicationContext());
-
+        db = FirebaseFirestore.getInstance();
+        DocumentReference rf_follow_list = db.collection("follow").document(user.getEmail());
+        rf_follow_list.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                myFollow = documentSnapshot.toObject(Follow.class);
+                if (myFollow != null) {
+                    follow_list = myFollow.followList;
+                    if (!follow_list.isEmpty()) {
+                        followed = follow_list.contains(user_email);
+                    }
+                    else{
+                        followed = false;
+                    }
+                    if(!followed){
+                        binding.tvFollow.setText("Follow");
+                    }
+                    else{
+                        binding.tvFollow.setText("Followed");
+                    }
+                }
+            }
+        });
     }
 
     private void loadData(){
@@ -122,6 +159,10 @@ public class OtherProfileActivity extends BaseActivity {
             intent.putExtra(MacroDef.KEY_USER, user);
             startActivity(intent);
         });
+        binding.btFollow.setOnClickListener(view -> {
+            //检查之前follow类是否含有数据.并添加新contributor email到里面去
+            followMainFunc();
+        });
     }
 
     private void showGrid() {
@@ -150,6 +191,53 @@ public class OtherProfileActivity extends BaseActivity {
                 startActivity(new Intent(getApplicationContext(), RecipeDetailActivity.class));
             }
         }) ;
+    }
+
+    private void followMainFunc() {
+        firebaseFirestore = FirebaseFirestore.getInstance();
+        user_email = recipes.recipeContributorEmail;
+        DocumentReference docRef = firebaseFirestore.collection("follow").document(preferences.getString(MacroDef.KEY_EMAIL));
+        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+
+                myFollow = documentSnapshot.toObject(Follow.class);
+                if(myFollow != null){
+                    if (myFollow.followList != null && containFollow(myFollow, user_email)) {
+                        myFollow.followList.remove(user_email);
+                        binding.tvFollow.setText("Follow");
+                        showToast("Follow Denied");
+                    } else if (myFollow.followList != null) {
+                        myFollow.followList.add(user_email);
+                        binding.tvFollow.setText("Followed");
+                        showToast("Follow Success");
+                    }
+                }
+                else {
+                    myFollow = new Follow(Collections.singletonList(user_email));
+                    binding.tvFollow.setText("Followed");
+                    showToast("This is your first time follow someone");
+                }
+                String currentEmail=preferences.getString(MacroDef.KEY_EMAIL);
+                firebaseFirestore.collection("follow").document(currentEmail)
+                        .set(myFollow).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                Log.d(TAG,"successfully written!");
+                            }
+                        });
+            }
+        });
+    }
+
+    private boolean containFollow(Follow myFollow, String user_email) {
+        List<String> arr=myFollow.followList;
+        return arr.contains(user_email);
+    }
+
+    private void showToast(String message) {
+        Toast.makeText(getApplicationContext(), message,Toast.LENGTH_SHORT).show();
     }
 
 }
