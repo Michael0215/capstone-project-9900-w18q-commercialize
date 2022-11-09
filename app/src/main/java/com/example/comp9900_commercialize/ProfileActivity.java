@@ -37,6 +37,7 @@ import com.example.comp9900_commercialize.databinding.ActivityProfileBinding;
 import com.example.comp9900_commercialize.utilities.MacroDef;
 import com.example.comp9900_commercialize.utilities.Preferences;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -235,9 +236,28 @@ public class ProfileActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(DocumentSnapshot documentSnapshot) {
                     LastFeed lastFeed = documentSnapshot.toObject(LastFeed.class);
-                    if(value.getDocumentChanges().get(0).getDocument().toObject(Recipe.class).recipePublishTime
-                            .compareTo(lastFeed.latestTime) > 0)
+                    if(lastFeed == null){
                         binding.redDot.setVisibility(View.VISIBLE);
+                        LastFeed createLastFeed = new LastFeed();
+                        createLastFeed.latestTime = "1970-01-01 00:00:00";
+                        firebaseFirestore.collection("lastFeed").document(preferences.getString(MacroDef.KEY_EMAIL))
+                                .set(createLastFeed)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@io.reactivex.rxjava3.annotations.NonNull Exception e) {
+                                    }
+                                });
+                    }
+                    else{
+                        if(value.getDocumentChanges().get(0).getDocument().toObject(Recipe.class).recipePublishTime
+                                .compareTo(lastFeed.latestTime) > 0)
+                            binding.redDot.setVisibility(View.VISIBLE);
+                    }
                 }
             });
 
