@@ -42,6 +42,8 @@ import java.util.Map;
 
 public class OtherProfileActivity extends BaseActivity {
 
+    public static final String action = "jason.broadcast.action";
+
     private ActivityOtherProfileBinding binding;
     private Preferences preferences;
     private FirebaseFirestore firebaseFirestore;
@@ -82,7 +84,7 @@ public class OtherProfileActivity extends BaseActivity {
                 if (myFollow != null) {
                     follow_list = myFollow.followList;
                     if (!follow_list.isEmpty()) {
-                        followed = follow_list.contains(user_email);
+                        followed = follow_list.contains(preferences.getString(MacroDef.KEY_OTHER_EMAIL));
                     }
                     else{
                         followed = false;
@@ -227,6 +229,9 @@ public class OtherProfileActivity extends BaseActivity {
                                 Log.d(TAG,"successfully written!");
                             }
                         });
+                Intent intent = new Intent(action);
+                intent.putExtra("data", binding.tvFollow.getText().toString());
+                sendBroadcast(intent);
             }
         });
     }

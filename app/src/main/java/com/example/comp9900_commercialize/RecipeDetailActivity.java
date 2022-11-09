@@ -4,7 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -89,6 +92,8 @@ public class RecipeDetailActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         linearLayoutIngredients = binding.llDetailIngredients;
         linearLayoutProcedures = binding.llDetailProcedures;
+        IntentFilter filter = new IntentFilter(OtherProfileActivity.action);
+        registerReceiver(broadcastReceiver, filter);
         init();
         loadData();
         setListeners();
@@ -97,7 +102,19 @@ public class RecipeDetailActivity extends AppCompatActivity {
         good = findViewById(R.id.ib_like);
     }
 
+    BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
 
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            // TODO Auto-generated method stub
+            binding.btFollow.setText(intent.getExtras().getString("data"));
+        }
+    };
+
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(broadcastReceiver);
+    };
 
     private void init(){
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -220,6 +237,7 @@ public class RecipeDetailActivity extends AppCompatActivity {
                     binding.tvDifficultyDetail.setText("Difficulty: " + recipe.recipeDifficulty);
                     binding.tvScheduledTimeDetail.setText("Scheduled time: " + recipe.recipeScheduledTime);
                     binding.tvDescription.setText(recipe.recipeDescription);
+                    preferences.putString(MacroDef.KEY_OTHER_EMAIL, recipe.recipeContributorEmail);
                     if(recipe.recipeContributorAvatar != null){
                         bytes = Base64.decode(recipe.recipeContributorAvatar, Base64.DEFAULT);
                         bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
@@ -247,6 +265,7 @@ public class RecipeDetailActivity extends AppCompatActivity {
                         binding.rivUserPhoto.setOnClickListener(v -> {
                             preferences.putString(MacroDef.KEY_CONTRIBUTOR_EMAIL, recipe.recipeContributorEmail);
                             startActivity(new Intent(getApplicationContext(), OtherProfileActivity.class));
+
                         });
                     }
                 }
