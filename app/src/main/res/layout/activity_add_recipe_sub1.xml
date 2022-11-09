@@ -20,18 +20,48 @@
         app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
-        android:id="@+id/tv_step_two"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:background="@drawable/background_input"
+        android:id="@+id/tv_step_one"
+        android:layout_width="120dp"
+        android:layout_height="20dp"
         android:layout_marginTop="15dp"
+        android:background="@drawable/background_input"
         android:gravity="center"
-        android:text="Create Recipe Step 2"
+        android:textColor="@color/black"
+        android:backgroundTint="@color/red"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/tv_step_two"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_add_recipe_page" />
+
+    <TextView
+        android:id="@+id/tv_step_two"
+        android:layout_width="120dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/background_input"
+        android:backgroundTint="@color/red"
+        android:gravity="center"
         android:textColor="@color/black"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tv_step_three"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tv_step_one"
+        app:layout_constraintTop_toBottomOf="@+id/tv_add_recipe_page" />
+
+    <TextView
+        android:id="@+id/tv_step_three"
+        android:layout_width="120dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/background_input"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_add_recipe_page"/>
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tv_step_two"
+        app:layout_constraintTop_toBottomOf="@+id/tv_add_recipe_page" />
 
     <TextView
         android:id="@+id/tv_add_ingredient"
