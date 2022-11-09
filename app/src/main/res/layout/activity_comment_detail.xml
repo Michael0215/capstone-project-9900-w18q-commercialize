@@ -23,8 +23,8 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcv_all_comment"
         android:layout_width="match_parent"
-        android:layout_height="600dp"
-        android:layout_marginTop="40dp"
+        android:layout_height="550dp"
+        android:layout_marginTop="45dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/bottom"
         app:layout_constraintTop_toBottomOf="@+id/tv_comment">
