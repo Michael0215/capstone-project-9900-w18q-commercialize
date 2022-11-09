@@ -7,11 +7,27 @@
         <entry key="..\:/capstone-project-9900-w18q-commercialize/app/src/main/res/drawable/ic_add.xml" value="0.1" />
         <entry key="..\:/capstone-project-9900-w18q-commercialize/app/src/main/res/drawable/ic_add1.xml" value="0.1" />
         <entry key="..\:/capstone-project-9900-w18q-commercialize/app/src/main/res/drawable/ic_collection2.xml" value="0.2015" />
+        <entry key="..\:/capstone-project-9900-w18q-commercialize/app/src/main/res/drawable/ic_sub.xml" value="0.223" />
+        <entry key="..\:/capstone-project-9900-w18q-commercialize/app/src/main/res/drawable/ic_subscribe.xml" value="0.223" />
+        <entry key="..\:/capstone-project-9900-w18q-commercialize/app/src/main/res/drawable/ic_subscribe2.xml" value="0.223" />
+        <entry key="..\:/capstone-project-9900-w18q-commercialize/app/src/main/res/layout/activity_add_recipe.xml" value="0.35052083333333334" />
+        <entry key="..\:/capstone-project-9900-w18q-commercialize/app/src/main/res/layout/activity_add_recipe_sub1.xml" value="0.35052083333333334" />
+        <entry key="..\:/capstone-project-9900-w18q-commercialize/app/src/main/res/layout/activity_add_recipe_sub2.xml" value="0.35052083333333334" />
         <entry key="..\:/capstone-project-9900-w18q-commercialize/app/src/main/res/layout/activity_chat_main.xml" value="0.23489583333333333" />
+        <entry key="..\:/capstone-project-9900-w18q-commercialize/app/src/main/res/layout/activity_collection.xml" value="0.35052083333333334" />
+        <entry key="..\:/capstone-project-9900-w18q-commercialize/app/src/main/res/layout/activity_comment_detail.xml" value="0.35052083333333334" />
+        <entry key="..\:/capstone-project-9900-w18q-commercialize/app/src/main/res/layout/activity_edit_profile.xml" value="0.35052083333333334" />
+        <entry key="..\:/capstone-project-9900-w18q-commercialize/app/src/main/res/layout/activity_email_reset_password.xml" value="0.35052083333333334" />
         <entry key="..\:/capstone-project-9900-w18q-commercialize/app/src/main/res/layout/activity_following.xml" value="0.3115942028985507" />
-        <entry key="..\:/capstone-project-9900-w18q-commercialize/app/src/main/res/layout/activity_guest_profile.xml" value="0.25317028985507245" />
+        <entry key="..\:/capstone-project-9900-w18q-commercialize/app/src/main/res/layout/activity_forgot_password.xml" value="0.35052083333333334" />
+        <entry key="..\:/capstone-project-9900-w18q-commercialize/app/src/main/res/layout/activity_guest_main.xml" value="0.33" />
+        <entry key="..\:/capstone-project-9900-w18q-commercialize/app/src/main/res/layout/activity_guest_profile.xml" value="0.6259780907668232" />
+        <entry key="..\:/capstone-project-9900-w18q-commercialize/app/src/main/res/layout/activity_guest_recipe_detail.xml" value="0.35052083333333334" />
+        <entry key="..\:/capstone-project-9900-w18q-commercialize/app/src/main/res/layout/activity_guest_search.xml" value="0.35052083333333334" />
+        <entry key="..\:/capstone-project-9900-w18q-commercialize/app/src/main/res/layout/activity_guest_search_result.xml" value="0.35052083333333334" />
         <entry key="..\:/capstone-project-9900-w18q-commercialize/app/src/main/res/layout/activity_live_chat.xml" value="0.264945652173913" />
         <entry key="..\:/capstone-project-9900-w18q-commercialize/app/src/main/res/layout/activity_login.xml" value="0.22" />
+        <entry key="..\:/capstone-project-9900-w18q-commercialize/app/src/main/res/layout/activity_main.xml" value="0.35052083333333334" />
         <entry key="..\:/capstone-project-9900-w18q-commercialize/app/src/main/res/layout/activity_other_profile.xml" value="0.33" />
         <entry key="..\:/capstone-project-9900-w18q-commercialize/app/src/main/res/layout/activity_profile.xml" value="0.284375" />
         <entry key="..\:/capstone-project-9900-w18q-commercialize/app/src/main/res/layout/activity_recipe_detail.xml" value="0.21" />
