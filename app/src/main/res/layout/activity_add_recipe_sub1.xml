@@ -21,13 +21,13 @@
 
     <TextView
         android:id="@+id/tv_step_one"
-        android:layout_width="120dp"
+        android:layout_width="100dp"
         android:layout_height="20dp"
         android:layout_marginTop="15dp"
         android:background="@drawable/background_input"
+        android:backgroundTint="@color/red"
         android:gravity="center"
         android:textColor="@color/black"
-        android:backgroundTint="@color/red"
         android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@+id/tv_step_two"
         app:layout_constraintHorizontal_bias="0.5"
@@ -36,12 +36,12 @@
 
     <TextView
         android:id="@+id/tv_step_two"
-        android:layout_width="120dp"
+        android:layout_width="100dp"
         android:layout_height="20dp"
         android:layout_marginTop="15dp"
         android:background="@drawable/background_input"
-        android:backgroundTint="@color/red"
         android:gravity="center"
+        android:backgroundTint="@color/red"
         android:textColor="@color/black"
         android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@+id/tv_step_three"
@@ -51,7 +51,7 @@
 
     <TextView
         android:id="@+id/tv_step_three"
-        android:layout_width="120dp"
+        android:layout_width="100dp"
         android:layout_height="20dp"
         android:layout_marginTop="15dp"
         android:background="@drawable/background_input"

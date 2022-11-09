@@ -18,9 +18,10 @@
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/tv_step_one"
-        android:layout_width="120dp"
+        android:layout_width="100dp"
         android:layout_height="20dp"
         android:layout_marginTop="15dp"
         android:background="@drawable/background_input"
@@ -35,7 +36,7 @@
 
     <TextView
         android:id="@+id/tv_step_two"
-        android:layout_width="120dp"
+        android:layout_width="100dp"
         android:layout_height="20dp"
         android:layout_marginTop="15dp"
         android:background="@drawable/background_input"
@@ -49,7 +50,7 @@
 
     <TextView
         android:id="@+id/tv_step_three"
-        android:layout_width="120dp"
+        android:layout_width="100dp"
         android:layout_height="20dp"
         android:layout_marginTop="15dp"
         android:background="@drawable/background_input"
