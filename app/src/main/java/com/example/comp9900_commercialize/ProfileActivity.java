@@ -19,6 +19,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
+import android.view.View;
 import android.widget.GridView;
 import android.widget.Toast;
 
@@ -28,18 +29,22 @@ import com.example.comp9900_commercialize.adapters.ProfileRecipeAdapter;
 import com.example.comp9900_commercialize.adapters.StaggerAdapter;
 import com.example.comp9900_commercialize.bean.Datas;
 
+import com.example.comp9900_commercialize.bean.Follow;
 import com.example.comp9900_commercialize.bean.ItemProfileRecipe;
+import com.example.comp9900_commercialize.bean.LastFeed;
 import com.example.comp9900_commercialize.bean.Recipe;
 import com.example.comp9900_commercialize.databinding.ActivityProfileBinding;
 import com.example.comp9900_commercialize.utilities.MacroDef;
 import com.example.comp9900_commercialize.utilities.Preferences;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -65,6 +70,7 @@ public class ProfileActivity extends AppCompatActivity {
     private SwipeRefreshLayout refreshLayout;
     private Recipe recipes;
     public static ProfileActivity instance = null;
+    private Follow follow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +89,8 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void init(){
         preferences = new Preferences(getApplicationContext());
+        firebaseFirestore = FirebaseFirestore.getInstance();
+        getFollowList();
     }
 
     private void loadData(){
@@ -163,8 +171,6 @@ public class ProfileActivity extends AppCompatActivity {
                 });
     }
 
-
-
     private void showGrid() {
         //准备布局管理器
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
@@ -193,27 +199,45 @@ public class ProfileActivity extends AppCompatActivity {
         }) ;
     }
 
-
-
-    private void showToast(String message) {
-        Toast.makeText(getApplicationContext(), message,Toast.LENGTH_SHORT).show();
+    private void getFollowList() {
+        DocumentReference docRef = firebaseFirestore.collection("follow").document(preferences.getString(MacroDef.KEY_EMAIL));
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@io.reactivex.rxjava3.annotations.NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        follow = document.toObject(Follow.class);
+                        listenUpdates();
+                    }
+                }
+            }
+        });
     }
-    // 等数据库内有数据了就可以把下面这个函数注释掉了
-//    private void initData() {
-//        //list<Data>-->Adapter-->SetAdapter-->显示数据
-//        //创建数据集合
-//        mData = new ArrayList<>();
-//        //创建模拟数据
-//        for (int i = 0; i < Datas.icons.length; i++){
-//            //创建数据对象
-//            ItemProfileRecipe data = new ItemProfileRecipe();
-//            data.id = String.valueOf(i);
-//            @SuppressLint("ResourceType") InputStream img_icon = getResources().openRawResource(Datas.icons[i]);
-//            data.icon = BitmapFactory.decodeStream(img_icon);
-//            data.title = "我是第" + (i+1) + "个菜谱";
-//            //添加到集合里头
-//            mData.add(data);
-//        }
-//        showGrid();
-//    }
+
+    private void listenUpdates(){
+        firebaseFirestore = FirebaseFirestore.getInstance();
+        firebaseFirestore.collection("recipes")
+                .whereIn("recipeContributorEmail", follow.followList)
+                .orderBy("recipePublishTime", Query.Direction.DESCENDING)
+                .addSnapshotListener(eventListener);
+    }
+
+    private final EventListener<QuerySnapshot> eventListener = (value, error) -> {
+        if(error != null) {
+            return;
+        }
+        if(value != null) {
+            DocumentReference docRef = firebaseFirestore.collection("lastFeed").document(preferences.getString(MacroDef.KEY_EMAIL));
+            docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    LastFeed lastFeed = documentSnapshot.toObject(LastFeed.class);
+                    if(!value.getDocumentChanges().get(0).getDocument().toObject(Recipe.class).recipeId.equals(lastFeed.recipeId))
+                        binding.redDot.setVisibility(View.VISIBLE);
+                }
+            });
+
+        }
+    };
 }

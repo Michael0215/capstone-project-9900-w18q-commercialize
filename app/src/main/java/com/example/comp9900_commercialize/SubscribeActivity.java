@@ -16,11 +16,14 @@ import android.widget.Toast;
 
 import com.example.comp9900_commercialize.adapters.ProfileRecipeAdapter;
 import com.example.comp9900_commercialize.adapters.SubscribeAdapter;
+import com.example.comp9900_commercialize.bean.LastFeed;
 import com.example.comp9900_commercialize.bean.Recipe;
 import com.example.comp9900_commercialize.databinding.ActivitySubscribeBinding;
 import com.example.comp9900_commercialize.utilities.MacroDef;
 import com.example.comp9900_commercialize.utilities.Preferences;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FieldPath;
@@ -42,6 +45,7 @@ public class SubscribeActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private SubscribeAdapter adapter;
     private SwipeRefreshLayout refreshLayout;
+    private LastFeed lastFeed;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +98,7 @@ public class SubscribeActivity extends AppCompatActivity {
 
     private void init(){
         preferences = new Preferences(getApplicationContext());
+//        preferences.putBoolean(MacroDef.KEY_NEWS_FEED, false);
         firebaseFirestore = FirebaseFirestore.getInstance();
         followList = new ArrayList<String>();
         getFollowList();
@@ -118,7 +123,7 @@ public class SubscribeActivity extends AppCompatActivity {
                     }
                 });
         refreshLayout.setRefreshing(false);
-        Toast.makeText(SubscribeActivity.this, "Refresh Succeed!", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(SubscribeActivity.this, "Refresh Succeed!", Toast.LENGTH_SHORT).show();
     }
 
     private void loadData(){
@@ -153,6 +158,7 @@ public class SubscribeActivity extends AppCompatActivity {
         binding.tvLoading.setVisibility(View.GONE);
         recyclerView.postInvalidate();
         initListener();
+        updateLastFeed();
 //        System.out.println(mData.get(0).recipeName+mData.get(1).recipeName);
 
     }
@@ -166,6 +172,22 @@ public class SubscribeActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), RecipeDetailActivity.class));
             }
         }) ;
+    }
+
+    private void updateLastFeed(){
+        lastFeed = new LastFeed();
+        lastFeed.recipeId = mData.get(0).recipeId;
+        firebaseFirestore.collection("lastFeed").document(preferences.getString(MacroDef.KEY_EMAIL)).set(lastFeed)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@io.reactivex.rxjava3.annotations.NonNull Exception e) {
+                    }
+                });
     }
 
 }

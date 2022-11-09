@@ -19,6 +19,7 @@ import com.example.comp9900_commercialize.adapters.StaggerAdapter;
 import com.example.comp9900_commercialize.bean.Collection;
 import com.example.comp9900_commercialize.bean.Follow;
 import com.example.comp9900_commercialize.bean.ItemExplore;
+import com.example.comp9900_commercialize.bean.LastFeed;
 import com.example.comp9900_commercialize.bean.Recipe;
 import com.example.comp9900_commercialize.databinding.ActivityMainBinding;
 import com.example.comp9900_commercialize.utilities.MacroDef;
@@ -31,6 +32,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -55,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseFirestore firebaseFirestore;
     private Preferences preferences;
     private Recipe recipe;
+    private Follow follow;
 
     private FirebaseFirestore db;
     private FirebaseUser user;
@@ -438,6 +441,7 @@ public class MainActivity extends AppCompatActivity {
         //创建数据集合409824
         mData = new ArrayList<>();
         db = FirebaseFirestore.getInstance();
+        getFollowList();
         user = FirebaseAuth.getInstance().getCurrentUser();
         DocumentReference Ref = db.collection("collection").document(user.getEmail());
         DocumentReference Reference = db.collection("users").document(user.getEmail());
@@ -797,4 +801,47 @@ public class MainActivity extends AppCompatActivity {
         binding.btNotice.setOnClickListener(v ->
                 startActivity(new Intent(getApplicationContext(), ChatMainActivity.class)));
     }
+
+    private void getFollowList() {
+        DocumentReference docRef = firebaseFirestore.collection("follow").document(preferences.getString(MacroDef.KEY_EMAIL));
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@io.reactivex.rxjava3.annotations.NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        follow = document.toObject(Follow.class);
+                        listenUpdates();
+                    }
+                }
+            }
+        });
+    }
+
+    private void listenUpdates(){
+        firebaseFirestore = FirebaseFirestore.getInstance();
+        firebaseFirestore.collection("recipes")
+                .whereIn("recipeContributorEmail", follow.followList)
+                .orderBy("recipePublishTime", Query.Direction.DESCENDING)
+                .addSnapshotListener(eventListener);
+    }
+
+    private final EventListener<QuerySnapshot> eventListener = (value, error) -> {
+        if(error != null) {
+            return;
+        }
+        if(value != null) {
+            DocumentReference docRef = firebaseFirestore.collection("lastFeed").document(preferences.getString(MacroDef.KEY_EMAIL));
+            docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    LastFeed lastFeed = documentSnapshot.toObject(LastFeed.class);
+                    if(!value.getDocumentChanges().get(0).getDocument().toObject(Recipe.class).recipeId.equals(lastFeed.recipeId))
+                        binding.redDot.setVisibility(View.VISIBLE);
+                }
+            });
+
+        }
+    };
+
 }

@@ -273,15 +273,14 @@
         android:layout_marginStart="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
-    <!--    <androidx.appcompat.widget.AppCompatImageView-->
-    <!--        android:id="@+id/bt_refresh"-->
-    <!--        android:layout_width="30dp"-->
-    <!--        android:layout_height="30dp"-->
-    <!--        android:layout_marginStart="16dp"-->
-    <!--        android:layout_marginTop="5dp"-->
-    <!--        android:src="@drawable/ic_refresh"-->
-    <!--        app:tint="@color/white"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toTopOf="parent"/>-->
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/red_dot"
+        android:src="@drawable/dot_red"
+        app:layout_constraintLeft_toRightOf="@+id/ib_subscribe"
+        app:layout_constraintRight_toRightOf="@+id/ib_subscribe"
+        app:layout_constraintTop_toTopOf="@+id/ib_subscribe"
+        android:visibility="invisible"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
 
