@@ -74,6 +74,10 @@ public class CommentActivity extends AppCompatActivity {
         loadData();
     }
 
+    public void refresh(){
+        finish();
+        startActivity(getIntent());
+    }
     private void loadData() {
         mData=new ArrayList<itemComment>();
         itemComment iC=new itemComment();
@@ -106,17 +110,6 @@ public class CommentActivity extends AppCompatActivity {
         //initListener();
     }
 
-//    private void initListener() {
-//        adapter.setOnItemClickListener(new CommentAdapter.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(int position) {
-//                preferences.putString(MacroDef.KEY_RECIPE_ID, mData.get(position).recipeId);
-//                preferences.putBoolean(MacroDef.KEY_MODE_CREATE, false);
-//                startActivity(new Intent(getApplicationContext(), RecipeDetailActivity.class));
-//            }
-//        }) ;
-//    }
-
 
     private void CommentMainFunc() {
         mData=new ArrayList<>();
@@ -136,11 +129,14 @@ public class CommentActivity extends AppCompatActivity {
                     if(myComment.commentList != null){
                         myComment.commentList.add(newComment);
                         showToast("You comment something");
+                        //onResume();
+                        binding.ivAddComment.setText("");
                     }
                 }else{
                     myComment=new Comment(newComment);
                     showToast("You comment something 1st");
                     binding.ivAddComment.setText("");
+                    //onResume();
                 }
                 db.collection("comment").document(recipeId).set(myComment).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -148,8 +144,10 @@ public class CommentActivity extends AppCompatActivity {
                         Log.d(TAG,"successfully written!");
                     }
                 });
+                recreate();
             }
         });
+
     }
 
     private void setListener() {
@@ -166,6 +164,7 @@ public class CommentActivity extends AppCompatActivity {
                     CommentMainFunc();
                 }
             }
+
         });
     }
 
