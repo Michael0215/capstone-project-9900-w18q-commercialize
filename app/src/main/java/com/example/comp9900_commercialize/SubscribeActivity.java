@@ -129,23 +129,27 @@ public class SubscribeActivity extends AppCompatActivity {
     private void loadData(){
         mData = new ArrayList<Recipe>();
         CollectionReference collectionReference = firebaseFirestore.collection("recipes");
-        Query query = collectionReference.whereIn("recipeContributorEmail", followList).orderBy("recipePublishTime", Query.Direction.DESCENDING);;
-        query.get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            // retrieve all posts in the 'posts' table
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Recipe recipe = document.toObject(Recipe.class);
-                                mData.add(recipe);
-                            }
-                            showRecycler();
-                        } else { // error handling
+        try{
+            Query query = collectionReference.whereIn("recipeContributorEmail", followList).orderBy("recipePublishTime", Query.Direction.DESCENDING);;
+            query.get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+                                // retrieve all posts in the 'posts' table
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    Recipe recipe = document.toObject(Recipe.class);
+                                    mData.add(recipe);
+                                }
+                                showRecycler();
+                            } else { // error handling
 //                            Toast.makeText(SubscribeActivity.this, "Error getting documents."+task.getException(), Toast.LENGTH_SHORT).show();
+                            }
                         }
-                    }
-                });
+                    });
+        }catch (Exception e){
+            showRecycler();
+        }
     }
 
     private void showRecycler() {
@@ -158,7 +162,9 @@ public class SubscribeActivity extends AppCompatActivity {
         binding.tvLoading.setVisibility(View.GONE);
         recyclerView.postInvalidate();
         initListener();
-        updateLastFeed();
+        try{
+            updateLastFeed();
+        }catch (Exception e){}
 //        System.out.println(mData.get(0).recipeName+mData.get(1).recipeName);
 
     }
@@ -176,7 +182,7 @@ public class SubscribeActivity extends AppCompatActivity {
 
     private void updateLastFeed(){
         lastFeed = new LastFeed();
-        lastFeed.recipeId = mData.get(0).recipeId;
+        lastFeed.latestTime = mData.get(0).recipePublishTime;
         firebaseFirestore.collection("lastFeed").document(preferences.getString(MacroDef.KEY_EMAIL)).set(lastFeed)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override

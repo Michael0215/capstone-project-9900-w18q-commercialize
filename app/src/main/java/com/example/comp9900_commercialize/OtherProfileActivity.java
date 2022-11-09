@@ -133,7 +133,8 @@ public class OtherProfileActivity extends BaseActivity {
                                                 Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
                                                 binding.rivUserPhoto.setImageBitmap(bitmap);
                                             }
-                                            binding.tvUserName.setText(recipes.recipeContributorName);
+                                            preferences.putString(MacroDef.KEY_OTHER_EMAIL, (String)data.get("E-mail"));
+                                            binding.tvUserName.setText((String)data.get("Name"));
                                             binding.tvContactDetail.setText((String)data.get("Contact Detail"));
                                         }
                                     }
@@ -197,7 +198,7 @@ public class OtherProfileActivity extends BaseActivity {
 
     private void followMainFunc() {
         firebaseFirestore = FirebaseFirestore.getInstance();
-        user_email = recipes.recipeContributorEmail;
+        user_email = preferences.getString(MacroDef.KEY_OTHER_EMAIL);
         DocumentReference docRef = firebaseFirestore.collection("follow").document(preferences.getString(MacroDef.KEY_EMAIL));
         docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @SuppressLint("SetTextI18n")

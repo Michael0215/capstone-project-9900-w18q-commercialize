@@ -2,20 +2,20 @@ package com.example.comp9900_commercialize.bean;
 
 public class LastFeed {
 
-    public String recipeId;
+    public String latestTime;
 
     public LastFeed() {
     }
 
     public LastFeed(String recipeId) {
-        this.recipeId = recipeId;
+        this.latestTime = recipeId;
     }
 
-    public String getRecipeId() {
-        return recipeId;
+    public String getLatestTime() {
+        return latestTime;
     }
 
-    public void setRecipeId(String recipeId) {
-        this.recipeId = recipeId;
+    public void setLatestTime(String latestTime) {
+        this.latestTime = latestTime;
     }
 }

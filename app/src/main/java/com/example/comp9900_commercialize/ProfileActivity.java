@@ -217,10 +217,12 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void listenUpdates(){
         firebaseFirestore = FirebaseFirestore.getInstance();
-        firebaseFirestore.collection("recipes")
-                .whereIn("recipeContributorEmail", follow.followList)
-                .orderBy("recipePublishTime", Query.Direction.DESCENDING)
-                .addSnapshotListener(eventListener);
+        if(follow != null && follow.followList != null && !follow.followList.isEmpty()){
+            firebaseFirestore.collection("recipes")
+                    .whereIn("recipeContributorEmail", follow.followList)
+                    .orderBy("recipePublishTime", Query.Direction.DESCENDING)
+                    .addSnapshotListener(eventListener);
+        }
     }
 
     private final EventListener<QuerySnapshot> eventListener = (value, error) -> {
@@ -233,7 +235,8 @@ public class ProfileActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(DocumentSnapshot documentSnapshot) {
                     LastFeed lastFeed = documentSnapshot.toObject(LastFeed.class);
-                    if(!value.getDocumentChanges().get(0).getDocument().toObject(Recipe.class).recipeId.equals(lastFeed.recipeId))
+                    if(value.getDocumentChanges().get(0).getDocument().toObject(Recipe.class).recipePublishTime
+                            .compareTo(lastFeed.latestTime) > 0)
                         binding.redDot.setVisibility(View.VISIBLE);
                 }
             });
