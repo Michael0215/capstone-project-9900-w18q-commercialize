@@ -128,7 +128,7 @@ public class CommentActivity extends AppCompatActivity {
         adapter = new CommentAdapter(mData);
         //设置适配器
         RCVlist.setAdapter(adapter);
-        //initListener();
+        initListener();
     }
 
 
@@ -208,5 +208,14 @@ public class CommentActivity extends AppCompatActivity {
 
     private void showToast(String message) {
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+    }
+
+    private void initListener() {
+        adapter.setOnItemClickListener(new CommentAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                binding.ivAddComment.setText("@" + mData.get(position).username + " ");
+            }
+        }) ;
     }
 }

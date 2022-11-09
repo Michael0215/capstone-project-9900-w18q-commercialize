@@ -20,7 +20,7 @@ import java.util.List;
 
 public class CommentAdapter  extends RecyclerView.Adapter<CommentAdapter.SimpleHolder> {
     private List<itemComment> mData;
-    private OnItemClickListener mOnItemClickListener;
+    private CommentAdapter.OnItemClickListener mOnItemClickListener;
     public CommentAdapter(List<itemComment> data){
         this.mData=data;
     }
