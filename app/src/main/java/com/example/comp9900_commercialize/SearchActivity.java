@@ -92,7 +92,7 @@ public class SearchActivity extends AppCompatActivity {
         });
         binding.btSelectType3.setOnClickListener(v -> {
             preferences.putString(MacroDef.KEY_SEARCH_MODE, "By type");
-            preferences.putString(MacroDef.KEY_SEARCH_TYPE, "Brunch");
+            preferences.putString(MacroDef.KEY_SEARCH_TYPE, "Dessert");
             startActivity(new Intent(getApplicationContext(), SearchResultActivity.class));
         });
         binding.btSelectType4.setOnClickListener(v -> {
