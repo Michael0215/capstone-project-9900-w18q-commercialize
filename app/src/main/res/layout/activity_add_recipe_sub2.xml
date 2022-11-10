@@ -11,9 +11,9 @@
         android:id="@+id/tv_add_recipe_page"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#1C2E46"
+        android:background="#E7594B"
         android:gravity="center_horizontal"
-        android:text="Post Recipe"
+        android:text="Create Recipe"
         android:textColor="@color/white"
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -98,20 +98,20 @@
         android:id="@+id/view01"
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:background="@color/drak_blue"
+        android:background="@color/brown"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/ProcedureRecyclerView"/>
     <View android:id="@+id/view02"
         android:layout_width="2dp"
         android:layout_height="300dp"
-        android:background="@color/drak_blue"
+        android:background="@color/brown"
         app:layout_constraintStart_toStartOf="@+id/ProcedureRecyclerView"
         app:layout_constraintTop_toTopOf="@+id/ProcedureRecyclerView"
         app:layout_constraintBottom_toBottomOf="@+id/ProcedureRecyclerView"/>
     <View android:id="@+id/view03"
         android:layout_width="2dp"
         android:layout_height="300dp"
-        android:background="@color/drak_blue"
+        android:background="@color/brown"
         app:layout_constraintEnd_toEndOf="@+id/ProcedureRecyclerView"
         app:layout_constraintTop_toTopOf="@+id/ProcedureRecyclerView"
         app:layout_constraintBottom_toBottomOf="@+id/ProcedureRecyclerView"/>
@@ -119,7 +119,7 @@
         android:id="@+id/view04"
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:background="@color/drak_blue"
+        android:background="@color/brown"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ProcedureRecyclerView"/>
     <TextView
@@ -150,7 +150,7 @@
         android:layout_height="70dp"
         android:layout_marginStart="40dp"
         android:layout_marginBottom="40dp"
-        android:backgroundTint="@color/dark_blue"
+        android:backgroundTint="#E7594B"
         android:text="PREV"
         android:textColor="@color/white"
         android:textSize="13sp"
@@ -166,7 +166,7 @@
         android:layout_height="70dp"
         android:layout_marginEnd="40dp"
         android:layout_marginBottom="40dp"
-        android:backgroundTint="@color/dark_blue"
+        android:backgroundTint="#E7594B"
         android:text="PUBLISH"
         android:textColor="@color/white"
         android:textSize="13sp"
@@ -175,14 +175,6 @@
         android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/spn_classification" />
-    <!--    <GridView-->
-    <!--    android:id="@+id/gv_recipe"-->
-    <!--    android:layout_width="match_parent"-->
-    <!--    android:layout_height="600dp"-->
-    <!--    android:layout_marginTop="15dp"-->
-    <!--    app:layout_constraintStart_toStartOf="parent"-->
-    <!--    app:layout_constraintTop_toBottomOf="@+id/tv_add_recipe_page"/>-->
-
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/bt_cancel"
@@ -190,8 +182,7 @@
         android:layout_height="30dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="5dp"
-        android:padding="6dp"
-        android:src="@drawable/ic_back"
+        android:src="@drawable/ic_close"
         app:tint="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
@@ -205,6 +196,6 @@
         app:layout_constraintEnd_toEndOf="@id/ProcedureRecyclerView"
         app:layout_constraintBottom_toBottomOf="@id/tv_add_procedure"
         android:drawableRight="@drawable/ic_add"
-        android:backgroundTint="@color/primary"/>
+        android:backgroundTint="#E7594B"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -123,7 +123,7 @@ public class SubscribeActivity extends AppCompatActivity {
                     }
                 });
         refreshLayout.setRefreshing(false);
-//        Toast.makeText(SubscribeActivity.this, "Refresh Succeed!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(SubscribeActivity.this, "Refresh Succeed!", Toast.LENGTH_SHORT).show();
     }
 
     private void loadData(){
