@@ -11,7 +11,7 @@
         android:id="@+id/tv_search_page"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#1C2E46"
+        android:background="#E7594B"
         android:gravity="center_horizontal"
         android:text="Search"
         android:textColor="@color/white"

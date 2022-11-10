@@ -11,9 +11,9 @@
         android:id="@+id/tv_add_recipe_page"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#1C2E46"
+        android:background="#E7594B"
         android:gravity="center_horizontal"
-        android:text="Post Recipe"
+        android:text="Create Recipe"
         android:textColor="@color/white"
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -128,7 +128,7 @@
         android:id="@+id/view01"
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:background="@color/drak_blue"
+        android:background="@color/brown"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/et_recipe_description" />
 
@@ -136,7 +136,7 @@
         android:id="@+id/view02"
         android:layout_width="2dp"
         android:layout_height="150dp"
-        android:background="@color/drak_blue"
+        android:background="@color/brown"
         app:layout_constraintBottom_toBottomOf="@+id/et_recipe_description"
         app:layout_constraintStart_toStartOf="@+id/et_recipe_description"
         app:layout_constraintTop_toTopOf="@+id/et_recipe_description" />
@@ -145,7 +145,7 @@
         android:id="@+id/view03"
         android:layout_width="2dp"
         android:layout_height="150dp"
-        android:background="@color/drak_blue"
+        android:background="@color/brown"
         app:layout_constraintBottom_toBottomOf="@+id/et_recipe_description"
         app:layout_constraintEnd_toEndOf="@+id/et_recipe_description"
         app:layout_constraintTop_toTopOf="@+id/et_recipe_description" />
@@ -154,7 +154,7 @@
         android:id="@+id/view04"
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:background="@color/drak_blue"
+        android:background="@color/brown"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_recipe_description" />
 
@@ -164,7 +164,7 @@
         android:layout_height="70dp"
         android:layout_marginTop="40dp"
         android:layout_marginBottom="40dp"
-        android:backgroundTint="@color/dark_blue"
+        android:backgroundTint="#E7594B"
         android:text="NEXT"
         android:textColor="@color/white"
         android:textSize="13sp"

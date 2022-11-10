@@ -4,16 +4,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     android:padding="24dp"
     android:clipToPadding="false">
 
     <ImageView
         android:id="@+id/iv_title"
         android:layout_width="354dp"
-        android:layout_height="212dp"
+        android:layout_height="220dp"
         android:layout_marginEnd="3dp"
         android:layout_marginTop="10dp"
-        android:src="@drawable/template"
+        android:src="@drawable/cover_icon"
+        android:background="@drawable/background_login"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -21,7 +23,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/iv_title"
-        android:layout_marginStart="4dp"
         android:gravity="center_horizontal"
         android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
@@ -30,7 +31,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="20dp"
             android:text="Welcome Back!"
             android:textColor="@color/primary_text"
             android:textSize="18sp"
@@ -49,7 +50,7 @@
             android:id="@+id/et_email"
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="30dp"
             android:background="@drawable/background_input"
             android:hint="Enter your email"
             android:imeOptions="actionNext"
@@ -80,7 +81,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="20dp"
-            android:backgroundTint="@color/dark_blue"
+            android:backgroundTint="#E7594B"
             android:text="sign in"
             android:textColor="@color/white"
             android:textSize="13sp"
@@ -110,7 +111,7 @@
             android:id="@+id/tv_sign_up_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:text="Don't have an account?"
             android:textColor="@color/dark_blue"
             android:gravity="center"
@@ -126,30 +127,32 @@
             android:gravity="center"
             android:textSize="13sp"
             android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_browse_as_guest_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="17dp"
+            android:text="Browse"
+            android:gravity="center"
+            android:textColor="@color/dark_blue"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+        <TextView
+            android:id="@+id/tv_browse_as_guest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="AS A GUEST"
+            android:textColor="@color/red"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/tv_browse_as_guest_text"
+            app:layout_constraintEnd_toEndOf="@+id/tv_browse_as_guest_text"
+            app:layout_constraintTop_toBottomOf="@+id/tv_browse_as_guest_text"/>
     </LinearLayout>
-    <TextView
-        android:id="@+id/tv_browse_as_guest_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:layout_marginEnd="10dp"
-        android:text="Browse"
-        android:gravity="center"
-        android:textColor="@color/dark_blue"
-        android:textSize="13sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
-    <TextView
-        android:id="@+id/tv_browse_as_guest"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="AS A GUEST"
-        android:textColor="@color/red"
-        android:textSize="13sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/tv_browse_as_guest_text"
-        app:layout_constraintEnd_toEndOf="@+id/tv_browse_as_guest_text"
-        app:layout_constraintTop_toBottomOf="@+id/tv_browse_as_guest_text"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
 

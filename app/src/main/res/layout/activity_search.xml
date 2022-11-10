@@ -11,22 +11,12 @@
         android:id="@+id/tv_search_page"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#1C2E46"
+        android:background="#E7594B"
         android:gravity="center_horizontal"
         android:text="Search"
         android:textColor="@color/white"
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/bt_notice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:padding="10dp"
-        android:src="@drawable/ic_notice"
-        app:tint="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
     <EditText
         android:id="@+id/et_search_bar"
@@ -55,8 +45,8 @@
         android:id="@+id/bt_search"
         android:layout_width="150dp"
         android:layout_height="60dp"
-        android:layout_marginTop="15dp"
-        android:backgroundTint="@color/dark_blue"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="#E7594B"
         android:text="SEARCH"
         android:textColor="@color/white"
         android:textSize="18sp"
@@ -65,13 +55,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_search_bar" />
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/bt_select_type1"
         android:layout_width="150dp"
         android:layout_height="100dp"
         android:layout_marginTop="40dp"
         android:layout_marginStart="20dp"
-        android:backgroundTint="@color/dark_blue"
+        android:backgroundTint="@color/yellow"
         android:text="Snack"
         android:drawableTop="@drawable/ic_snack"
         android:gravity="bottom|center"
@@ -88,7 +79,7 @@
         android:layout_height="100dp"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="20dp"
-        android:backgroundTint="@color/dark_blue"
+        android:backgroundTint="@color/yellow"
         android:text="Breakfast"
         android:drawableTop="@drawable/ic_breakfast"
         android:gravity="bottom|center"
@@ -105,7 +96,7 @@
         android:layout_height="100dp"
         android:layout_marginTop="20dp"
         android:layout_marginStart="20dp"
-        android:backgroundTint="@color/dark_blue"
+        android:backgroundTint="@color/yellow"
         android:text="Dessert"
         android:drawableTop="@drawable/ic_dessert"
         android:gravity="bottom|center"
@@ -122,7 +113,7 @@
         android:layout_height="100dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
-        android:backgroundTint="@color/dark_blue"
+        android:backgroundTint="@color/yellow"
         android:text="Lunch"
         android:drawableTop="@drawable/ic_lunch"
         android:gravity="bottom|center"
@@ -138,7 +129,7 @@
         android:layout_height="100dp"
         android:layout_marginTop="20dp"
         android:layout_marginStart="20dp"
-        android:backgroundTint="@color/dark_blue"
+        android:backgroundTint="@color/yellow"
         android:text="Afternoon tea"
         android:drawableTop="@drawable/ic_afternoon_tea"
         android:gravity="bottom|center"
@@ -155,7 +146,7 @@
         android:layout_height="100dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
-        android:backgroundTint="@color/dark_blue"
+        android:backgroundTint="@color/yellow"
         android:text="Dinner"
         android:textColor="@color/white"
         android:textSize="18sp"
@@ -170,7 +161,7 @@
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:layout_marginBottom="60dp"
-        android:background="@color/drak_blue"
+        android:background="@color/brown"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -206,7 +197,7 @@
         android:id="@+id/view2"
         android:layout_width="2dp"
         android:layout_height="60dp"
-        android:background="@color/drak_blue"
+        android:background="@color/brown"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/ib_search"
         app:layout_constraintHorizontal_bias="0.5"
@@ -224,7 +215,7 @@
         app:layout_constraintEnd_toStartOf="@+id/view3"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/view2"
-         />
+        />
 
     <TextView
         android:id="@+id/tv_search"
@@ -243,7 +234,7 @@
         android:id="@+id/view3"
         android:layout_width="2dp"
         android:layout_height="60dp"
-        android:background="@color/drak_blue"
+        android:background="@color/brown"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/ib_create"
         app:layout_constraintHorizontal_bias="0.5"
@@ -280,8 +271,7 @@
         android:id="@+id/view4"
         android:layout_width="2dp"
         android:layout_height="60dp"
-        android:background="@color/drak_blue"
-
+        android:background="@color/brown"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/ib_subscribe"
         app:layout_constraintHorizontal_bias="0.5"
@@ -318,7 +308,7 @@
         android:id="@+id/view5"
         android:layout_width="2dp"
         android:layout_height="60dp"
-        android:background="@color/drak_blue"
+        android:background="@color/brown"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/ib_profile"
         app:layout_constraintHorizontal_bias="0.5"
@@ -350,24 +340,34 @@
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/ib_profile"
         app:layout_constraintTop_toBottomOf="@+id/ib_profile" />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/bt_notice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:padding="10dp"
+        android:src="@drawable/ic_notice"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/white" />
 
     <View
         android:id="@+id/view6"
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:background="@color/drak_blue"
+        android:background="@color/brown"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
     <View android:id="@+id/view7"
         android:layout_width="2dp"
         android:layout_height="60dp"
-        android:background="@color/drak_blue"
+        android:background="@color/brown"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
     <View android:id="@+id/view8"
         android:layout_width="2dp"
         android:layout_height="60dp"
-        android:background="@color/drak_blue"
+        android:background="@color/brown"
         android:layout_marginStart="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
@@ -380,6 +380,4 @@
         app:layout_constraintRight_toRightOf="@+id/ib_subscribe"
         app:layout_constraintTop_toTopOf="@+id/ib_subscribe"
         android:visibility="invisible"/>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
-

@@ -22,4 +22,5 @@
     <color name="icon_background">#20FFFFFF</color>
     <color name="error">#B00020</color>
     <color name="drak_blue">#B4002CB0</color>
+    <color name="yellow">#FF9C07</color>
 </resources>
