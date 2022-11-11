@@ -205,9 +205,9 @@ public class GuestMainActivity extends AppCompatActivity {
             finish();
         });
         binding.ibCreate.setOnClickListener(v ->
-            Toast.makeText(GuestMainActivity.this, "Please register a new account!", Toast.LENGTH_SHORT).show());
+            Toast.makeText(GuestMainActivity.this, "Please log in", Toast.LENGTH_SHORT).show());
         binding.ibSubscribe.setOnClickListener(v ->
-                Toast.makeText(GuestMainActivity.this, "Please register a new account!", Toast.LENGTH_SHORT).show());
+                Toast.makeText(GuestMainActivity.this, "Please log in", Toast.LENGTH_SHORT).show());
         binding.ibProfile.setOnClickListener(v -> {
             startActivity(new Intent(getApplicationContext(), GuestProfileActivity.class));
             finish();

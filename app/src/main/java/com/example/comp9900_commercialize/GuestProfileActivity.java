@@ -39,8 +39,8 @@ public class GuestProfileActivity extends AppCompatActivity {
             finish();
         });
         binding.ibCreate.setOnClickListener(v ->
-                Toast.makeText(GuestProfileActivity.this, "Please register a new account!", Toast.LENGTH_SHORT).show());
+                Toast.makeText(GuestProfileActivity.this, "Please log in", Toast.LENGTH_SHORT).show());
         binding.ibSubscribe.setOnClickListener(v ->
-                Toast.makeText(GuestProfileActivity.this, "Please register a new account!", Toast.LENGTH_SHORT).show());
+                Toast.makeText(GuestProfileActivity.this, "Please log in", Toast.LENGTH_SHORT).show());
     }
 }
