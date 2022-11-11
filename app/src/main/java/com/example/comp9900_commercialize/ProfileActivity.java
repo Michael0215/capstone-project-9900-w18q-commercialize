@@ -163,8 +163,12 @@ public class ProfileActivity extends AppCompatActivity {
                     finish();
                 });
         binding.ibCreate.setOnClickListener(v -> {
-            preferences.putBoolean(MacroDef.KEY_MODE_CREATE, true);
-            startActivity(new Intent(getApplicationContext(), AddRecipeActivity.class));
+            if(preferences.getString(MacroDef.KEY_USER_TYPE).equals("Contributor")){
+                preferences.putBoolean(MacroDef.KEY_MODE_CREATE, true);
+                startActivity(new Intent(getApplicationContext(), AddRecipeActivity.class));
+            }else{
+                Toast.makeText(ProfileActivity.this, "You can not create a recipe as an explorer", Toast.LENGTH_SHORT).show();
+            }
         });
         binding.ibSubscribe.setOnClickListener(v -> {
                     startActivity(new Intent(getApplicationContext(), SubscribeActivity.class));
