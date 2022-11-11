@@ -177,6 +177,8 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void showGrid() {
+        binding.progressBar.setVisibility(View.GONE);
+        binding.tvLoading.setVisibility(View.GONE);
         //准备布局管理器
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
         //设置布局管理器的方向

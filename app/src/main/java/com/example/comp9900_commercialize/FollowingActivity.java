@@ -12,6 +12,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.example.comp9900_commercialize.adapters.CollectionAdapter;
@@ -134,6 +135,8 @@ public class FollowingActivity extends AppCompatActivity {
     }
 
     private void showLinear() {
+        binding.progressBar.setVisibility(View.GONE);
+        binding.tvLoading.setVisibility(View.GONE);
         //准备布局管理器
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         //设置布局管理器的方向

@@ -120,6 +120,8 @@ public class CommentActivity extends AppCompatActivity {
 //d
 
     private void showLinear() {
+        binding.progressBar.setVisibility(View.GONE);
+        binding.tvLoading.setVisibility(View.GONE);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         RCVlist.setLayoutManager(layoutManager);
         //创建适配器
