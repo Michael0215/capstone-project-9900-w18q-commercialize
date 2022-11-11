@@ -88,17 +88,14 @@ public class CommentActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(Void unused) {
                         Log.d(TAG,"successfully written!");
-                        System.out.println(commentNum+" 评论数已经被设置为了++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+                        //System.out.println(commentNum+" 评论数已经被设置为了++++++++++++++++++++++++++++++++++++++++++++++++++++++");
                     }
                 });
             }
         });
     }
 
-    public void refresh(){
-        finish();
-        startActivity(getIntent());
-    }
+
     private void loadData() {
         mData=new ArrayList<itemComment>();
         itemComment iC=new itemComment();
@@ -129,6 +126,7 @@ public class CommentActivity extends AppCompatActivity {
         //设置适配器
         RCVlist.setAdapter(adapter);
         initListener();
+
     }
 
 
@@ -171,12 +169,17 @@ public class CommentActivity extends AppCompatActivity {
                     }
                 });
                 updateCommentNum();
-                recreate();
+//                recreate();
+                refresh();
             }
         });
 
     }
 
+    public void refresh(){
+        startActivity(new Intent(this, CommentActivity.class));
+        finish();
+    }
     private void setListener() {
         binding.btCancel.setOnClickListener(view -> {
             onBackPressed();
