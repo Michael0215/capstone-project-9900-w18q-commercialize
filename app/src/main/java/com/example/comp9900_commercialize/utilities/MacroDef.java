@@ -26,6 +26,7 @@ public class MacroDef {
     public static final String KEY_SEARCH_TYPE = "search_type";
     public static final String KEY_SEARCH_MODE = "search_mode";
     public static final String KEY_OTHER_EMAIL = "other_email";
+    public static final String KEY_USER_TYPE = "user_type";
     //Live_Chat
     public static final String KEY_KEY_LIVECHATTABLE = "users";
     public static final String KEY_LIVECHATNAME = "Name";

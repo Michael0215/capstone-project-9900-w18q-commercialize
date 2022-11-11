@@ -99,6 +99,7 @@ public class LoginActivity extends AppCompatActivity {
                                             preferences.putString(MacroDef.KEY_CONTACT, documentSnapshot.getString("Contact Detail"));
                                             preferences.putString(MacroDef.KEY_AVATAR, documentSnapshot.getString("Avatar"));
                                             preferences.putBoolean(MacroDef.KEY_MODE_CREATE, true);
+                                            preferences.putString(MacroDef.KEY_USER_TYPE, documentSnapshot.getString("Type"));
                                             startActivity(new Intent(getApplicationContext(), MainActivity.class));
                                             finish();
                                         }
