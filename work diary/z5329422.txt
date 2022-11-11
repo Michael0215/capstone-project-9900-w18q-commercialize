@@ -17,4 +17,23 @@ Work together to finish own task. My job is to write the password change page.
 
 Week 5
 
+Complete the "like" function in the recipe details page; Fix the bug of the application to show the achievement in demo A. 
+
+Week 6
+
+Fix the bug and conceive the specifics of the recommendation system.
+
+Week 7
+
+Apply the recommendation system to the explore page.
+
+Week 8
+
+Prepare demo B
+
+Week 9 
+
+Write the project report and prepare the final demo
+
+
 
