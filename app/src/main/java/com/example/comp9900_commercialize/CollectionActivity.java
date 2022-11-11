@@ -12,6 +12,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -144,6 +145,8 @@ public class CollectionActivity extends AppCompatActivity {
 
 
     private void showGrid() {
+        binding.progressBar.setVisibility(View.GONE);
+        binding.tvLoading.setVisibility(View.GONE);
         //准备布局管理器
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
         //设置布局管理器的方向
