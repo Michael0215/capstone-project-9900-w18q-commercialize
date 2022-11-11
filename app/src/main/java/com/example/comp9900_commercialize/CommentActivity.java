@@ -109,6 +109,7 @@ public class CommentActivity extends AppCompatActivity {
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 myComment=documentSnapshot.toObject(Comment.class);
                 if(myComment != null) {
+                    Collections.reverse(myComment.commentList);
                     mData = myComment.commentList;
 //                    System.out.println(mData.size());
                 }
