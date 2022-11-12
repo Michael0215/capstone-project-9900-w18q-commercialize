@@ -28,3 +28,6 @@ I finished the live-chat function in the 'notice' part of our platform and fixed
 
 Week8 (2022.11.3)
 We finished DemoB, retrospective B's meeting and the retroB report. And I'm working on the last user stories in sprint3.
+
+Week9 (2022.11.12)
+I'm working on the final report and the final demo.
