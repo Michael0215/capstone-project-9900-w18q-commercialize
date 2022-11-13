@@ -262,3 +262,35 @@ None
 Add some real data into the database.
 Improve the UI design.
 Complete the tasks for sprint3.
+--------------------------------------------------------------------------------
+
+Week 9 (2022.11.13)
+
+
+1) What was planned for the period since the last work diary entry
+
+Add some real data into the database.
+Improve the UI design.
+Complete the tasks for sprint3.
+
+2) What was finished
+ 
+Add some real data into the database.
+Improve the UI design.
+Complete the tasks for sprint3.
+
+3) What were the main technical and non-technical obstacles and how they were 
+overcome (or what was tried and did not work)
+
+None
+
+4) What was not finished, why this happened, how this affects the overall project 
+progress and what adjustments (if any) are needed so the success of the project is not 
+endangered.
+
+None
+
+5) what is planned for the next period
+
+Finish FinalReport
+Prepare for the final demo
