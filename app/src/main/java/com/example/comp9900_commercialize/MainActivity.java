@@ -399,6 +399,7 @@ public class MainActivity extends AppCompatActivity {
                                                             binding.progressBar.setVisibility(View.GONE);
                                                             binding.tvLoading.setVisibility(View.GONE);
                                                             showStagger(true, false);
+                                                            Toast.makeText(MainActivity.this, "Refresh Succeed!", Toast.LENGTH_SHORT).show();
                                                         }
                                                         else { // error handling
                                                             Toast.makeText(MainActivity.this, "Error getting documents.", Toast.LENGTH_SHORT).show();
@@ -416,7 +417,7 @@ public class MainActivity extends AppCompatActivity {
 
         });
         refreshLayout.setRefreshing(false);
-        Toast.makeText(MainActivity.this, "Refresh Succeed!", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(MainActivity.this, "Refresh Succeed!", Toast.LENGTH_SHORT).show();
 
     }
 
