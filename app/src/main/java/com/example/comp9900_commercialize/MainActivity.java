@@ -445,8 +445,8 @@ public class MainActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         getFollowList();
         user = FirebaseAuth.getInstance().getCurrentUser();
-        DocumentReference Ref = db.collection("collection").document(user.getEmail());
-        DocumentReference Reference = db.collection("users").document(user.getEmail());
+        DocumentReference Ref = db.collection("collection").document(preferences.getString(MacroDef.KEY_EMAIL));
+        DocumentReference Reference = db.collection("users").document(preferences.getString(MacroDef.KEY_EMAIL));
 
         Ref.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
@@ -635,7 +635,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                                                 if (length1 / length2 > max) {
-                                                    if (document1.get("E-mail").toString().equals(user.getEmail()) == false) {
+                                                    if (document1.get("E-mail").toString().equals(preferences.getString(MacroDef.KEY_EMAIL)) == false) {
                                                         max = length1 / length2;
                                                         mostSimilarRecipes = otherLikeList;
                                                         //Toast.makeText(MainActivity.this, String.valueOf(max), Toast.LENGTH_SHORT).show();

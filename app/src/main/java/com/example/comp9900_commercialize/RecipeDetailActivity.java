@@ -117,14 +117,14 @@ public class RecipeDetailActivity extends AppCompatActivity {
     };
 
     private void init(){
-        user = FirebaseAuth.getInstance().getCurrentUser();
+//        user = FirebaseAuth.getInstance().getCurrentUser();
         preferences = new Preferences(getApplicationContext());
         firebaseFirestore = FirebaseFirestore.getInstance();
         
         db = FirebaseFirestore.getInstance();
-        DocumentReference Reference = db.collection("users").document(user.getEmail());
-        DocumentReference rf_collection_list = db.collection("collection").document(user.getEmail());
-        DocumentReference rf_follow_list = db.collection("follow").document(user.getEmail());
+        DocumentReference Reference = db.collection("users").document(preferences.getString(MacroDef.KEY_EMAIL));
+        DocumentReference rf_collection_list = db.collection("collection").document(preferences.getString(MacroDef.KEY_EMAIL));
+        DocumentReference rf_follow_list = db.collection("follow").document(preferences.getString(MacroDef.KEY_EMAIL));
 
         preferences = new Preferences(getApplicationContext());
         likeNum = findViewById(R.id.tv_like_num);
@@ -340,7 +340,7 @@ public class RecipeDetailActivity extends AppCompatActivity {
                         }
                         });
 
-                DocumentReference Ref1 = db.collection("users").document(user.getEmail());
+                DocumentReference Ref1 = db.collection("users").document(preferences.getString(MacroDef.KEY_EMAIL));
                 Ref1
                         .update("Like List", newString)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -370,7 +370,7 @@ public class RecipeDetailActivity extends AppCompatActivity {
                         }
                         });
 
-                DocumentReference Ref1 = db.collection("users").document(user.getEmail());
+                DocumentReference Ref1 = db.collection("users").document(preferences.getString(MacroDef.KEY_EMAIL));
                 Ref1
                         .update("Like List", newString)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {

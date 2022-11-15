@@ -73,10 +73,10 @@ public class OtherProfileActivity extends BaseActivity {
 
     private void init(){
         firebaseFirestore = FirebaseFirestore.getInstance();
-        user = FirebaseAuth.getInstance().getCurrentUser();
+//        user = FirebaseAuth.getInstance().getCurrentUser();
         preferences = new Preferences(getApplicationContext());
         db = FirebaseFirestore.getInstance();
-        DocumentReference rf_follow_list = db.collection("follow").document(user.getEmail());
+        DocumentReference rf_follow_list = db.collection("follow").document(preferences.getString(MacroDef.KEY_EMAIL));
         rf_follow_list.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @SuppressLint("SetTextI18n")
             @Override

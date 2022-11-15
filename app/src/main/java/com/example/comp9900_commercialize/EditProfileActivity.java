@@ -111,12 +111,12 @@ public class EditProfileActivity extends AppCompatActivity {
 
     private void save(){
 
-        String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+//        String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
         FirebaseFirestore database = FirebaseFirestore.getInstance();
         if (encodedImage == null){
             encodedImage = preferences.getString(MacroDef.KEY_AVATAR);
         }
-        database.collection("users").document(email)
+        database.collection("users").document(preferences.getString(MacroDef.KEY_EMAIL))
                 .update("Avatar", encodedImage,
                         "Name", binding.etUserName.getText().toString().trim(),
                         "Contact Detail", binding.etContact.getText().toString().trim())
@@ -141,11 +141,7 @@ public class EditProfileActivity extends AppCompatActivity {
                                     batch.commit().addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
-                                            Toast.makeText(EditProfileActivity.this, "Update Successfully!", Toast.LENGTH_SHORT).show();
-                                            startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
-                                            new ProfileActivity().instance.finish();
-                                            new SettingActivity().instance.finish();
-                                            finish();
+                                            updateReceiver();
                                         }
                                     });
                                 }
@@ -195,6 +191,58 @@ public class EditProfileActivity extends AppCompatActivity {
 
         Toast.makeText(getApplicationContext(), message,Toast.LENGTH_SHORT).show();
 
+    }
+
+    private void updateReceiver(){
+        FirebaseFirestore database = FirebaseFirestore.getInstance();
+        WriteBatch batch = database.batch();
+        Query query = database.collection("conversations").whereEqualTo("receiverEmail", preferences.getString(MacroDef.KEY_EMAIL));
+        query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        DocumentReference documentReference = database.collection("conversations").document(document.getId());
+                        batch.update(documentReference, "receiverImage", preferences.getString(MacroDef.KEY_AVATAR));
+                        batch.update(documentReference, "receiverName", preferences.getString(MacroDef.KEY_USERNAME));
+                    }
+                    batch.commit().addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            updateSender();
+                        }
+                    });
+                }
+            }
+        });
+    }
+
+    private void updateSender(){
+        FirebaseFirestore database = FirebaseFirestore.getInstance();
+        WriteBatch batch = database.batch();
+        Query query = database.collection("conversations").whereEqualTo("senderEmail", preferences.getString(MacroDef.KEY_EMAIL));
+        query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        DocumentReference documentReference = database.collection("conversations").document(document.getId());
+                        batch.update(documentReference, "senderImage", preferences.getString(MacroDef.KEY_AVATAR));
+                        batch.update(documentReference, "senderName", preferences.getString(MacroDef.KEY_USERNAME));
+                    }
+                    batch.commit().addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            Toast.makeText(EditProfileActivity.this, "Update Successfully!", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+                            new ProfileActivity().instance.finish();
+                            new SettingActivity().instance.finish();
+                            finish();
+                        }
+                    });
+                }
+            }
+        });
     }
 
 }

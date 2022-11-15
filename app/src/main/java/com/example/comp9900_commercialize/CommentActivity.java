@@ -208,7 +208,7 @@ public class CommentActivity extends AppCompatActivity {
         user = FirebaseAuth.getInstance().getCurrentUser();
         db = FirebaseFirestore.getInstance();
         recipeId = preferences.getString(MacroDef.KEY_RECIPE_ID);
-        publishEmail = user.getEmail();
+        publishEmail = preferences.getString(MacroDef.KEY_EMAIL);
 
     }
 
