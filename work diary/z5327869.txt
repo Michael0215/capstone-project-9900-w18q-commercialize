@@ -154,3 +154,164 @@ User stories in sprint 2 except for restting password by e-mail.
 
 Implement the rest functions in sprint 2.
 Keep debugging and optimizing the UI design.
+--------------------------------------------------------------------------------
+
+Week 6 (2022.10.23)
+
+
+1) What was planned for the period since the last work diary entry
+
+Implement the rest functions in sprint 2.
+Keep debugging and optimizing the UI design.
+
+2) What was finished 
+
+Implement some parts of the rest functions in sprint 2, which includes the 'explore' page, creating and editting a recipe and so on.
+
+3) What were the main technical and non-technical obstacles and how they were 
+overcome (or what was tried and did not work)
+
+I need to add 'ingredients' and 'procedures' to a recipe by clicking the 'add' button.
+So I must figure out how to implement the 'add' method of a view widget to add or delete a row.
+
+4) What was not finished, why this happened, how this affects the overall project 
+progress and what adjustments (if any) are needed so the success of the project is not 
+endangered.
+
+Remaining user stories in sprint 2
+
+5) what is planned for the next period
+
+Implement the rest functions in sprint 2.
+Prepare for the Demo B.
+--------------------------------------------------------------------------------
+
+Week 7 (2022.10.29)
+
+
+1) What was planned for the period since the last work diary entry
+
+Implement the rest functions in sprint 2.
+Prepare for the Demo B.
+
+2) What was finished 
+
+Implement the rest functions in sprint 2.
+Prepare for the Demo B.
+
+
+3) What were the main technical and non-technical obstacles and how they were 
+overcome (or what was tried and did not work)
+
+I used a third-party extension named Algolia to implement the searching function and it works fine on 
+an emulator on Windows. But it crashes when I test it on VM using the Anbox emulator.
+This is probably because the version of Android of Anbox is too old. Need to find a 
+substitution for Algolia.
+
+4) What was not finished, why this happened, how this affects the overall project 
+progress and what adjustments (if any) are needed so the success of the project is not 
+endangered.
+
+None.
+
+5) what is planned for the next period
+
+Finish the Demo B.
+Implement all functions mentioned in Sprint 3.
+Keep optimize the application and prepare for the final demo.
+--------------------------------------------------------------------------------
+
+Week 8 (2022.11.6)
+
+
+1) What was planned for the period since the last work diary entry
+
+Finish the Demo B.
+Implement all functions mentioned in Sprint 3.
+Keep optimize the application and prepare for the final demo.
+
+2) What was finished 
+
+Finish the Demo B.
+Keep optimize the application and prepare for the final demo.
+
+3) What were the main technical and non-technical obstacles and how they were 
+overcome (or what was tried and did not work)
+
+In the news feed function of the APP, it is new for me to write codes to create a brand
+new adapter for a particular view widget. I need to familiarize myself with the constructor
+and methods of an adapter class.
+
+4) What was not finished, why this happened, how this affects the overall project 
+progress and what adjustments (if any) are needed so the success of the project is not 
+endangered.
+
+None.
+
+5) what is planned for the next period
+
+Implement all functions mentioned in Sprint 3.
+Optimized the recommendation system and fix known bugs.
+Keep optimize the application and prepare for the final demo.
+--------------------------------------------------------------------------------
+
+Week 9 (2022.11.12)
+
+
+1) What was planned for the period since the last work diary entry
+
+Implement all functions mentioned in Sprint 3.
+Optimized the recommendation system and fix known bugs.
+Keep optimize the application and prepare for the final demo.
+
+2) What was finished 
+
+Implement all functions mentioned in Sprint 3.
+Optimized the recommendation system and fix known bugs.
+Keep optimize the application and prepare for the final demo.
+
+3) What were the main technical and non-technical obstacles and how they were 
+overcome (or what was tried and did not work)
+
+The window size of the emulator on VM is not what we see on Windows, thus some issues displaying
+pages of the APP appears when I test it on VM. I need to search for some commands to set a proper
+size for emulator on VM, and keep test APP on it to find bugs. Then I should fix them.
+
+4) What was not finished, why this happened, how this affects the overall project 
+progress and what adjustments (if any) are needed so the success of the project is not 
+endangered.
+
+None.
+
+5) what is planned for the next period
+
+Keep optimize the application and prepare for the final demo.
+--------------------------------------------------------------------------------
+
+Week 10 (2022.11.17)
+
+
+1) What was planned for the period since the last work diary entry
+
+Keep optimize the application and prepare for the final demo.
+
+2) What was finished 
+
+Keep optimize the application and prepare for the final demo.
+
+3) What were the main technical and non-technical obstacles and how they were 
+overcome (or what was tried and did not work)
+
+Fix some bugs and write the user manaul for the report. It is a little tedious to establish
+and configure the environment for the virtual machine. And I must be very careful to put commands
+in correct order to avoid the failure of establishment.
+
+4) What was not finished, why this happened, how this affects the overall project 
+progress and what adjustments (if any) are needed so the success of the project is not 
+endangered.
+
+None.
+
+5) what is planned for the next period
+
+None.
