@@ -30,7 +30,7 @@ Week8 (2022.11.3)
 We finished DemoB, retrospective B's meeting and the retroB report. And I'm working on the last user stories in sprint3.
 
 Week9 (2022.11.12)
-I'm working on the final report and the final demo.
+I'm working on the final report, the final demo, and testing the APK file running on Anbox in Lubuntu.
 
 Week10 (2022.11.16)
 We finished final demo and report. And I'm collecting all the materials to make submission.
